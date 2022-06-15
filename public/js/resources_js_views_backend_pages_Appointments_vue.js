@@ -187,7 +187,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _this.edit = true;
-                api_url = "http://127.0.0.1:8000/api/v1/" + 'appointments/';
+                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'appointments/';
                 _context.next = 4;
                 return axios.get(api_url + id, {
                   headers: {
@@ -216,7 +216,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + 'appointments/';
+                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'appointments/';
                 _context2.prev = 1;
                 _context2.next = 4;
                 return axios.patch(api_url + id, {
@@ -266,7 +266,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 vm = _this3;
                 page_url = page_url || 'appointments';
                 _context3.next = 4;
-                return axios.get("http://127.0.0.1:8000/api/v1/" + page_url, {
+                return axios.get("https://abshia-health.herokuapp.com/api/v1/" + page_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
@@ -302,7 +302,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + 'appointments/';
+                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'appointments/';
 
                 if (!confirm("Do you really want to delete this record?")) {
                   _context4.next = 14;

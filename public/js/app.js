@@ -2376,6 +2376,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_views_backend_pages_Hospitals_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/backend/pages/Hospitals.vue */ "./resources/js/views/backend/pages/Hospitals.vue"));
     }
   }, {
+    path: '/appointments',
+    name: 'Appointments',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_views_backend_pages_Appointments_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/backend/pages/Appointments.vue */ "./resources/js/views/backend/pages/Appointments.vue"));
+    }
+  }, {
     path: '/dashboard',
     name: 'Dashboard',
     component: function component() {
@@ -36667,7 +36673,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_Home_vue":1,"resources_js_views_Verify_vue":1,"resources_js_views_ForgetPassword_vue":1,"resources_js_views_Register_vue":1,"resources_js_views_backend_pages_Categories_vue":1,"resources_js_views_backend_pages_Services_vue":1,"resources_js_views_backend_pages_Agents_vue":1,"resources_js_views_backend_pages_Hospitals_vue":1,"resources_js_views_backend_Dashboard_vue":1,"resources_js_views_Notfound_vue":1,"resources_js_components_Header_vue":1,"resources_js_components_Nav_vue":1,"resources_js_components_DashboardComponent_vue":1,"resources_js_components_DashboardComponentHospital_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_Home_vue":1,"resources_js_views_Verify_vue":1,"resources_js_views_ForgetPassword_vue":1,"resources_js_views_Register_vue":1,"resources_js_views_backend_pages_Categories_vue":1,"resources_js_views_backend_pages_Services_vue":1,"resources_js_views_backend_pages_Agents_vue":1,"resources_js_views_backend_pages_Hospitals_vue":1,"resources_js_views_backend_pages_Appointments_vue":1,"resources_js_views_backend_Dashboard_vue":1,"resources_js_views_Notfound_vue":1,"resources_js_components_Header_vue":1,"resources_js_components_Nav_vue":1,"resources_js_components_DashboardComponent_vue":1,"resources_js_components_DashboardComponentHospital_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

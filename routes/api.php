@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AppointmentController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\EmailVerificationController;
+use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\HelperController;
 use App\Http\Controllers\Api\ServiceController;
@@ -51,7 +52,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::get('user-profile', 'userProfile');
         });
 
-        Route::controller(HelperController ::class)->group(function () {
+        Route::controller(HelperController ::class)->group(function () { //helper routes
             Route::get('get-dashboard', 'dashBoardCounts');
             Route::get('get-dashboard-hospital', 'getHospitalDashboardMatrix');
         });
@@ -62,6 +63,13 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::get('services/{id}',  'show');
             Route::patch('services/{id}',  'update');
             Route::delete('services/{id}',  'destroy');
+        });
+
+        Route::controller(FeedbackController::class)->group(function () { // feedbacks route
+            Route::post('feedbacks',  'store');
+            Route::get('feedbacks',  'index');
+            Route::get('feedbacks/{id}',  'show');
+            Route::delete('feedbacks/{id}',  'destroy');
         });
 
         Route::controller(CategoryController::class)->group(function () { // categories routes

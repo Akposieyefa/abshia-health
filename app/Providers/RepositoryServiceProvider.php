@@ -48,6 +48,12 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Libs\Repositories\Contracts\AppointmentRepositoryInterface::class,
             \App\Libs\Repositories\AppointmentRepository::class
         );
+
+        $this->app->bind(
+            \App\Libs\Repositories\Contracts\FeedbackRepositoryInterface::class,
+            \App\Libs\Repositories\FeedbackRepository::class
+        );
+
     }
 
     /**

@@ -17,6 +17,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $deleted_at
  * @property mixed $created_at
  * @property mixed $updated_at
+ * @property mixed $ref_code
  */
 class HospitalResource extends JsonResource
 {
@@ -31,6 +32,7 @@ class HospitalResource extends JsonResource
         $helper = new SystemHelper();
         return [
             'id' => $this->id,
+            'code' => $helper->cleanStringHelper($this->ref_code),
             'name' => $helper->cleanStringHelper($this->name),
             'phone_number' => $helper->cleanStringHelper($this->phone_number),
             'address' => $helper->cleanStringHelper($this->address),

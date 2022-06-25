@@ -18,7 +18,7 @@ class Appointment extends Model
     use HasFactory, Sluggable, SoftDeletes;
 
     protected $fillable = [
-        'enrolle_id', 'health_care_id', 'title', 'appointment_reason', 'appointment_data',  'status',  'approved_date', 'approval_comment', 'slug'
+        'enrolle_id', 'health_care_id', 'title', 'appointment_reason', 'appointment_date',  'status',  'approved_date', 'approval_comment', 'slug'
     ];
 
     public function enrolle(): \Illuminate\Database\Eloquent\Relations\BelongsTo

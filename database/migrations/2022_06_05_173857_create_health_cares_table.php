@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('health_cares', function (Blueprint $table) {
             $table->id();
+            $table->string('ref_code')->unique();
             $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('address')->nullable();

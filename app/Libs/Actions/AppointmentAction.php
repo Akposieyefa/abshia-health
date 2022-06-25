@@ -34,11 +34,11 @@ class AppointmentAction
     {
         try {
             $appointment = $this->model->create([
-                'enrolle_id' => auth()->user()->enrolle->id,
-                'health_care_id' => auth()->user()->enrolle->health_care_id,
+                'enrolle_id' => auth()->user()->enrollee->id,
+                'health_care_id' => auth()->user()->enrollee->health_care_id,
                 'title' => $request->title,
                 'appointment_reason' => $request->appointment_reason,
-                'appointment_data' => $request->appointment_date
+                'appointment_date' => $request->appointment_date
             ]);
             return response()->json([
                 'message' => 'Appointment booked successfully',
@@ -61,10 +61,13 @@ class AppointmentAction
     public function getAllAppointmentAction(): \Illuminate\Http\JsonResponse|AnonymousResourceCollection
     {
         if (auth()->user()->role == 'superadmin'){
-            $appointments = $this->model->latest()->paginate(10);
+            $appointments = $this->model->with(['enrolle'])->latest()->paginate(10);
+        } elseif(auth()->user()->role == 'hospital') {
+            $appointments = $this->model->where('health_care_id', '=', auth()->user()->hospital->id)->with(['enrolle'])->latest()->paginate(10);
         } else {
-            $appointments = $this->model->where('health_care_id', '=', auth()->user()->hospital->id)->latest()->paginate(10);
+            $appointments = $this->model->where('enrolle_id', '=', auth()->user()->enrollee->id)->latest()->paginate(10);
         }
+
         if (count($appointments) < 1) {
             return response()->json([
                 'message' => 'Sorry no appointment found',
@@ -100,6 +103,7 @@ class AppointmentAction
      */
     public function approveAppointmentAction($request, $id): JsonResponse
     {
+        info($id);
         $appointment =  $this->model->findOrFail($id);
         try {
             $appointment->update([

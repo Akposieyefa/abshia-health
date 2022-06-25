@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('enrolles', function (Blueprint $table) {
             $table->id();
+            $table->string('emp_id')->unique();
             $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(\App\Models\Agent::class, 'agent_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('title');
@@ -34,7 +35,6 @@ return new class extends Migration
             $table->string('nok_phone');
             $table->string('nok_relationship');
             $table->foreignIdFor(\App\Models\Category::class, 'category_id')->constrained()->onDelete('cascade');
-            $table->string('mda_school_name')->nullable();
             $table->string('genotype');
             $table->string('marital_status');
             $table->string('no_of_dependants');

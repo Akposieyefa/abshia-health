@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->boolean('status')->default(true);
             $table->foreignIdFor(\App\Models\Lga::class, 'lga_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('ref_code')->unique();
             $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();

@@ -45,6 +45,7 @@
                                     <thead class="thead-light">
                                     <tr>
                                         <th scope="col">No..</th>
+                                        <th scope="col">Hospital Code</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
@@ -58,6 +59,7 @@
                                         :key="hospital.id"
                                     >
                                         <td>{{ index + 1 }} </td>
+                                        <td> {{ hospital.details.code }}</td>
                                         <td> {{ hospital.details.name }}</td>
                                         <td>  {{ hospital.email }} </td>
                                         <td>  {{ hospital.details.phone_number }} </td>
@@ -157,7 +159,6 @@ import { mapGetters } from "vuex";
 export default {
     name: "Hospitals",
     components: {
-        Header: () => import("../../../components/Header"),
         Nav: () => import("../../../components/Nav.vue"),
     },
     data() {

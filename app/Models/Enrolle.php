@@ -18,7 +18,7 @@ class Enrolle extends Model
         'user_id', 'agent_id', 'title', 'surname', 'first_name', 'middle_name', 'gender', 'phone_number',  'dob',  'address',
         'blood_group', 'state_id', 'lga_id',  'town', 'nok_name', 'nok_address', 'nok_phone', 'nok_relationship',
         'category_id', 'mda_school_name', 'genotype', 'marital_status', 'no_of_dependants',  'health_care_id',
-        'existing_medical_condition',  'hypertension', 'sickle_cell', 'cancer',  'kidney_issue',  'slug'
+        'existing_medical_condition',  'hypertension', 'sickle_cell', 'cancer',  'kidney_issue',  'slug', 'emp_id'
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

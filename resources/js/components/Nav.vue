@@ -59,6 +59,16 @@
                             <i class="bi bi-file-medical-fill"></i> Hospitals
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/appointments">
+                            <i class="bi bi-book"></i> Appointment
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/feedbacks">
+                            <i class="bi bi-arrow-clockwise"></i> Feedback
+                        </router-link>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav" v-if="user.role === 'hospital'">
@@ -80,6 +90,11 @@
                     <li class="nav-item">
                         <router-link class="nav-link" to="/employees">
                             <i class="bi bi-people"></i> Referred Patients
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/give-feedbacks">
+                            <i class="bi bi-arrow-clockwise"></i> Feedback
                         </router-link>
                     </li>
                 </ul>

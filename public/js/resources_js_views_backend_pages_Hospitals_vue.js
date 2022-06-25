@@ -180,15 +180,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Hospitals",
   components: {
-    Header: function Header() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Header_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Header */ "./resources/js/components/Header.vue"));
-    },
     Nav: function Nav() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b1").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
     }
   },
   data: function data() {
@@ -1037,6 +1036,10 @@ var render = function () {
                             _c("td", [_vm._v(_vm._s(index + 1) + " ")]),
                             _vm._v(" "),
                             _c("td", [
+                              _vm._v(" " + _vm._s(hospital.details.code)),
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
                               _vm._v(" " + _vm._s(hospital.details.name)),
                             ]),
                             _vm._v(" "),
@@ -1510,6 +1513,8 @@ var staticRenderFns = [
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("No..")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Hospital Code")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
         _vm._v(" "),

@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_Nav_vue"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_Nav_vue-_422b1"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Nav.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************!*\
@@ -125,13 +125,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Nav",
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["user"])),
   methods: {
     onLogout: function onLogout() {
-      var api_url = "http://127.0.0.1:8000/api/v1/" + 'logout';
+      var api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'logout';
       axios.post(api_url, {
         token: localStorage.getItem("token")
       }, {
@@ -453,6 +463,25 @@ var render = function () {
                       ],
                       1
                     ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/feedbacks" },
+                          },
+                          [
+                            _c("i", { staticClass: "bi bi-arrow-clockwise" }),
+                            _vm._v(" Feedback\n                    "),
+                          ]
+                        ),
+                      ],
+                      1
+                    ),
                   ])
                 : _vm._e(),
               _vm._v(" "),
@@ -525,6 +554,25 @@ var render = function () {
                           [
                             _c("i", { staticClass: "bi bi-people" }),
                             _vm._v(" Referred Patients\n                    "),
+                          ]
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/give-feedbacks" },
+                          },
+                          [
+                            _c("i", { staticClass: "bi bi-arrow-clockwise" }),
+                            _vm._v(" Feedback\n                    "),
                           ]
                         ),
                       ],

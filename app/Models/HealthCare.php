@@ -14,7 +14,7 @@ class HealthCare extends Model
     use HasFactory, Sluggable;
 
     protected $fillable = [
-        'user_id', 'name', 'address', 'phone_number', 'status', 'lga_id', 'slug'
+        'user_id', 'ref_code', 'name', 'address', 'phone_number', 'status', 'lga_id', 'slug'
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

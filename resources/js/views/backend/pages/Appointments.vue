@@ -48,15 +48,15 @@
                                         :key="appointment.id"
                                     >
                                         <td>{{ index + 1 }} </td>
+                                        <td> {{ appointment.relationships.enrolle.surname }}</td>
                                         <td>  {{ appointment.title }} </td>
-                                        <td> {{ appointment.title }}</td>
                                         <td>  {{ appointment.appointment_reason }} </td>
                                         <td>  {{ appointment.status }} </td>
                                         <td> {{ formatDate(appointment.appointment_date)}}</td>
                                         <td class="text-end">
-                                            <button  class="btn btn-sm btn-neutral" @click="editMode(appointment.id)" data-toggle="modal" data-target="#form">Approve</button>
-                                            <button  class="btn btn-sm btn-danger" @click="editMode(appointment.id)" data-toggle="modal" data-target="#form">Decline</button>
-                                            <button  @click="deleteAppointments(appointment.id)" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                            <button class="btn btn-sm btn-neutral" v-if="appointment.status === 'pending' && user.role !== 'superadmin'" @click="editMode(appointment.id)" data-toggle="modal" data-target="#form">Approve</button>
+                                            <button  class="btn btn-sm btn-danger" v-if="appointment.status === 'pending' && user.role !== 'superadmin'"  @click="cancelAppointment(appointment.id)">Decline</button>
+                                            <button v-if="user.role === 'superadmin'"  @click="deleteAppointments(appointment.id)" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </td>
@@ -127,7 +127,6 @@ import { mapGetters } from "vuex";
 export default {
     name: "Appointments",
     components: {
-        Header: () => import("../../../components/Header"),
         Nav: () => import("../../../components/Nav.vue"),
     },
     data() {
@@ -157,7 +156,22 @@ export default {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
-            this.category = response.data.data;
+            this.appointment = response.data.data;
+        },
+
+        async cancelAppointment(id){
+            this.edit = true;
+            let api_url = process.env.MIX_API_BASE_URL + 'cancel-appointments/'
+            try {
+                const response = await axios.get(api_url + id, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                });
+                this.$toasted.success(response.data.message)
+            }  catch (e) {
+                this.$toasted.error(e.response.data.message)
+            }
         },
 
         async approveAppointments(id) {
@@ -166,8 +180,8 @@ export default {
                 const response = await axios.patch(
                     api_url + id,
                     {
-                        title: this.category.title,
-                        description: this.category.description
+                        approved_date: this.appointment.approved_date,
+                        approval_comment: this.appointment.approval_comment
                     },
                     {
                         headers: {

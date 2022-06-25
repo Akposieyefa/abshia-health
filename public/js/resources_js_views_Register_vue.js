@@ -303,7 +303,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         password_confirmation: '',
         gender: 0,
         town: '',
-        mda_school_name: ''
+        agent_code: ''
       },
       hospitals: [],
       states: [],
@@ -374,7 +374,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   nok_phone: _this2.user.nok_phone_number,
                   nok_relationship: _this2.user.nok_relationship,
                   category_id: _this2.user.category,
-                  mda_school_name: _this2.user.mda_school_name,
+                  agent_code: _this2.user.agent_code,
                   genotype: _this2.user.genotype,
                   marital_status: _this2.user.marital_status,
                   no_of_dependants: _this2.user.no_of_dependants,
@@ -1926,26 +1926,26 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-4 form-group" }, [
-          _c("label", [_vm._v("MDA School name")]),
+          _vm._m(1),
           _vm._v(" "),
           _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.user.mda_school_name,
-                expression: "user.mda_school_name",
+                value: _vm.user.agent_code,
+                expression: "user.agent_code",
               },
             ],
             staticClass: "form-control",
             attrs: { type: "text", required: "" },
-            domProps: { value: _vm.user.mda_school_name },
+            domProps: { value: _vm.user.agent_code },
             on: {
               input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.user, "mda_school_name", $event.target.value)
+                _vm.$set(_vm.user, "agent_code", $event.target.value)
               },
             },
           }),
@@ -2103,7 +2103,7 @@ var render = function () {
           }),
         ]),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(2),
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-12 form-group mb-0" }, [
           _c(
@@ -2133,6 +2133,15 @@ var staticRenderFns = [
       { staticClass: "spinner-border", attrs: { role: "status" } },
       [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("Agent Code "),
+      _c("small", [_vm._v("(Not required)")]),
+    ])
   },
   function () {
     var _vm = this

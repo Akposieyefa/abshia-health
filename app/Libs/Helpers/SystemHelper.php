@@ -62,7 +62,7 @@ class SystemHelper
         return response()->json([
             "data" => [
                 'patients' =>  DB::table('enrolles')->where('health_care_id', '=', auth()->user()->hospital->id)->count(),
-                'appointments' => DB::table('services')->count(),
+                'appointments' => DB::table('appointments')->where('health_care_id', '=', auth()->user()->hospital->id)->count(),
                 'treatments' => DB::table('services')->count()
             ]
         ], 200);
@@ -96,5 +96,36 @@ class SystemHelper
             ]
         ], 200);
     }
+
+    /**
+     * generate random code
+     * @param $number
+     * @return string
+     */
+    public function generateRandomOtp($number): string
+    {
+        $today = date('YmdHis');
+        $characters = '0123456789';
+        $main = $today."". $characters;
+        $randomString = '';
+        for ($i = 0; $i < $number; $i++) {
+            $index = rand(0, strlen($main) - 1);
+            $randomString .= $main[$index];
+        }
+        return $randomString;
+    }
+
+    /**
+     * get agent id
+     * @param $code
+     * @return mixed
+     */
+    public function getAgentId($code): mixed
+    {
+        $agent_id = DB::table('agents')->where('ref_code', '=', $code)->first();
+        return $agent_id->id;
+    }
+
+
 
 }

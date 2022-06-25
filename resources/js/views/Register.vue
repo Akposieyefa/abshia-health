@@ -200,8 +200,8 @@
                 </div>
 
                 <div class="col-sm-4 form-group">
-                    <label>MDA School name</label>
-                    <input type="text" v-model="user.mda_school_name" class="form-control" required>
+                    <label>Agent Code <small>(Not required)</small></label>
+                    <input type="text" v-model="user.agent_code" class="form-control" required>
                 </div>
 
                 <div class="col-sm-4 form-group">
@@ -262,7 +262,7 @@ export default {
                 no_of_dependants: 0, category: 0, kidney_issue: 0,
                 health_care: 0, sickle_cell: 0, hypertensive: 0, cancer : 0,
                 genotype : 0,  existing_medical_condition : 0, password : '',
-                password_confirmation : '', gender : 0, town : '', mda_school_name : ''
+                password_confirmation : '', gender : 0, town : '', agent_code : ''
             },
             hospitals : [],
             states : [],
@@ -308,7 +308,7 @@ export default {
                         nok_phone : this.user.nok_phone_number ,
                         nok_relationship : this.user.nok_relationship ,
                         category_id : this.user.category ,
-                        mda_school_name : this.user.mda_school_name ,
+                        agent_code : this.user.agent_code,
                         genotype : this.user.genotype ,
                         marital_status : this.user.marital_status ,
                         no_of_dependants : this.user.no_of_dependants ,

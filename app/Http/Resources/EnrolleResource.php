@@ -40,6 +40,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $primaryHealthCare
  * @property mixed $agent
  * @property mixed $surname
+ * @property mixed $emp_id
  */
 class EnrolleResource extends JsonResource
 {
@@ -53,6 +54,7 @@ class EnrolleResource extends JsonResource
     {$helper = new SystemHelper();
         return [
             'id' => $this->id,
+            'emp_id' => $helper->cleanStringHelper($this->emp_id),
             'title' => $helper->cleanStringHelper($this->title),
             'surname' => $helper->cleanStringHelper($this->surname),
             'first_name' => $helper->cleanStringHelper($this->first_name),

@@ -147,7 +147,7 @@ class UserRepository implements UserRepositoryInterface
             'nok_phone' => 'required',
             'nok_relationship' => 'required',
             'category_id' => 'required',
-            'mda_school_name' => 'required',
+            'agent_code' => 'sometimes',
             'genotype' => 'required',
             'marital_status' => 'required',
             'no_of_dependants' => 'required',

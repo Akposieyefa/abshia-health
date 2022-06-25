@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\HealthCare;
 use App\Models\Agent;
 use App\Models\Enrolle;
+use App\Libs\Helpers\SystemHelper;
 
 /**
  * use action
@@ -22,13 +23,16 @@ class UserAction
      * @var User
      */
     private  User $model;
+    private SystemHelper $helper;
 
     /**
      * @param User $model
+     * @param SystemHelper $helper
      */
-    public function __construct(User $model)
+    public function __construct(User $model, SystemHelper $helper)
     {
         $this->model = $model;
+        $this->helper = $helper;
     }
 
     /**
@@ -51,7 +55,8 @@ class UserAction
                 'name' => $request->name,
                 'address' => $request->address,
                 'phone_number' => $request->phone_number,
-                'lga_id' => $request->lga_id
+                'lga_id' => $request->lga_id,
+                'ref_code' => $this->helper->generateRandomOtp(5)
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -89,7 +94,8 @@ class UserAction
                 'name' => $request->name,
                 'address' => $request->address,
                 'phone_number' => $request->phone_number,
-                'lga_id' => $request->lga_id
+                'lga_id' => $request->lga_id,
+                'ref_code' => $this->helper->generateRandomOtp(5)
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -124,7 +130,8 @@ class UserAction
             ]);
             $user->enrollee()->create([
                 'user_id' => $user->id,
-                'agent_id' => !auth()->user() ? NULL : auth()->user()->id,
+                'emp_id' => $this->helper->generateRandomOtp(5),
+                'agent_id' => empty($request->agent_code) ? null : $this->helper->getAgentId($request->agent_code),
                 'title' => $request->title,
                 'surname' => $request->surname,
                 'first_name' => $request->first_name,
@@ -142,7 +149,6 @@ class UserAction
                 'nok_phone' => $request->nok_phone,
                 'nok_relationship' => $request->nok_relationship,
                 'category_id' => $request->category_id,
-                'mda_school_name' => $request->mda_school_name,
                 'genotype' => $request->genotype,
                 'marital_status' => $request->marital_status,
                 'no_of_dependants' => $request->no_of_dependants,

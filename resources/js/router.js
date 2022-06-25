@@ -61,6 +61,18 @@ const router = new  VueRouter({
         },
 
         {
+            path: '/feedbacks',
+            name: 'Feedbacks',
+            component: () => import('./views/backend/pages/Feedbacks.vue')
+        },
+
+        {
+            path: '/give-feedbacks',
+            name: 'GiveFeedback',
+            component: () => import('./views/backend/pages/GiveFeedback.vue')
+        },
+
+        {
             path: '/dashboard',
             name: 'Dashboard',
             component: () => import('./views/backend/Dashboard.vue') ,

@@ -45,9 +45,11 @@
                                     <thead class="thead-light">
                                     <tr>
                                         <th scope="col">No..</th>
+                                        <th scope="col">Agent Code</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
+                                        <th scope="col">Enrolled Users</th>
                                         <th scope="col">Date</th>
                                         <th></th>
                                     </tr>
@@ -58,9 +60,11 @@
                                         :key="agent.id"
                                     >
                                         <td>{{ index + 1 }} </td>
+                                        <td> {{ agent.details.code }}</td>
                                         <td> {{ agent.details.name }}</td>
                                         <td>  {{ agent.email }} </td>
                                         <td>  {{ agent.details.phone_number }} </td>
+                                        <td>  {{ agent.details.relationships.enrolled_users.length}} </td>
                                         <td> {{ formatDate(agent.details.created_at)}}</td>
                                         <td class="text-end">
                                             <button  class="btn btn-sm btn-neutral" @click="editMode(agent.id)" data-toggle="modal" data-target="#form">Edit</button>
@@ -157,7 +161,6 @@ import { mapGetters } from "vuex";
 export default {
     name: "Agents",
     components: {
-        Header: () => import("../../../components/Header"),
         Nav: () => import("../../../components/Nav.vue"),
     },
     data() {

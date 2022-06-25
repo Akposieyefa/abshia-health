@@ -135,7 +135,6 @@ import { mapGetters } from "vuex";
 export default {
     name: "Categories",
     components: {
-        Header: () => import("../../../components/Header"),
         Nav: () => import("../../../components/Nav.vue"),
     },
     data() {

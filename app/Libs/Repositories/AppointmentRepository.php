@@ -37,7 +37,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'appointment_reason' => 'required',
-            'appointment_data' => 'required'
+            'appointment_date' => 'required'
         ]);
 
         if ($validator->fails()) {

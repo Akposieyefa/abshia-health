@@ -33,7 +33,6 @@ class CategoryController extends Controller
         return  $this->categoryRepositoryInterface->getAllCategory();
     }
 
-
     /**
      * @param Request $request
      * @return mixed
@@ -43,7 +42,6 @@ class CategoryController extends Controller
        return $this->categoryRepositoryInterface->createCategory($request);
     }
 
-
     /**
      * @param int $id
      * @return mixed
@@ -52,7 +50,6 @@ class CategoryController extends Controller
     {
         return  $this->categoryRepositoryInterface->getSingleCategory($id);
     }
-
 
     /**
      * @param Request $request

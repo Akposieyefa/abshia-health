@@ -71,6 +71,4 @@ class HelperController extends Controller
         return $this->helper->dashBoardCountHelperForHospital();
     }
 
-
-
 }

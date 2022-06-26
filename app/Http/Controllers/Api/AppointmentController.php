@@ -83,4 +83,5 @@ class AppointmentController extends Controller
     {
         return $this->appointmentRepositoryInterface->deleteAppointment($id);
     }
+
 }

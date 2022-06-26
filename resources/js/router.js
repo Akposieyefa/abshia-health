@@ -73,6 +73,12 @@ const router = new  VueRouter({
         },
 
         {
+            path: '/administer-treatment',
+            name: 'AdministerTreatment',
+            component: () => import('./views/backend/pages/AdministerTreatment.vue')
+        },
+
+        {
             path: '/dashboard',
             name: 'Dashboard',
             component: () => import('./views/backend/Dashboard.vue') ,

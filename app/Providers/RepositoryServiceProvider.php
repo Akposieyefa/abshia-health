@@ -54,6 +54,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Libs\Repositories\FeedbackRepository::class
         );
 
+        $this->app->bind(
+            \App\Libs\Repositories\Contracts\TreatmentRepositoryInterface::class,
+            \App\Libs\Repositories\TreatmentRepository::class
+        );
+
     }
 
     /**

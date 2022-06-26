@@ -124,8 +124,6 @@ class UserController extends Controller
         return $this->userRepositoryInterface->getAllEnrolledUsers();
     }
 
-
-
     /**
      * delete account
      * @param string $id

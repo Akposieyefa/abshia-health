@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\HelperController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\TreatmentController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -80,6 +81,14 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::delete('categories/{id}',  'destroy');
         });
 
+        Route::controller(TreatmentController::class)->group(function () { // treatment routes
+            Route::post('treatments',  'store');
+            Route::get('treatments',  'index');
+            Route::get('treatments/{id}',  'show');
+            Route::patch('treatments/{id}',  'update');
+            Route::delete('treatments/{id}',  'destroy');
+        });
+
         Route::controller(AppointmentController::class)->group(function () { // appointments routes
             Route::post('appointments',  'store');
             Route::get('appointments',  'index');
@@ -99,6 +108,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::post('create-hospitals',  'createHospital');
             Route::get('get-hospitals',  'getHospitals');
             Route::get('get-onboard-users',  'getAllOnboardedUsers');
+            Route::patch('change-password',  'changeAccountPassword');
         });
 
     });

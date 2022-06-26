@@ -35,6 +35,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
 
     Route::controller(UserController::class)->group(function () { //create new users
         Route::post('onboard-new-users',  'onboardNewUser');
+        Route::post('sign-up',  'signUpAccount');
     });
 
     Route::controller(EmailVerificationController::class)->group(function () {
@@ -80,6 +81,11 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::patch('categories/{id}',  'update');
             Route::delete('categories/{id}',  'destroy');
         });
+
+        Route::controller(UserController::class)->group(function () { //create new users
+            Route::patch('update-signup-details',  'updateSignUpAccount');
+        });
+
 
         Route::controller(TreatmentController::class)->group(function () { // treatment routes
             Route::post('treatments',  'store');

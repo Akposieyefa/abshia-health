@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\HealthCare::class, 'health_care_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->longText('appointment_reason');
-            $table->date('appointment_data');
+            $table->date('appointment_date');
             $table->string('status')->default('pending');
             $table->timestamp('approved_date')->nullable();
             $table->longText('approval_comment')->nullable();

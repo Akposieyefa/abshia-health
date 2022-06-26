@@ -127,6 +127,10 @@ class UserRepository implements UserRepositoryInterface
         return $this->action->getAccountAction($id);
     }
 
+    /**
+     * @param $request
+     * @return JsonResponse
+     */
     public function createUserAccount($request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -167,6 +171,75 @@ class UserRepository implements UserRepositoryInterface
             ], 422);
         }else {
             return $this->action->createUserAccountAction($request);
+        }
+    }
+
+    /**
+     * create sign up for users
+     * @param $request
+     * @return JsonResponse
+     */
+    public function createSignUp($request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users,email',
+            'surname' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->messages()->first(),
+                'success' => false
+            ], 422);
+        }else {
+            return $this->action->createSignUpAction($request);
+        }
+    }
+
+    /**
+     * update sign up details
+     * @param $request
+     * @return JsonResponse
+     */
+    public function updateSignUpDetails($request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'phone_number' => 'required',
+            'address' => 'required',
+            'title' => 'required',
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'gender' => 'required',
+            'dob' => 'required',
+            'blood_group' => 'required',
+            'town' => 'required',
+            'nok_name' => 'required',
+            'nok_address' => 'required',
+            'nok_phone' => 'required',
+            'nok_relationship' => 'required',
+            'category_id' => 'required',
+            'agent_code' => 'sometimes',
+            'genotype' => 'required',
+            'marital_status' => 'required',
+            'no_of_dependants' => 'required',
+            'health_care_id' => 'required',
+            'existing_medical_condition' => 'required',
+            'hypertension' => 'required',
+            'sickle_cell' => 'required',
+            'cancer' => 'required',
+            'state_id' => 'required',
+            'lga_id' => 'required',
+            'kidney_issue' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->messages()->first(),
+                'success' => false
+            ], 422);
+        }else {
+            return  $this->action->updateOnboardProcessAction($request);
         }
     }
 

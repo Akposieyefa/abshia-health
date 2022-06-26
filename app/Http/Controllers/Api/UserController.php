@@ -124,6 +124,25 @@ class UserController extends Controller
     }
 
     /**
+     * sign up account
+     * @param Request $request
+     * @return mixed
+     */
+    public function signUpAccount(Request $request): mixed
+    {
+        return $this->userRepositoryInterface->createSignUp($request);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function updateSignUpAccount(Request $request): mixed
+    {
+        return $this->userRepositoryInterface->updateSignUpDetails($request);
+    }
+
+    /**
      * delete account
      * @param string $id
      * @return mixed

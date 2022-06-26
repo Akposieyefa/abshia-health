@@ -80,9 +80,9 @@ class EnrolleResource extends JsonResource
             'kidney_issue' => $this->kidney_issue,
             'slug' => $this->slug,
             'relationships' => [
-                'state' => $this->state->state_name,
-                'lga' => $this->lga->lga_name,
-                'primary_healthcare' => $this->primaryHealthCare->name,
+                'state' => !is_null($this->state) ? $this->state->state_name : "",
+                'lga' => !is_null($this->lga) ?  $this->lga->lga_name : "",
+                'primary_healthcare' => !is_null($this->primaryHealthCare) ?  $this->primaryHealthCare->name : "",
                 'agents' => is_null($this->agent) ? ""  :  $this->agent->name
             ],
             'deleted_at' => $this->deleted_at,

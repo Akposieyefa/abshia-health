@@ -9,9 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\HealthCare;
-use App\Models\Agent;
-use App\Models\Enrolle;
 use App\Libs\Helpers\SystemHelper;
 
 /**
@@ -23,6 +20,9 @@ class UserAction
      * @var User
      */
     private  User $model;
+    /**
+     * @var SystemHelper
+     */
     private SystemHelper $helper;
 
     /**
@@ -111,6 +111,93 @@ class UserAction
             'data' => new UserResource($this->model->find($user->id)),
             'success' => true
         ], 201);
+    }
+
+    /**
+     * create sign up for user
+     * @param $request
+     * @return JsonResponse
+     */
+    public function createSignUpAction($request): JsonResponse
+    {
+        DB::beginTransaction();
+        try {
+            $user = $this->model->create([
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'role' => RolesEnum::USER,
+                'email_verified_at' => now(),
+            ]);
+            $user->enrollee()->create([
+                'user_id' => $user->id,
+                'emp_id' => $this->helper->generateRandomOtp(5),
+                'surname' => $request->surname
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Sorry unable to  created account',
+                'error' => $e->getMessage(),
+                'success' => false
+            ], 400);
+        }
+        DB::commit();
+        return response()->json([
+            'message' => 'Account created successfully',
+            'data' => new UserResource($this->model->find($user->id)),
+            'success' => true
+        ], 201);
+    }
+
+    /**
+     * update boarding process
+     * @param $request
+     * @return JsonResponse
+     */
+    public function updateOnboardProcessAction($request): JsonResponse
+    {
+        $user = $this->model->findOrFail(auth()->user()->id);
+        try {
+            $user->enrollee()->update([
+                'title' => $request->title,
+                'surname' => $request->surname,
+                'first_name' => $request->first_name,
+                'middle_name' => $request->middle_name,
+                'gender' => $request->gender,
+                'phone_number' => $request->phone_number,
+                'dob' => $request->input('dob', date('Y-m-d')),
+                'address' => $request->address,
+                'blood_group' => $request->blood_group,
+                'state_id' => $request->state_id,
+                'lga_id' => $request->lga_id,
+                'town' => $request->town,
+                'nok_name' => $request->nok_name,
+                'nok_address' => $request->nok_address,
+                'nok_phone' => $request->nok_phone,
+                'nok_relationship' => $request->nok_relationship,
+                'category_id' => $request->category_id,
+                'genotype' => $request->genotype,
+                'marital_status' => $request->marital_status,
+                'no_of_dependants' => $request->no_of_dependants,
+                'health_care_id' => $request->health_care_id,
+                'existing_medical_condition' => $request->existing_medical_condition,
+                'hypertension' => filter_var($request->hypertension, FILTER_VALIDATE_BOOLEAN) ,
+                'sickle_cell' => filter_var($request->sickle_cell, FILTER_VALIDATE_BOOLEAN),
+                'cancer' => filter_var($request->cancer, FILTER_VALIDATE_BOOLEAN),
+                'kidney_issue' => filter_var($request->kidney_issue, FILTER_VALIDATE_BOOLEAN)
+            ]);
+            return response()->json([
+                'message' => 'Account updated successfully',
+                'data' => new UserResource($this->model->find($user->id)),
+                'success' => true
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Sorry unable to  created account',
+                'error' => $e->getMessage(),
+                'success' => false
+            ], 400);
+        }
     }
 
     /**

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ForgotPasswordRepository implements ForgotPasswordRepositoryInterface
 {
@@ -59,11 +60,11 @@ class ForgotPasswordRepository implements ForgotPasswordRepositoryInterface
                         'token' => $token,
                         'created_at' => now()
                     ]);
-                    $email_user = new ResetPasswordMail([
-                        'name' =>$email_check->name,
-                        'url' => config('payhelpa-services.payhelpa.forget_password_url').$token.'&email'.$request->email
-                    ]);
-                    Mail::to($request->email)->send($email_user);
+//                    $email_user = new ResetPasswordMail([
+//                        'name' =>$email_check->name,
+//                        'url' => $token.'&email'.$request->email
+//                    ]);
+//                    Mail::to($request->email)->send($email_user);
                     return response()->json([
                         'message' => 'Email link sent successfully',
                         'data' => $request->email,
@@ -139,4 +140,5 @@ class ForgotPasswordRepository implements ForgotPasswordRepositoryInterface
             }
         }
     }
+
 }

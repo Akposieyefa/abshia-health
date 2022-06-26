@@ -15,6 +15,8 @@ interface UserRepositoryInterface
     public function updateHospitalAccount($request, $id);
     public function createUserAccount($request);
     public function getAllEnrolledUsers();
+    public function createSignUp($request);
+    public function updateSignUpDetails($request);
 
 }
 

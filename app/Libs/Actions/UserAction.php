@@ -222,60 +222,50 @@ class UserAction
         }
     }
 
-
     /**
      * change user password
      * @param $request
-     * @param $id
      * @return JsonResponse
      */
-    public function changePasswordAction($request, $id): JsonResponse
+    public function changePasswordAction($request): JsonResponse
     {
-        $data = $this->model->where('id', '=', $id)->exists();
-        if ($data) {
+        $user = $this->model->findOrFail(auth()->user()->id);
 
-            $user = $this->model->find($id);
-            $hashedPassword = $user->password;
+        $hashedPassword = $user->password;
 
-            if (Hash::check($request->old_password , $hashedPassword)) {
+        if (Hash::check($request->old_password , $hashedPassword)) {
 
-                if (!Hash::check($request->password , $hashedPassword)) {
+            if (!Hash::check($request->password , $hashedPassword)) {
 
-                    try {
-                        $user->update([
-                            'password' => empty($request->password) ? $user->password : bcrypt($request->password),
-                        ]);
-                        return response()->json([
-                            'message' => 'You have changed your password successfully',
-                            'data' => new UserResource($user),
-                            'success' => true
-                        ], 200);
-
-                    }catch (\Exception $e) {
-                        return response()->json([
-                            'message' => 'Sorry the change password process failed',
-                            'error' => $e->getMessage(),
-                            'success' => false
-                        ], 400);
-                    }
-
-                }else {
+                try {
+                    $user->update([
+                        'password' => empty($request->password) ? $user->password : bcrypt($request->password),
+                    ]);
                     return response()->json([
-                        'message' => 'Sorry new password can not be the old password!',
+                        'message' => 'You have changed your password successfully',
+                        'data' => new UserResource($user),
+                        'success' => true
+                    ], 200);
+
+                }catch (\Exception $e) {
+                    return response()->json([
+                        'message' => 'Sorry the change password process failed',
+                        'error' => $e->getMessage(),
                         'success' => false
-                    ], 401);
+                    ], 400);
                 }
+
             }else {
                 return response()->json([
-                    'message' => 'Sorry old password doesnt matched',
+                    'message' => 'Sorry new password can not be the old password!',
                     'success' => false
-                ], 402);
+                ], 401);
             }
         }else {
             return response()->json([
-                'message' => 'Sorry this user do not exist',
+                'message' => 'Sorry old password doesnt matched',
                 'success' => false
-            ], 404);
+            ], 402);
         }
     }
 

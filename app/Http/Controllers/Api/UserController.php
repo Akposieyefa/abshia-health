@@ -65,12 +65,11 @@ class UserController extends Controller
     /**
      * change password
      * @param Request $request
-     * @param $id
      * @return mixed
      */
-    public function changeAccountPassword(Request $request, $id): mixed
+    public function changeAccountPassword(Request $request): mixed
     {
-        return $this->userRepositoryInterface->changePassword($request, $id);
+        return $this->userRepositoryInterface->changePassword($request);
     }
 
     /**

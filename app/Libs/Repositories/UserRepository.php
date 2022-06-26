@@ -81,10 +81,9 @@ class UserRepository implements UserRepositoryInterface
     /**
      * change password
      * @param $request
-     * @param $id
      * @return JsonResponse
      */
-    public function changePassword($request, $id): JsonResponse
+    public function changePassword($request): JsonResponse
     {
         $validator =  Validator::make($request->all(),[
             'old_password' => 'required',
@@ -96,7 +95,7 @@ class UserRepository implements UserRepositoryInterface
                 'success' => false
             ], 422);
         }else {
-            return $this->action->changePasswordAction($request, $id);
+            return $this->action->changePasswordAction($request);
         }
     }
 

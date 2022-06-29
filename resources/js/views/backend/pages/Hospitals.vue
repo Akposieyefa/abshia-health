@@ -66,7 +66,7 @@
                                         <td> {{ formatDate(hospital.details.created_at)}}</td>
                                         <td class="text-end">
                                             <button  class="btn btn-sm btn-neutral" @click="editMode(hospital.id)" data-toggle="modal" data-target="#form">Edit</button>
-                                            <button  @click="deleteHospital(hospital.id)" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                            <button  @click="deleteHospital(hospital.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </td>

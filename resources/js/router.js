@@ -79,6 +79,19 @@ const router = new  VueRouter({
         },
 
         {
+            path: '/treatments',
+            name: 'Treatments',
+            component: () => import('./views/backend/pages/Treatments.vue')
+        },
+
+        {
+            path: '/get-refers',
+            name: 'Refers',
+            component: () => import('./views/backend/pages/Refers.vue')
+        },
+
+
+        {
             path: '/dashboard',
             name: 'Dashboard',
             component: () => import('./views/backend/Dashboard.vue') ,

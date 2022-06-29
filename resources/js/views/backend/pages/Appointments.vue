@@ -56,7 +56,7 @@
                                         <td class="text-end">
                                             <button class="btn btn-sm btn-neutral" v-if="appointment.status === 'pending' && user.role !== 'superadmin'" @click="editMode(appointment.id)" data-toggle="modal" data-target="#form">Approve</button>
                                             <button  class="btn btn-sm btn-danger" v-if="appointment.status === 'pending' && user.role !== 'superadmin'"  @click="cancelAppointment(appointment.id)">Decline</button>
-                                            <button v-if="user.role === 'superadmin'"  @click="deleteAppointments(appointment.id)" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                            <button v-if="user.role === 'superadmin'"  @click="deleteAppointments(appointment.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </td>

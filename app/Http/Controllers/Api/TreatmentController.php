@@ -5,40 +5,63 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Libs\Repositories\Contracts\TreatmentRepositoryInterface;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\True_;
 
+/**
+ * Treatment controller
+ */
 class TreatmentController extends Controller
 {
+    /**
+     * @var TreatmentRepositoryInterface
+     */
     private TreatmentRepositoryInterface $treatmentRepositoryInterface;
 
+    /**
+     * @param TreatmentRepositoryInterface $treatmentRepositoryInterface
+     */
     public function __construct(TreatmentRepositoryInterface $treatmentRepositoryInterface)
     {
         $this->treatmentRepositoryInterface = $treatmentRepositoryInterface;
     }
 
-    public function index()
+    /**
+     * get all treatment
+     * @return mixed
+     */
+    public function index(): mixed
     {
-        //
+        return $this->treatmentRepositoryInterface->getAllTreatments();
     }
 
-
-    public function store(Request $request)
+    /**
+     * create treatment
+     * @param Request $request
+     * @return mixed
+     */
+    public function store(Request $request): mixed
     {
-        //
+        return $this->treatmentRepositoryInterface->createTreatment($request);
     }
 
-    public function show($id)
+    /**
+     * get single treatment
+     * @param $id
+     * @return mixed
+     */
+    public function show($id): mixed
     {
-        //
+        return $this->treatmentRepositoryInterface->getSingleTreatment($id);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * delete treatment
+     * @param $id
+     * @return mixed
+     */
+    public function destroy($id): mixed
     {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        return $this->treatmentRepositoryInterface->deleteTreatment($id);
     }
 
 }

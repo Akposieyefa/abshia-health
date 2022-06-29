@@ -163,7 +163,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'feedbacks';
+                api_url = "http://127.0.0.1:8000/api/v1/" + 'feedbacks';
                 _context.prev = 1;
                 _context.next = 4;
                 return axios.post(api_url, {
@@ -188,27 +188,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this.$toasted.success(response.data.message);
 
-                _this.clearData();
-
-                _context.next = 9;
-                return _this.getAllCategories();
-
-              case 9:
-                _context.next = 14;
+                _context.next = 11;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](1);
 
                 _this.$toasted.error(_context.t0.response.data.message);
 
-              case 14:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 11]]);
+        }, _callee, null, [[1, 8]]);
       }))();
     }
   }
@@ -1081,7 +1075,7 @@ var render = function () {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary float-right",
+                        staticClass: "btn btn-dark float-right",
                         on: {
                           click: function ($event) {
                             return _vm.submitFeedBack()

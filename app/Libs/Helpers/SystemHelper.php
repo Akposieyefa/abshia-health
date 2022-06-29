@@ -63,7 +63,7 @@ class SystemHelper
             "data" => [
                 'patients' =>  DB::table('enrolles')->where('health_care_id', '=', auth()->user()->hospital->id)->count(),
                 'appointments' => DB::table('appointments')->where('health_care_id', '=', auth()->user()->hospital->id)->count(),
-                'treatments' => DB::table('services')->count()
+                'treatments' => DB::table('treatments')->where('health_care_id', '=', auth()->user()->hospital->id)->count()
             ]
         ], 200);
     }
@@ -124,6 +124,17 @@ class SystemHelper
     {
         $agent_id = DB::table('agents')->where('ref_code', '=', $code)->first();
         return $agent_id->id;
+    }
+
+    /**
+     * get enroll id
+     * @param $code
+     * @return mixed
+     */
+    public function getEnrolleeId($code): mixed
+    {
+        $enrollee_id = DB::table('enrolles')->where('emp_id', '=', $code)->first();
+        return $enrollee_id->id;
     }
 
 

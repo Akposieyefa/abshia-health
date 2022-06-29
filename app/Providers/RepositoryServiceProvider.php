@@ -59,6 +59,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Libs\Repositories\TreatmentRepository::class
         );
 
+        $this->app->bind(
+            \App\Libs\Repositories\Contracts\ReferRepositoryInterface::class,
+            \App\Libs\Repositories\ReferRepository::class
+        );
+
     }
 
     /**

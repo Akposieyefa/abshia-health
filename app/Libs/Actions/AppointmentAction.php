@@ -103,7 +103,6 @@ class AppointmentAction
      */
     public function approveAppointmentAction($request, $id): JsonResponse
     {
-        info($id);
         $appointment =  $this->model->findOrFail($id);
         try {
             $appointment->update([

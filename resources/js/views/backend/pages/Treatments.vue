@@ -13,7 +13,7 @@
                             <div class="row align-items-center">
                                 <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                     <!-- Title -->
-                                    <h1 class="h2 mb-0 ls-tight">Feedbacks</h1>
+                                    <h1 class="h2 mb-0 ls-tight">Treatments</h1>
                                 </div>
                             </div>
                             <!-- Nav -->
@@ -27,33 +27,39 @@
                         <!-- Card stats -->
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
-                                <h5 class="mb-0">All Feedbacks</h5>
+                                <h5 class="mb-0">All Treatments</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                     <tr>
                                         <th scope="col">No..</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Market Reality</th>
-                                        <th scope="col">Importance</th>
+                                        <th v-if="user.role === 'superadmin'" scope="col">Hospital Name</th>
+                                        <th scope="col">ENROLLEE ID</th>
+                                        <th scope="col">Patient Name</th>
+                                        <th scope="col">Doctor Name</th>
+                                        <th scope="col">Cost of Treatment</th>
                                         <th scope="col">Date</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr
-                                        v-for="(feedback, index) in feedbacks"
-                                        :key="feedback.id"
+                                        v-for="(treatment, index) in treatments"
+                                        :key="treatment.id"
                                     >
                                         <td>{{ index + 1 }} </td>
-                                        <td> {{ feedback.name }}</td>
-                                        <td>  {{ feedback.market_reality }} </td>
-                                        <td>  {{ feedback.importance }} </td>
-                                        <td> {{ formatDate(feedback.created_at)}}</td>
+                                        <td v-if="user.role === 'superadmin'"> {{ treatment.relationships.hospital.name }}</td>
+                                        <td> {{ treatment.relationships.enrolle.emp_id }}</td>
+                                        <td> {{ treatment.relationships.enrolle.first_name }}</td>
+                                        <td>  {{ treatment.verified_by }} </td>
+                                        <td>  {{ treatment.cost_of_treatment }} </td>
+                                        <td> {{ formatDate(treatment.date_and_time)}}</td>
                                         <td class="text-end">
-                                            <button  class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#form">More</button>
-                                            <button  @click="deleteFeedback(feedback.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
+                                            <router-link to="/" type="button" class="btn btn-sm btn-square btn-info text-danger-hover">
+                                                <i class="bi bi-eye"></i>
+                                            </router-link>
+                                            <button v-if="user.role === 'superadmin'"  @click="deleteTreatments(treatment.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </td>
@@ -65,11 +71,11 @@
                                 <nav aria-label="...">
                                     <ul class="pagination">
                                         <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                                            <a class="page-link"  @click="getAllFeedbacks(pagination.prev_page_url)" href="#" tabindex="-1">Previous</a>
+                                            <a class="page-link"  @click="getAllTreatments(pagination.prev_page_url)" href="#" tabindex="-1">Previous</a>
                                         </li>
                                         <li class="page-item disabled"><a class="page-link" href="#">Page {{ pagination.current_page}} of {{ pagination.last_page}} </a></li>
                                         <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                                            <a class="page-link" @click="getAllFeedbacks(pagination.next_page_url)" href="#">Next</a>
+                                            <a class="page-link" @click="getAllTreatments(pagination.next_page_url)" href="#">Next</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -79,38 +85,37 @@
                 </main>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 export default {
-    name: "Feedbacks",
+    name: "Treatments",
     components: {
         Nav: () => import("../../../components/Nav.vue"),
     },
     data() {
         return {
-            feedbacks: [],
-            pagination: {}
+            treatments: [],
+            pagination: {},
         }
     },
     created() {
-        this.getAllFeedbacks();
+        this.getAllTreatments();
     },
     computed: {
         ...mapGetters(["user"]),
     },
     methods : {
 
-        async getAllFeedbacks(page_url) {
+        async getAllTreatments(page_url) {
             let vm = this;
-            page_url = page_url || 'feedbacks'
+            page_url = page_url || 'treatments'
             const response = await axios.get(process.env.MIX_API_BASE_URL + page_url, {
                 headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
             });
-            this.feedbacks = response.data.data;
+            this.treatments = response.data.data;
             vm.makePagination(response.data.meta, response.data.links)
         },
 
@@ -123,8 +128,8 @@ export default {
             };
         },
 
-        async deleteFeedback(id) {
-            let api_url = process.env.MIX_API_BASE_URL + 'feedbacks/'
+        async deleteTreatments(id) {
+            let api_url = process.env.MIX_API_BASE_URL + 'treatments/'
             if (confirm("Do you really want to delete this record?")) {
                 try {
                     const response = await axios.delete( api_url + id, {
@@ -133,7 +138,7 @@ export default {
                         },
                     });
                     this.$toasted.success(response.data.message)
-                    await this.getAllFeedbacks();
+                    await this.getAllTreatments();
                 } catch (e) {
                     this.$toasted.error(e.response.data.message)
                 }
@@ -144,6 +149,7 @@ export default {
             const options = { year: "numeric", month: "long", day: "numeric" };
             return new Date(dateString).toLocaleDateString(undefined, options);
         }
+
     },
 }
 </script>
@@ -154,4 +160,4 @@ export default {
 </style>
 
 
-
+>

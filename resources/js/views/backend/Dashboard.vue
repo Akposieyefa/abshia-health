@@ -16,6 +16,17 @@
                                     <!-- Title -->
                                     <h1 class="h2 mb-0 ls-tight">Dashboard</h1>
                                 </div>
+
+                                <div  v-if="user.role === 'superadmin'" class="col-sm-6 col-12 text-sm-end">
+                                    <div class="mx-n1">
+                                        <router-link to="/treatments"   data-toggle="modal" data-target="#form" class="btn d-inline-flex btn-sm btn-dark mx-1">
+                                            <span class=" pe-2">
+                                                <i class="bi bi-eye"></i>
+                                            </span>
+                                            <span>All Treatments</span>
+                                        </router-link>
+                                    </div>
+                                </div>
                             </div>
                             <!-- Nav -->
                         </div>
@@ -58,8 +69,10 @@
                                         <td> {{ user.details.phone_number }}  </td>
                                         <td>  {{ formatDate(user.created_at)}} </td>
                                         <td class="text-end">
-                                            <router-link  v-bind:to="'/leave/' + user.id" class="btn btn-sm btn-neutral">View</router-link>
-                                            <button  @click="deleteUser(user.id)" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                            <router-link  v-bind:to="'/leave/' + user.id" class="btn btn-sm btn-info">
+                                                <i class="bi bi-eye"></i>
+                                            </router-link>
+                                            <button  @click="deleteUser(user.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </td>

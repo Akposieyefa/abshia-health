@@ -2,22 +2,22 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @method findOrFail($id)
- * @method where(string $string, string $string1, $id)
  * @method create(array $array)
+ * @method where(string $string, string $string1, $id)
+ * @method findOrFail($id)
  */
-class Treatment extends Model
+class Refer extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Sluggable;
 
     protected $fillable = [
-        'enrolle_id', 'health_care_id', 'verified_by', 'date_and_time', 'is_capitated', 'is_ffs', 'drugs', 'cost_of_treatment',
-        'height', 'weight', 'blood_pressure', 'pulse', 'respiration', 'temperature', 'treatment_give', 'is_referred',  'summary'
+        'enrolle_id', 'health_care_id', 'case', 'hospital_name',  'remark',  'slug'
     ];
 
     public function enrolle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -30,4 +30,12 @@ class Treatment extends Model
         return $this->belongsTo(HealthCare::class, 'health_care_id');
     }
 
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'case'
+            ]
+        ];
+    }
 }

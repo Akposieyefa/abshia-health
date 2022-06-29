@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\EmailVerificationController;
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\HelperController;
+use App\Http\Controllers\Api\ReferController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\TreatmentController;
 use App\Http\Controllers\Api\UserController;
@@ -86,13 +87,17 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::patch('update-signup-details',  'updateSignUpAccount');
         });
 
-
         Route::controller(TreatmentController::class)->group(function () { // treatment routes
             Route::post('treatments',  'store');
             Route::get('treatments',  'index');
             Route::get('treatments/{id}',  'show');
-            Route::patch('treatments/{id}',  'update');
             Route::delete('treatments/{id}',  'destroy');
+        });
+
+        Route::controller(ReferController::class)->group(function () { // refer routes
+            Route::post('refers',  'store');
+            Route::get('refers',  'index');
+            Route::get('refers/{id}',  'show');
         });
 
         Route::controller(AppointmentController::class)->group(function () { // appointments routes

@@ -85,7 +85,7 @@
                                     </div>
 
                                     <div class="col-sm-12 form-group mb-0">
-                                        <button class="btn btn-primary float-right" @click="submitFeedBack()">Submit Feedback</button>
+                                        <button class="btn btn-dark float-right" @click="submitFeedBack()">Submit Feedback</button>
                                     </div>
                                 </div>
 
@@ -152,8 +152,6 @@ export default {
                     }
                 );
                 this.$toasted.success(response.data.message)
-                this. clearData()
-                await this.getAllCategories();
             } catch (e) {
                 this.$toasted.error(e.response.data.message)
             }

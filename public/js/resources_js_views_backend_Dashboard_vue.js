@@ -118,6 +118,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -155,7 +168,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 vm = _this;
                 page_url = page_url || 'get-onboard-users';
                 _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().get("https://abshia-health.herokuapp.com/api/v1/" + page_url, {
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://127.0.0.1:8000/api/v1/" + page_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
@@ -192,7 +205,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'delete-account/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + 'delete-account/';
 
                 if (!confirm("Do you really want to delete this record?")) {
                   _context2.next = 14;
@@ -342,7 +355,54 @@ var render = function () {
         _c("Nav"),
         _vm._v(" "),
         _c("div", { staticClass: "h-screen flex-grow-1 overflow-y-lg-auto" }, [
-          _vm._m(0),
+          _c(
+            "header",
+            { staticClass: "bg-surface-primary border-bottom pt-6 pb-5" },
+            [
+              _c("div", { staticClass: "container-fluid" }, [
+                _c("div", { staticClass: "mb-npx" }, [
+                  _c("div", { staticClass: "row align-items-center" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _vm.user.role === "superadmin"
+                      ? _c(
+                          "div",
+                          { staticClass: "col-sm-6 col-12 text-sm-end" },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "mx-n1" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "btn d-inline-flex btn-sm btn-dark mx-1",
+                                    attrs: {
+                                      to: "/treatments",
+                                      "data-toggle": "modal",
+                                      "data-target": "#form",
+                                    },
+                                  },
+                                  [
+                                    _c("span", { staticClass: " pe-2" }, [
+                                      _c("i", { staticClass: "bi bi-eye" }),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("span", [_vm._v("All Treatments")]),
+                                  ]
+                                ),
+                              ],
+                              1
+                            ),
+                          ]
+                        )
+                      : _vm._e(),
+                  ]),
+                ]),
+              ]),
+            ]
+          ),
           _vm._v(" "),
           _c("main", { staticClass: "py-6 bg-surface-secondary" }, [
             _c(
@@ -427,17 +487,17 @@ var render = function () {
                                       _c(
                                         "router-link",
                                         {
-                                          staticClass: "btn btn-sm btn-neutral",
+                                          staticClass: "btn btn-sm btn-info",
                                           attrs: { to: "/leave/" + user.id },
                                         },
-                                        [_vm._v("View")]
+                                        [_c("i", { staticClass: "bi bi-eye" })]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "button",
                                         {
                                           staticClass:
-                                            "btn btn-sm btn-square btn-neutral text-danger-hover",
+                                            "btn btn-sm btn-square btn-danger text-danger-hover",
                                           attrs: { type: "button" },
                                           on: {
                                             click: function ($event) {
@@ -557,23 +617,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "header",
-      { staticClass: "bg-surface-primary border-bottom pt-6 pb-5" },
-      [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "mb-npx" }, [
-            _c("div", { staticClass: "row align-items-center" }, [
-              _c("div", { staticClass: "col-sm-6 col-12 mb-4 mb-sm-0" }, [
-                _c("h1", { staticClass: "h2 mb-0 ls-tight" }, [
-                  _vm._v("Dashboard"),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]
-    )
+    return _c("div", { staticClass: "col-sm-6 col-12 mb-4 mb-sm-0" }, [
+      _c("h1", { staticClass: "h2 mb-0 ls-tight" }, [_vm._v("Dashboard")]),
+    ])
   },
   function () {
     var _vm = this

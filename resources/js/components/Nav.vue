@@ -69,6 +69,11 @@
                             <i class="bi bi-arrow-clockwise"></i> Feedback
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/get-refers">
+                            <i class="bi bi-arrow-right-circle"></i> Refers
+                        </router-link>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav" v-if="user.role === 'hospital'">
@@ -83,18 +88,18 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/levels">
+                        <router-link class="nav-link" to="/administer-treatment">
                             <i class="bi bi-chat"></i> Treatments
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/employees">
-                            <i class="bi bi-people"></i> Referred Patients
                         </router-link>
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" to="/give-feedbacks">
                             <i class="bi bi-arrow-clockwise"></i> Feedback
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/get-refers">
+                            <i class="bi bi-people"></i> Refers
                         </router-link>
                     </li>
                 </ul>

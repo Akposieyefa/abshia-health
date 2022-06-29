@@ -13,16 +13,16 @@
                             <div class="row align-items-center">
                                 <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                     <!-- Title -->
-                                    <h1 class="h2 mb-0 ls-tight">Services</h1>
+                                    <h1 class="h2 mb-0 ls-tight">Referred Patients</h1>
                                 </div>
                                 <!-- Actions -->
                                 <div class="col-sm-6 col-12 text-sm-end">
                                     <div class="mx-n1">
-                                        <button  data-toggle="modal" data-target="#form" class="btn d-inline-flex btn-sm btn-dark mx-1">
-                                    <span class=" pe-2">
-                                        <i class="bi bi-plus"></i>
-                                    </span>
-                                            <span>Create</span>
+                                        <button  v-if="user.role === 'hospital'" data-toggle="modal" data-target="#form" class="btn d-inline-flex btn-sm btn-dark mx-1">
+                                            <span class=" pe-2">
+                                                <i class="bi bi-plus"></i>
+                                            </span>
+                                            <span>Refer a patient</span>
                                         </button>
                                     </div>
                                 </div>
@@ -38,34 +38,37 @@
                         <!-- Card stats -->
                         <div class="card shadow border-0 mb-7">
                             <div class="card-header">
-                                <h5 class="mb-0">All Services</h5>
+                                <h5 class="mb-0">All Referrals</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover table-nowrap">
                                     <thead class="thead-light">
                                     <tr>
                                         <th scope="col">No..</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Description</th>
+                                        <th scope="col"  v-if="user.role === 'superadmin'" >Refred From</th>
+                                        <th scope="col">Enrolle Id</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Case</th>
+                                        <th scope="col">Hospital Reffed To</th>
                                         <th scope="col">Date</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                         <tr
-                                            v-for="(service, index) in services"
-                                            :key="service.id"
+                                            v-for="(refer, index) in refers"
+                                            :key="refer.id"
                                         >
-                                            <td>{{ index + 1 }} </td>
-                                            <td> {{ service.title }}</td>
-                                            <td>  {{ service.description }} </td>
-                                            <td> {{ formatDate(service.created_at)}}</td>
-                                            <td class="text-end">
-                                                <button  class="btn btn-sm btn-neutral" @click="editMode(service.id)" data-toggle="modal" data-target="#form">Edit</button>
-                                                <button  @click="deleteService(service.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </td>
+                                            <td> {{ index + 1 }} </td>
+                                            <td  v-if="user.role === 'superadmin'" > {{ refer.relationships.hospital.name }} </td>
+                                            <td> {{ refer.relationships.enrolle.emp_id }} </td>
+                                            <td>  {{ refer.relationships.enrolle.surname + " " + refer.relationships.enrolle.first_name }} </td>
+                                            <td>  {{ refer.case }} </td>
+                                            <td>  {{ refer.hospital_name }} </td>
+                                            <td> {{ formatDate(refer.created_at)}} </td>
+                                           <td>
+                                               <router-link to="/" class="btn btn-sm btn-neutral"  data-toggle="modal" data-target="#form">More</router-link>
+                                           </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -74,11 +77,11 @@
                                 <nav aria-label="...">
                                     <ul class="pagination">
                                         <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                                            <a class="page-link"  @click="getAllServices(pagination.prev_page_url)" href="#" tabindex="-1">Previous</a>
+                                            <a class="page-link"  @click="getAllRefers(pagination.prev_page_url)" href="#" tabindex="-1">Previous</a>
                                         </li>
                                         <li class="page-item disabled"><a class="page-link" href="#">Page {{ pagination.current_page}} of {{ pagination.last_page}} </a></li>
                                         <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                                            <a class="page-link" @click="getAllServices(pagination.next_page_url)" href="#">Next</a>
+                                            <a class="page-link" @click="getAllRefers(pagination.next_page_url)" href="#">Next</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -94,8 +97,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header border-bottom-0">
-                        <h5 class="modal-title" v-if="edit">Edit Service</h5>
-                        <h5 class="modal-title" v-else>Add New</h5>
+                        <h5 class="modal-title">Refer patient</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -103,15 +105,22 @@
                     <div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="name">Title</label>
-                                <input type="text" v-model="service.title" class="form-control form-control-lg" id="name" aria-describedby="emailHelp" placeholder="Enter title">
+                                <label for="name">Patient Id</label>
+                                <input type="text" v-model="refer.emp_code" class="form-control form-control-lg" aria-describedby="emailHelp" >
                             </div>
                             <div class="form-group">
-                                <label for="description">Description</label>
+                                <label for="name">Case/Reason for Refer</label>
+                                <input type="text" v-model="refer.case" class="form-control form-control-lg"aria-describedby="emailHelp" >
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Hospital Name</label>
+                                <input type="text" v-model="refer.hospital_name" class="form-control form-control-lg" aria-describedby="emailHelp" >
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Summary/Remark</label>
                                 <textarea
                                     id="description"
-                                    v-model="service.description"
-                                    placeholder="Enter description"
+                                    v-model="refer.remark"
                                     rows="6"
                                     class="form-control form-control-md"
                                     aria-label="With textarea"
@@ -119,8 +128,7 @@
                             </div>
                         </div>
                         <div class="modal-footer border-top-0">
-                            <button type="submit" @click="updateService(service.id)" class="btn btn-sm btn-dark" v-if="edit">Update</button>
-                            <button type="submit" @click="createService()" class="btn btn-sm btn-dark" v-else>Create</button>
+                            <button type="submit" @click="createRefer()" class="btn btn-sm btn-dark">Create</button>
                         </div>
                     </div>
                 </div>
@@ -133,68 +141,41 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-    name: "Services",
+    name: "Refers",
     components: {
         Nav: () => import("../../../components/Nav.vue"),
     },
     data() {
         return {
-            service: {
-                title: "",
-                description: ""
+            refer: {
+                emp_code: "",
+                case: "",
+                hospital_name: "",
+                remark: ""
             },
-            services: [],
+            refers: [],
             pagination: {},
             edit: false,
         }
     },
     created() {
-        this.getAllServices();
+        this.getAllRefers();
     },
     computed: {
         ...mapGetters(["user"]),
     },
     methods : {
-        async editMode(id){
-            this.edit = true;
-            let api_url = process.env.MIX_API_BASE_URL + 'services/'
-            const response = await axios.get(api_url + id, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            });
-            this.service = response.data.data;
-        },
-        async updateService(id) {
-            let api_url = process.env.MIX_API_BASE_URL + 'services/'
-            try {
-                const response = await axios.patch(
-                    api_url + id,
-                    {
-                        title: this.service.title,
-                        description: this.service.description
-                    },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        },
-                    }
-                );
-                await this.getAllServices();
-                this.$toasted.success(response.data.message)
-                this.edit = false;
-            } catch (e) {
-                this.$toasted.error(e.response.data.message)
-            }
-        },
-        async createService() {
-            let api_url = process.env.MIX_API_BASE_URL + 'services'
+
+        async createRefer() {
+            let api_url = process.env.MIX_API_BASE_URL + 'refers'
             try {
                 const response = await axios.post(
                     api_url,
                     {
-                        title: this.service.title,
-                        description: this.service.description
+                        emp_code: this.refer.emp_code,
+                        case: this.refer.case,
+                        hospital_name: this.refer.hospital_name,
+                        remark: this.refer.remark
                     },
                     {
                         headers: {
@@ -203,21 +184,22 @@ export default {
                     }
                 );
                 this.$toasted.success(response.data.message)
-                this. clearData()
-                await this.getAllServices();
+                await this.getAllRefers();
             } catch (e) {
                 this.$toasted.error(e.response.data.message)
             }
         },
-        async getAllServices(page_url) {
+
+        async getAllRefers(page_url) {
             let vm = this;
-            page_url = page_url || 'services'
+            page_url = page_url || 'refers'
             const response = await axios.get(process.env.MIX_API_BASE_URL + page_url, {
                 headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
             });
-            this.services = response.data.data;
+            this.refers = response.data.data;
             vm.makePagination(response.data.meta, response.data.links)
         },
+
         makePagination(meta, links) {
             this.pagination = {
                 current_page: meta.current_page,
@@ -226,38 +208,18 @@ export default {
                 prev_page_url: links.prev
             };
         },
-        async deleteService(id) {
-            let api_url = process.env.MIX_API_BASE_URL + 'services/'
-            if (confirm("Do you really want to delete this record?")) {
-                try {
-                    const response = await axios.delete( api_url + id, {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        },
-                    });
-                    this.$toasted.success(response.data.message)
-                    await this.getAllServices();
-                } catch (e) {
-                    this.$toasted.error(e.response.data.message)
-                }
-            }
-        },
+
         formatDate(dateString) {
             const options = { year: "numeric", month: "long", day: "numeric" };
             return new Date(dateString).toLocaleDateString(undefined, options);
-        },
-        clearData() {
-            this.service.name = ""
-            this.service.description = ""
         }
     },
 }
 </script>
 
 <style scoped>
-@import '../../../css/index.css';
-@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+    @import '../../../css/index.css';
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
 </style>
-
 
 

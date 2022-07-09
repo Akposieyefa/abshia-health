@@ -10,9 +10,9 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-//online
-//local  https://abshia-health.herokuapp.com/
-mix.browserSync('http://127.0.0.1:8000/');
+//online 
+//local http://127.0.0.1:8000/ 
+mix.browserSync('https://abshia-health.herokuapp.com/');
 mix.js('resources/js/app.js', 'public/js')
     .vue()
     .postCss('resources/css/app.css', 'public/css', [

@@ -16,7 +16,7 @@
                                     <h1 class="h2 mb-0 ls-tight">Payment Claims</h1>
                                 </div>
                                  <!-- Actions -->
-                                <div class="col-sm-6 col-12 text-sm-end">
+                                <div v-if="user.role === 'hospital'" class="col-sm-6 col-12 text-sm-end">
                                     <div class="mx-n1">
                                         <button  data-toggle="modal" data-target="#form" class="btn d-inline-flex btn-sm btn-dark mx-1">
                                     <span class=" pe-2">

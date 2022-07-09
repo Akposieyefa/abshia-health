@@ -1064,12 +1064,32 @@ var render = function () {
         _c("Nav"),
         _vm._v(" "),
         _c("div", { staticClass: "h-screen flex-grow-1 overflow-y-lg-auto" }, [
-          _vm._m(0),
+          _c(
+            "header",
+            { staticClass: "bg-surface-primary border-bottom pt-6 pb-5" },
+            [
+              _c("div", { staticClass: "container-fluid" }, [
+                _c("div", { staticClass: "mb-npx" }, [
+                  _c("div", { staticClass: "row align-items-center" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _vm.user.role === "hospital"
+                      ? _c(
+                          "div",
+                          { staticClass: "col-sm-6 col-12 text-sm-end" },
+                          [_vm._m(1)]
+                        )
+                      : _vm._e(),
+                  ]),
+                ]),
+              ]),
+            ]
+          ),
           _vm._v(" "),
           _c("main", { staticClass: "py-6 bg-surface-secondary" }, [
             _c("div", { staticClass: "container-fluid" }, [
               _c("div", { staticClass: "card shadow border-0 mb-7" }, [
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("div", { staticClass: "table-responsive" }, [
                   _c(
@@ -1395,7 +1415,7 @@ var render = function () {
                       _vm._v("Request New Claim"),
                     ]),
                 _vm._v(" "),
-                _vm._m(2),
+                _vm._m(3),
               ]),
               _vm._v(" "),
               _c("div", [
@@ -1692,42 +1712,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "header",
-      { staticClass: "bg-surface-primary border-bottom pt-6 pb-5" },
-      [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("div", { staticClass: "mb-npx" }, [
-            _c("div", { staticClass: "row align-items-center" }, [
-              _c("div", { staticClass: "col-sm-6 col-12 mb-4 mb-sm-0" }, [
-                _c("h1", { staticClass: "h2 mb-0 ls-tight" }, [
-                  _vm._v("Payment Claims"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-6 col-12 text-sm-end" }, [
-                _c("div", { staticClass: "mx-n1" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn d-inline-flex btn-sm btn-dark mx-1",
-                      attrs: { "data-toggle": "modal", "data-target": "#form" },
-                    },
-                    [
-                      _c("span", { staticClass: " pe-2" }, [
-                        _c("i", { staticClass: "bi bi-plus" }),
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Request Payment")]),
-                    ]
-                  ),
-                ]),
-              ]),
-            ]),
+    return _c("div", { staticClass: "col-sm-6 col-12 mb-4 mb-sm-0" }, [
+      _c("h1", { staticClass: "h2 mb-0 ls-tight" }, [_vm._v("Payment Claims")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mx-n1" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn d-inline-flex btn-sm btn-dark mx-1",
+          attrs: { "data-toggle": "modal", "data-target": "#form" },
+        },
+        [
+          _c("span", { staticClass: " pe-2" }, [
+            _c("i", { staticClass: "bi bi-plus" }),
           ]),
-        ]),
-      ]
-    )
+          _vm._v(" "),
+          _c("span", [_vm._v("Request Payment")]),
+        ]
+      ),
+    ])
   },
   function () {
     var _vm = this

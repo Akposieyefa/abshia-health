@@ -177,10 +177,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 response = _context.sent;
                 _this.users = response.data.data;
-                console.log(_this.users);
                 vm.makePagination(response.data.meta, response.data.links);
 
-              case 8:
+              case 7:
               case "end":
                 return _context.stop();
             }

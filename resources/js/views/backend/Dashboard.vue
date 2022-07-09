@@ -130,7 +130,6 @@ export default {
                 headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
             });
             this.users = response.data.data;
-            console.log(this.users)
             vm.makePagination(response.data.meta, response.data.links)
         },
 

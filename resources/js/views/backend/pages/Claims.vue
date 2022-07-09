@@ -142,7 +142,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Cost</label>
-                                <input type="text" v-model="claim.cost" class="form-control form-control-lg" id="name" aria-describedby="emailHelp" placeholder="Enter treatment cost">
+                                <input type="number" v-model="claim.cost" class="form-control form-control-lg" id="name" aria-describedby="emailHelp" placeholder="Enter treatment cost">
                             </div>
                             <div class="form-group">
                                 <label for="description">Treatment Details</label>

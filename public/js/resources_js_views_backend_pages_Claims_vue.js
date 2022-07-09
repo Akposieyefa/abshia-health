@@ -1615,7 +1615,7 @@ var render = function () {
                       ],
                       staticClass: "form-control form-control-lg",
                       attrs: {
-                        type: "text",
+                        type: "number",
                         id: "name",
                         "aria-describedby": "emailHelp",
                         placeholder: "Enter treatment cost",

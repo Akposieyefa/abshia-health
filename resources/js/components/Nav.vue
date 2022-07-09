@@ -74,6 +74,11 @@
                             <i class="bi bi-arrow-right-circle"></i> Refers
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/claims">
+                            <i class="bi bi-arrows-move"></i>Payment Claims
+                        </router-link>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav" v-if="user.role === 'hospital'">
@@ -100,6 +105,11 @@
                     <li class="nav-item">
                         <router-link class="nav-link" to="/get-refers">
                             <i class="bi bi-people"></i> Refers
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/claims">
+                            <i class="bi bi-arrows-move"></i>Payment Claims
                         </router-link>
                     </li>
                 </ul>

@@ -44,7 +44,7 @@ class CategoryAction
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Sorry unable to  created category',
+                'message' => 'Sorry unable to  create category',
                 'error' => $e->getMessage(),
                 'success' => false
             ], 400);

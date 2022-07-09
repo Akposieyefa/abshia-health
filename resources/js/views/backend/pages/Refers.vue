@@ -67,7 +67,9 @@
                                             <td>  {{ refer.hospital_name }} </td>
                                             <td> {{ formatDate(refer.created_at)}} </td>
                                            <td>
-                                               <router-link to="/" class="btn btn-sm btn-neutral"  data-toggle="modal" data-target="#form">More</router-link>
+                                               <router-link to="/" class="btn btn-sm btn-square btn-info text-info-hover"  data-toggle="modal" data-target="#form">
+                                                    <i class="bi bi-eye"></i>
+                                               </router-link>
                                            </td>
                                         </tr>
                                     </tbody>
@@ -110,7 +112,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Case/Reason for Refer</label>
-                                <input type="text" v-model="refer.case" class="form-control form-control-lg"aria-describedby="emailHelp" >
+                                <input type="text" v-model="refer.case" class="form-control form-control-lg" aria-describedby="emailHelp" >
                             </div>
                             <div class="form-group">
                                 <label for="name">Hospital Name</label>

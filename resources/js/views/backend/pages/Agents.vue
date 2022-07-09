@@ -67,8 +67,10 @@
                                         <td>  {{ agent.details.relationships.enrolled_users.length}} </td>
                                         <td> {{ formatDate(agent.details.created_at)}}</td>
                                         <td class="text-end">
-                                            <button  class="btn btn-sm btn-neutral" @click="editMode(agent.id)" data-toggle="modal" data-target="#form">Edit</button>
-                                            <button  @click="deleteAgent(agent.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
+                                            <button title="Edit agent" class="btn btn-sm btn-square btn-dark text-dark-hover" @click="editMode(agent.id)" data-toggle="modal" data-target="#form">
+                                                <i class="bi bi-pen-fill"></i>
+                                            </button>
+                                            <button title="Delete agent"  @click="deleteAgent(agent.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </td>

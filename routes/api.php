@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Api\AppointmentController;
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\EmailVerificationController;
-use App\Http\Controllers\Api\FeedbackController;
-use App\Http\Controllers\Api\ForgotPasswordController;
-use App\Http\Controllers\Api\HelperController;
-use App\Http\Controllers\Api\ReferController;
-use App\Http\Controllers\Api\ServiceController;
-use App\Http\Controllers\Api\TreatmentController;
-use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ClaimController;
+use App\Http\Controllers\Api\ReferController;
+use App\Http\Controllers\Api\HelperController;
+use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\FeedbackController;
+use App\Http\Controllers\Api\TreatmentController;
+use App\Http\Controllers\Api\AppointmentController;
+use App\Http\Controllers\Api\ForgotPasswordController;
+use App\Http\Controllers\Api\EmailVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +109,17 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::patch('appointments/{id}',  'update');
             Route::delete('appointments/{id}',  'destroy');
         });
+
+        Route::controller(ClaimController::class)->group(function () { // claim routes
+            Route::post('claims',  'store');
+            Route::get('claims',  'index');
+            Route::get('claims/{id}',  'show');
+            Route::patch('claims/{id}',  'update');
+            Route::delete('claims/{id}',  'destroy');
+            Route::get('approve-claims/{id}',  'approveRequest'); 
+            Route::get('decline-claims/{id}',  'declineRequest');
+        });
+
 
         Route::controller(UserController::class)->group(function () { // categories routes
             Route::post('create-agents',  'createAgent');

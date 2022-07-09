@@ -90,6 +90,11 @@ const router = new  VueRouter({
             component: () => import('./views/backend/pages/Refers.vue')
         },
 
+        {
+            path: '/claims',
+            name: 'Claims',
+            component: () => import('./views/backend/pages/Claims.vue')
+        },
 
         {
             path: '/dashboard',

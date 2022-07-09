@@ -166,6 +166,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Refers",
@@ -975,14 +977,15 @@ var render = function () {
                                 _c(
                                   "router-link",
                                   {
-                                    staticClass: "btn btn-sm btn-neutral",
+                                    staticClass:
+                                      "btn btn-sm btn-square btn-info text-info-hover",
                                     attrs: {
                                       to: "/",
                                       "data-toggle": "modal",
                                       "data-target": "#form",
                                     },
                                   },
-                                  [_vm._v("More")]
+                                  [_c("i", { staticClass: "bi bi-eye" })]
                                 ),
                               ],
                               1

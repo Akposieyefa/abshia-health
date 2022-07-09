@@ -182,6 +182,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Hospitals",
@@ -1068,8 +1070,10 @@ var render = function () {
                               _c(
                                 "button",
                                 {
-                                  staticClass: "btn btn-sm btn-neutral",
+                                  staticClass:
+                                    "btn btn-sm btn-square btn-dark text-dark-hover",
                                   attrs: {
+                                    title: "Edit hospital",
                                     "data-toggle": "modal",
                                     "data-target": "#form",
                                   },
@@ -1079,7 +1083,7 @@ var render = function () {
                                     },
                                   },
                                 },
-                                [_vm._v("Edit")]
+                                [_c("i", { staticClass: "bi bi-pen-fill" })]
                               ),
                               _vm._v(" "),
                               _c(
@@ -1087,7 +1091,10 @@ var render = function () {
                                 {
                                   staticClass:
                                     "btn btn-sm btn-square btn-danger text-danger-hover",
-                                  attrs: { type: "button" },
+                                  attrs: {
+                                    title: "Delete hospital",
+                                    type: "button",
+                                  },
                                   on: {
                                     click: function ($event) {
                                       return _vm.deleteHospital(hospital.id)

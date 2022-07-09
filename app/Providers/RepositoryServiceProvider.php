@@ -64,6 +64,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Libs\Repositories\ReferRepository::class
         );
 
+        $this->app->bind(
+            \App\Libs\Repositories\Contracts\ClaimRepositoryInterface::class,
+            \App\Libs\Repositories\ClaimRepository::class
+        );
+
     }
 
     /**

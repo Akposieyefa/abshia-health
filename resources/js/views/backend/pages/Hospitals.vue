@@ -65,8 +65,10 @@
                                         <td>  {{ hospital.details.phone_number }} </td>
                                         <td> {{ formatDate(hospital.details.created_at)}}</td>
                                         <td class="text-end">
-                                            <button  class="btn btn-sm btn-neutral" @click="editMode(hospital.id)" data-toggle="modal" data-target="#form">Edit</button>
-                                            <button  @click="deleteHospital(hospital.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
+                                            <button title="Edit hospital"  class="btn btn-sm btn-square btn-dark text-dark-hover" @click="editMode(hospital.id)" data-toggle="modal" data-target="#form">
+                                                <i class="bi bi-pen-fill"></i>
+                                            </button>
+                                            <button title="Delete hospital" @click="deleteHospital(hospital.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </td>

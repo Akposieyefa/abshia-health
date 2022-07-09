@@ -61,8 +61,10 @@
                                             <td>  {{ service.description }} </td>
                                             <td> {{ formatDate(service.created_at)}}</td>
                                             <td class="text-end">
-                                                <button  class="btn btn-sm btn-neutral" @click="editMode(service.id)" data-toggle="modal" data-target="#form">Edit</button>
-                                                <button  @click="deleteService(service.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
+                                                <button title="Edit service"  class="btn btn-sm btn-square btn-dark text-dark-hover" @click="editMode(service.id)" data-toggle="modal" data-target="#form">
+                                                    <i class="bi bi-pen-fill"></i>
+                                                </button>
+                                                <button title="Delete service"  @click="deleteService(service.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </td>

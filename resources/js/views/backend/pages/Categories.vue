@@ -61,8 +61,10 @@
                                         <td>  {{ category.description }} </td>
                                         <td> {{ formatDate(category.created_at)}}</td>
                                         <td class="text-end">
-                                            <button  class="btn btn-sm btn-neutral" @click="editMode(category.id)" data-toggle="modal" data-target="#form">Edit</button>
-                                            <button  @click="deleteCategory(category.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
+                                            <button title="Edit category"  class="btn btn-sm btn-square btn-dark text-dark-hover" @click="editMode(category.id)" data-toggle="modal" data-target="#form">
+                                                 <i class="bi bi-pen-fill"></i>
+                                            </button>
+                                            <button title="Delete category"  @click="deleteCategory(category.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </td>

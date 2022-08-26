@@ -34,6 +34,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ForgetPassword"
 });
@@ -56,7 +65,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-f0079af2]{\n    display: flex;\n    -ms-flex-align: center;\n    -ms-flex-pack: center;\n    align-items: center;\n    justify-content: center;\n    background-color: #f5f5f5;\n}\n.form[data-v-f0079af2]{\n    padding-top: 10px;\n    font-size: 14px;\n    margin-top: 30px;\n}\n.card-title[data-v-f0079af2]{ font-weight:300;\n}\n.btn[data-v-f0079af2]{\n    font-size: 14px;\n    margin-top:20px;\n}\n.login-form[data-v-f0079af2]{\n    width:320px;\n    margin:20px;\n}\nspan[data-v-f0079af2]{\n    font-size:14px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-f0079af2] {\n  display: flex;\n  -ms-flex-align: center;\n  -ms-flex-pack: center;\n  align-items: center;\n  justify-content: center;\n  background-color: #f5f5f5;\n}\n.form[data-v-f0079af2] {\n  padding-top: 10px;\n  font-size: 14px;\n  margin-top: 30px;\n}\n.card-title[data-v-f0079af2] {\n  font-weight: 300;\n}\n.btn[data-v-f0079af2] {\n  font-size: 14px;\n  margin-top: 20px;\n}\n.login-form[data-v-f0079af2] {\n  width: 320px;\n  margin: 20px;\n}\nspan[data-v-f0079af2] {\n  font-size: 14px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -564,7 +573,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", [
                       _vm._v(
-                        "Enter your email address and we will send you a link to reset your password."
+                        "Enter your email address and we will send you a link to\n                  reset your password."
                       ),
                     ]),
                     _vm._v(" "),
@@ -583,7 +592,11 @@ var staticRenderFns = [
                       staticClass: "btn btn-primary btn-block",
                       attrs: { type: "submit" },
                     },
-                    [_vm._v("Send password reset email")]
+                    [
+                      _vm._v(
+                        "\n                Send password reset email\n              "
+                      ),
+                    ]
                   ),
                 ]),
               ]),

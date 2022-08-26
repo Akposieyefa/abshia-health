@@ -186,34 +186,131 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AdministerTreatment",
   components: {
     Nav: function Nav() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b1").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b2").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
     }
   },
   data: function data() {
     return {
       loading: false,
       treatment: {
-        emp_code: '',
-        verified_by: '',
-        date_and_time: '',
+        emp_code: "",
+        verified_by: "",
+        date_and_time: "",
         is_capitated: 0,
         is_ffs: 0,
-        drugs: '',
-        cost_of_treatment: '',
-        height: '',
-        weight: '',
-        blood_pressure: '',
-        pulse: '',
-        respiration: '',
-        temperature: '',
-        treatment_give: '',
+        drugs: "",
+        cost_of_treatment: "",
+        height: "",
+        weight: "",
+        blood_pressure: "",
+        pulse: "",
+        respiration: "",
+        temperature: "",
+        treatment_give: "",
         is_referred: 0,
-        summary: ''
+        summary: ""
       }
     };
   },
@@ -229,7 +326,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _this.loading = true;
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'treatments';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "treatments";
                 _context.prev = 2;
                 _context.next = 5;
                 return axios.post(api_url, {
@@ -853,7 +950,7 @@ var render = function () {
                               },
                             },
                             [
-                              _c("span", { staticClass: " pe-2" }, [
+                              _c("span", { staticClass: "pe-2" }, [
                                 _c("i", { staticClass: "bi bi-eye" }),
                               ]),
                               _vm._v(" "),
@@ -989,7 +1086,7 @@ var render = function () {
                           },
                         ],
                         staticClass:
-                          "form-control browser-default custom-select form-control-lg",
+                          "\n                    form-control\n                    browser-default\n                    custom-select\n                    form-control-lg\n                  ",
                         on: {
                           change: function ($event) {
                             var $$selectedVal = Array.prototype.filter
@@ -1041,7 +1138,7 @@ var render = function () {
                           },
                         ],
                         staticClass:
-                          "form-control browser-default custom-select form-control-lg",
+                          "\n                    form-control\n                    browser-default\n                    custom-select\n                    form-control-lg\n                  ",
                         on: {
                           change: function ($event) {
                             var $$selectedVal = Array.prototype.filter
@@ -1353,7 +1450,7 @@ var render = function () {
                           },
                         ],
                         staticClass:
-                          "form-control browser-default custom-select form-control-lg",
+                          "\n                    form-control\n                    browser-default\n                    custom-select\n                    form-control-lg\n                  ",
                         on: {
                           change: function ($event) {
                             var $$selectedVal = Array.prototype.filter
@@ -1434,7 +1531,7 @@ var render = function () {
                         staticClass: "btn btn-dark float-right",
                         on: { click: _vm.submitTreatment },
                       },
-                      [_vm._v("Submit")]
+                      [_vm._v("\n                  Submit\n                ")]
                     ),
                   ]),
                 ]),

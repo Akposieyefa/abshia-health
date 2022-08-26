@@ -82,6 +82,16 @@ class TreatmentRepository implements TreatmentRepositoryInterface
         return $this->action->getSingleTreatmentAction($id);
     }
 
+     /**
+     * get single treatment
+     * @param $id
+     * @return TreatmentResource
+     */
+    public function getTreatmentByEnrolleID($id) : TreatmentResource 
+    {
+        return $this->action->getTreatmentByEnrolleID($id);
+    }
+
     /**
      * delete treatment
      * @param $id

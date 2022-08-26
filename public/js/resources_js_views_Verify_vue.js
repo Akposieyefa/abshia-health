@@ -21,8 +21,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Verify",
   created: function created() {
@@ -46,12 +44,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 })
               };
               _context.next = 5;
-              return fetch('verify-account', config);
+              return fetch("verify-account", config);
 
             case 5:
               response = _context.sent;
               _context.next = 8;
-              return _this.$router.push('/');
+              return _this.$router.push("/");
 
             case 8:
             case "end":

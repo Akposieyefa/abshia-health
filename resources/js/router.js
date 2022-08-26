@@ -20,9 +20,27 @@ const router = new  VueRouter({
         },
 
         {
+            path: '/verify-payment',
+            name: 'VerifyPayment',
+            component: () => import('./views/VerifyPayment.vue')
+        },
+
+        {
+            path: '/payment-success',
+            name: 'PaymentSuccess',
+            component: () => import('./views/PaymentSuccess.vue')
+        },
+
+        {
             path: '/forget-password',
             name: 'ForgetPassword',
             component: () => import('./views/ForgetPassword.vue')
+        },
+
+        {
+            path: '/profile/:id',
+            name: 'Profile',
+            component: () => import('./views/backend/Profile.vue')
         },
 
         {
@@ -100,6 +118,12 @@ const router = new  VueRouter({
             path: '/dashboard',
             name: 'Dashboard',
             component: () => import('./views/backend/Dashboard.vue') ,
+        },
+
+        {
+            path: '/settings',
+            name: 'Settings',
+            component: () => import('./views/backend/Settings.vue') ,
         },
 
         {

@@ -114,9 +114,13 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/profile">
+                    <li class="nav-item" v-if="user.role != 'superadmin'">
+                        <router-link class="nav-link" v-bind:to="'/profile/' + user.id">
                             <i class="bi bi-person-square"></i>  Profile
+                        </router-link>
+                    </li><li class="nav-item">
+                        <router-link class="nav-link" v-bind:to="'/settings'">
+                            <i class="bi bi-gear-fill"></i>  Settings
                         </router-link>
                     </li>
                     <li class="nav-item">

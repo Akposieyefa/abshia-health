@@ -45,6 +45,16 @@ class TreatmentController extends Controller
     }
 
     /**
+     * create treatment
+     * @param Request $request
+     * @return mixed
+     */
+    public function getEnrolleTreatment($id): mixed
+    {
+        return $this->treatmentRepositoryInterface->getTreatmentByEnrolleID($id);
+    }
+
+    /**
      * get single treatment
      * @param $id
      * @return mixed

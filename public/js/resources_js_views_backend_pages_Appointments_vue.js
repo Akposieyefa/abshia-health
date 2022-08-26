@@ -155,7 +155,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "Appointments",
   components: {
     Nav: function Nav() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b1").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b2").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
     }
   },
   data: function data() {
@@ -184,7 +184,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _this.edit = true;
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'appointments/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + 'appointments/';
                 _context.next = 4;
                 return axios.get(api_url + id, {
                   headers: {
@@ -214,7 +214,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context2.prev = _context2.next) {
               case 0:
                 _this2.edit = true;
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'cancel-appointments/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + 'cancel-appointments/';
                 _context2.prev = 2;
                 _context2.next = 5;
                 return axios.get(api_url + id, {
@@ -254,7 +254,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'appointments/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + 'appointments/';
                 _context3.prev = 1;
                 _context3.next = 4;
                 return axios.patch(api_url + id, {
@@ -304,7 +304,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 vm = _this4;
                 page_url = page_url || 'appointments';
                 _context4.next = 4;
-                return axios.get("https://abshia-health.herokuapp.com/api/v1/" + page_url, {
+                return axios.get("http://127.0.0.1:8000/api/v1/" + page_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
@@ -340,7 +340,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'appointments/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + 'appointments/';
 
                 if (!confirm("Do you really want to delete this record?")) {
                   _context5.next = 14;
@@ -959,7 +959,9 @@ var render = function () {
                               _vm._v(
                                 " " +
                                   _vm._s(
-                                    appointment.relationships.enrolle.surname
+                                    appointment.relationships.enrolle.surname +
+                                      appointment.relationships.enrolle
+                                        .first_name
                                   )
                               ),
                             ]),
@@ -1269,7 +1271,7 @@ var staticRenderFns = [
             _c("div", { staticClass: "row align-items-center" }, [
               _c("div", { staticClass: "col-sm-6 col-12 mb-4 mb-sm-0" }, [
                 _c("h1", { staticClass: "h2 mb-0 ls-tight" }, [
-                  _vm._v("Patient Appointments"),
+                  _vm._v("Enrollees Appointments"),
                 ]),
               ]),
             ]),

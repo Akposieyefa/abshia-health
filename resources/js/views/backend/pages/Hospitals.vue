@@ -1,312 +1,406 @@
 <template>
-    <div>
-        <!-- Dashboard -->
-        <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
-            <!-- Vertical Navbar -->
-            <Nav />
-            <!-- Main content -->
-            <div class="h-screen flex-grow-1 overflow-y-lg-auto">
-                <!-- Header -->
-                <header class="bg-surface-primary border-bottom pt-6 pb-5">
-                    <div class="container-fluid">
-                        <div class="mb-npx">
-                            <div class="row align-items-center">
-                                <div class="col-sm-6 col-12 mb-4 mb-sm-0">
-                                    <!-- Title -->
-                                    <h1 class="h2 mb-0 ls-tight">Hospitals</h1>
-                                </div>
-                                <!-- Actions -->
-                                <div class="col-sm-6 col-12 text-sm-end">
-                                    <div class="mx-n1">
-                                        <button  data-toggle="modal" data-target="#form" class="btn d-inline-flex btn-sm btn-dark mx-1">
-                                    <span class=" pe-2">
-                                        <i class="bi bi-plus"></i>
-                                    </span>
-                                            <span>Create</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Nav -->
-                        </div>
-                    </div>
-                </header>
-
-                <!-- Main -->
-                <main class="py-6 bg-surface-secondary">
-                    <div class="container-fluid">
-                        <!-- Card stats -->
-                        <div class="card shadow border-0 mb-7">
-                            <div class="card-header">
-                                <h5 class="mb-0">All Hospitals</h5>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-nowrap">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">No..</th>
-                                        <th scope="col">Hospital Code</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Phone</th>
-                                        <th scope="col">Date</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr
-                                        v-for="(hospital, index) in hospitals"
-                                        :key="hospital.id"
-                                    >
-                                        <td>{{ index + 1 }} </td>
-                                        <td> {{ hospital.details.code }}</td>
-                                        <td> {{ hospital.details.name }}</td>
-                                        <td>  {{ hospital.email }} </td>
-                                        <td>  {{ hospital.details.phone_number }} </td>
-                                        <td> {{ formatDate(hospital.details.created_at)}}</td>
-                                        <td class="text-end">
-                                            <button title="Edit hospital"  class="btn btn-sm btn-square btn-dark text-dark-hover" @click="editMode(hospital.id)" data-toggle="modal" data-target="#form">
-                                                <i class="bi bi-pen-fill"></i>
-                                            </button>
-                                            <button title="Delete hospital" @click="deleteHospital(hospital.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card-footer border-0 py-5">
-                                <nav aria-label="...">
-                                    <ul class="pagination">
-                                        <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                                            <a class="page-link"  @click="getAllHospitals(pagination.prev_page_url)" href="#" tabindex="-1">Previous</a>
-                                        </li>
-                                        <li class="page-item disabled"><a class="page-link" href="#">Page {{ pagination.current_page}} of {{ pagination.last_page}} </a></li>
-                                        <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                                            <a class="page-link" @click="getAllHospitals(pagination.next_page_url)" href="#">Next</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        </div>
-
-        <!--Modal display-->
-        <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-bottom-0">
-                        <h5 class="modal-title" v-if="edit">Edit Hospital</h5>
-                        <h5 class="modal-title" v-else>Add New</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" v-model="hospital.details.name" class="form-control form-control-lg" id="name" aria-describedby="emailHelp" placeholder="Enter name">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" v-model="hospital.email" class="form-control form-control-lg" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="text" v-model="hospital.details.phone_number" class="form-control form-control-lg" id="phone" aria-describedby="emailHelp" placeholder="Enter phone number">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Lga</label>
-                                <select id="lga" v-model="hospital.details.lga_id" class="form-control form-control-lg">
-                                    <option value="0">Select Lga</option>
-                                    <option  v-for="(lga, index) in lgas"
-                                             v-bind:value="lga.id"
-                                             :key="index">
-                                        {{ lga.lga_name }}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Address</label>
-                                <textarea
-                                    id="description"
-                                    v-model="hospital.details.address"
-                                    placeholder="Enter address"
-                                    rows="6"
-                                    class="form-control form-control-md"
-                                    aria-label="With textarea"
-                                ></textarea>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer border-top-0">
-                            <button type="submit" @click="updateHospital(hospital.id)" class="btn btn-sm btn-dark" v-if="edit">Update</button>
-                            <button type="submit" @click="createHospital()" class="btn btn-sm btn-dark" v-else>Create</button>
-                        </div>
-                    </div>
+  <div>
+    <!-- Dashboard -->
+    <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+      <!-- Vertical Navbar -->
+      <Nav />
+      <!-- Main content -->
+      <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+        <!-- Header -->
+        <header class="bg-surface-primary border-bottom pt-6 pb-5">
+          <div class="container-fluid">
+            <div class="mb-npx">
+              <div class="row align-items-center">
+                <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                  <!-- Title -->
+                  <h1 class="h2 mb-0 ls-tight">Hospitals</h1>
                 </div>
+                <!-- Actions -->
+                <div class="col-sm-6 col-12 text-sm-end">
+                  <div class="mx-n1">
+                    <button
+                      data-toggle="modal"
+                      data-target="#form"
+                      class="btn d-inline-flex btn-sm btn-dark mx-1"
+                    >
+                      <span class="pe-2">
+                        <i class="bi bi-plus"></i>
+                      </span>
+                      <span>Create</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Nav -->
             </div>
-        </div>
-        <!--end of modal -->
+          </div>
+        </header>
+
+        <!-- Main -->
+        <main class="py-6 bg-surface-secondary">
+          <div class="container-fluid">
+            <!-- Card stats -->
+            <div class="card shadow border-0 mb-7">
+              <div class="card-header">
+                <h5 class="mb-0">All Hospitals</h5>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover table-nowrap">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">No..</th>
+                      <th scope="col">Hospital Code</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Phone</th>
+                      <th scope="col">Date</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      v-for="(hospital, index) in hospitals"
+                      :key="hospital.id"
+                    >
+                      <td>{{ index + 1 }}</td>
+                      <td>{{ hospital.details.code }}</td>
+                      <td>{{ hospital.details.name }}</td>
+                      <td>{{ hospital.email }}</td>
+                      <td>{{ hospital.details.phone_number }}</td>
+                      <td>{{ formatDate(hospital.details.created_at) }}</td>
+                      <td class="text-end">
+                        <button
+                          title="Edit hospital"
+                          class="btn btn-sm btn-square btn-dark text-dark-hover"
+                          @click="editMode(hospital.id)"
+                          data-toggle="modal"
+                          data-target="#form"
+                        >
+                          <i class="bi bi-pen-fill"></i>
+                        </button>
+                        <button
+                          title="Delete hospital"
+                          @click="deleteHospital(hospital.id)"
+                          type="button"
+                          class="
+                            btn btn-sm btn-square btn-danger
+                            text-danger-hover
+                          "
+                        >
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer border-0 py-5">
+                <nav aria-label="...">
+                  <ul class="pagination">
+                    <li
+                      v-bind:class="[{ disabled: !pagination.prev_page_url }]"
+                      class="page-item"
+                    >
+                      <a
+                        class="page-link"
+                        @click="getAllHospitals(pagination.prev_page_url)"
+                        href="#"
+                        tabindex="-1"
+                        >Previous</a
+                      >
+                    </li>
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#"
+                        >Page {{ pagination.current_page }} of
+                        {{ pagination.last_page }}
+                      </a>
+                    </li>
+                    <li
+                      v-bind:class="[{ disabled: !pagination.next_page_url }]"
+                      class="page-item"
+                    >
+                      <a
+                        class="page-link"
+                        @click="getAllHospitals(pagination.next_page_url)"
+                        href="#"
+                        >Next</a
+                      >
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
+
+    <!--Modal display-->
+    <div
+      class="modal fade"
+      id="form"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header border-bottom-0">
+            <h5 class="modal-title" v-if="edit">Edit Hospital</h5>
+            <h5 class="modal-title" v-else>Add New</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  v-model="hospital.details.name"
+                  class="form-control form-control-lg"
+                  id="name"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="text"
+                  v-model="hospital.email"
+                  class="form-control form-control-lg"
+                  id="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input
+                  type="text"
+                  v-model="hospital.details.phone_number"
+                  class="form-control form-control-lg"
+                  id="phone"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter phone number"
+                />
+              </div>
+              <div class="form-group">
+                <label for="phone">Lga</label>
+                <select
+                  id="lga"
+                  v-model="hospital.details.lga_id"
+                  class="form-control form-control-lg"
+                >
+                  <option value="0">Select Lga</option>
+                  <option
+                    v-for="(lga, index) in lgas"
+                    v-bind:value="lga.id"
+                    :key="index"
+                  >
+                    {{ lga.lga_name }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="description">Address</label>
+                <textarea
+                  id="description"
+                  v-model="hospital.details.address"
+                  placeholder="Enter address"
+                  rows="6"
+                  class="form-control form-control-md"
+                  aria-label="With textarea"
+                ></textarea>
+              </div>
+            </div>
+            <div class="modal-footer border-top-0">
+              <button
+                type="submit"
+                @click="updateHospital(hospital.id)"
+                class="btn btn-sm btn-dark"
+                v-if="edit"
+              >
+                Update
+              </button>
+              <button
+                type="submit"
+                @click="createHospital()"
+                class="btn btn-sm btn-dark"
+                v-else
+              >
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end of modal -->
+  </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 export default {
-    name: "Hospitals",
-    components: {
-        Nav: () => import("../../../components/Nav.vue"),
+  name: "Hospitals",
+  components: {
+    Nav: () => import("../../../components/Nav.vue"),
+  },
+  data() {
+    return {
+      hospital: {
+        email: "",
+        details: {
+          name: "",
+          phone_number: "",
+          address: "",
+          lga_id: 0,
+        },
+      },
+      lgas: [],
+      hospitals: [],
+      pagination: {},
+      edit: false,
+    };
+  },
+  created() {
+    this.getAllHospitals();
+    this.getAllLocalArea();
+  },
+  computed: {
+    ...mapGetters(["user"]),
+  },
+  methods: {
+    async editMode(id) {
+      this.edit = true;
+      let api_url = process.env.MIX_API_BASE_URL + "account-details/";
+      const response = await axios.get(api_url + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      this.agent = response.data.data;
     },
-    data() {
-        return {
-            hospital : {
-                email: '',
-                details : {
-                    name: '',
-                    phone_number: '',
-                    address: '',
-                    lga_id: 0
-                }
+
+    async updateHospital(id) {
+      let api_url = process.env.MIX_API_BASE_URL + "account-update-hospital/";
+      try {
+        const response = await axios.patch(
+          api_url + id,
+          {
+            name: this.hospital.details.name,
+            phone_number: this.hospital.details.phone_number,
+            address: this.hospital.details.address,
+            lga_id: this.hospital.details.lga_id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
-            lgas: [],
-            hospitals: [],
-            pagination: {},
-            edit: false,
+          }
+        );
+        await this.getAllHospitals();
+        this.$toasted.success(response.data.message);
+        this.edit = false;
+      } catch (e) {
+        this.$toasted.error(e.response.data.message);
+      }
+    },
+
+    async createHospital() {
+      let api_url = process.env.MIX_API_BASE_URL + "create-hospitals";
+      try {
+        const response = await axios.post(
+          api_url,
+          {
+            name: this.hospital.details.name,
+            email: this.hospital.email,
+            phone_number: this.hospital.details.phone_number,
+            address: this.hospital.details.address,
+            lga_id: this.hospital.details.lga_id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        this.$toasted.success(response.data.message);
+        await this.getAllHospitals();
+      } catch (e) {
+        this.$toasted.error(e.response.data.message);
+      }
+    },
+
+    async getAllHospitals(page_url) {
+      let vm = this;
+      page_url = page_url || "get-hospitals";
+      const response = await axios.get(
+        process.env.MIX_API_BASE_URL + page_url,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
+      );
+      this.hospitals = response.data.data;
+      vm.makePagination(response.data.meta, response.data.links);
     },
-    created() {
-        this.getAllHospitals();
-        this.getAllLocalArea();
+
+    makePagination(meta, links) {
+      this.pagination = {
+        current_page: meta.current_page,
+        last_page: meta.last_page,
+        next_page_url: links.next,
+        prev_page_url: links.prev,
+      };
     },
-    computed: {
-        ...mapGetters(["user"]),
+
+    //get all local government areas
+    async getAllLocalArea() {
+      let api_url = process.env.MIX_API_BASE_URL + "get-all-lga";
+      const response = await axios.get(api_url, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      this.lgas = response.data.data.lgas;
     },
-    methods : {
-        async editMode(id){
-            this.edit = true;
-            let api_url = process.env.MIX_API_BASE_URL + 'account-details/'
-            const response = await axios.get(api_url + id, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            });
-            this.agent = response.data.data;
-        },
 
-        async updateHospital(id) {
-            let api_url = process.env.MIX_API_BASE_URL + 'account-update-hospital/'
-            try {
-                const response = await axios.patch(
-                    api_url + id,
-                    {
-                        name: this.hospital.details.name,
-                        phone_number: this.hospital.details.phone_number,
-                        address : this.hospital.details.address,
-                        lga_id : this.hospital.details.lga_id
-                    },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        },
-                    }
-                );
-                await this.getAllHospitals();
-                this.$toasted.success(response.data.message)
-                this.edit = false;
-            } catch (e) {
-                this.$toasted.error(e.response.data.message)
-            }
-        },
-
-        async  createHospital() {
-            let api_url = process.env.MIX_API_BASE_URL + 'create-hospitals'
-            try {
-                const response = await axios.post(
-                    api_url,
-                    {
-                        name: this.hospital.details.name,
-                        email: this.hospital.email,
-                        phone_number: this.hospital.details.phone_number,
-                        address : this.hospital.details.address,
-                        lga_id : this.hospital.details.lga_id
-                    },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        },
-                    }
-                );
-                this.$toasted.success(response.data.message)
-                await this.getAllHospitals()
-            } catch (e) {
-                this.$toasted.error(e.response.data.message)
-            }
-        },
-
-        async getAllHospitals(page_url) {
-            let vm = this;
-            page_url = page_url || 'get-hospitals'
-            const response = await axios.get(process.env.MIX_API_BASE_URL + page_url, {
-                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-            });
-            this.hospitals = response.data.data;
-            vm.makePagination(response.data.meta, response.data.links)
-        },
-
-        makePagination(meta, links) {
-            this.pagination = {
-                current_page: meta.current_page,
-                last_page: meta.last_page,
-                next_page_url: links.next,
-                prev_page_url: links.prev
-            };
-        },
-
-        //get all local government areas
-        async getAllLocalArea()  {
-            let api_url = process.env.MIX_API_BASE_URL + 'get-all-lga'
-            const response = await axios.get(api_url,  {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            })
-            this.lgas = response.data.data.lgas
-        },
-
-        async deleteHospital(id) {
-            let api_url = process.env.MIX_API_BASE_URL + 'delete-account/'
-            if (confirm("Do you really want to delete this record?")) {
-                try {
-                    const response = await axios.delete( api_url + id, {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        },
-                    });
-                    this.$toasted.success(response.data.message)
-                    await this.getAllHospitals();
-                } catch (e) {
-                    this.$toasted.error(e.response.data.message)
-                }
-            }
-        },
-
-        formatDate(dateString) {
-            const options = { year: "numeric", month: "long", day: "numeric" };
-            return new Date(dateString).toLocaleDateString(undefined, options);
-        },
-
+    async deleteHospital(id) {
+      let api_url = process.env.MIX_API_BASE_URL + "delete-account/";
+      if (confirm("Do you really want to delete this record?")) {
+        try {
+          const response = await axios.delete(api_url + id, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          });
+          this.$toasted.success(response.data.message);
+          await this.getAllHospitals();
+        } catch (e) {
+          this.$toasted.error(e.response.data.message);
+        }
+      }
     },
-}
+
+    formatDate(dateString) {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      return new Date(dateString).toLocaleDateString(undefined, options);
+    },
+  },
+};
 </script>
 
 <style scoped>
-@import '../../../css/index.css';
+@import "../../../css/index.css";
 @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
 </style>
 

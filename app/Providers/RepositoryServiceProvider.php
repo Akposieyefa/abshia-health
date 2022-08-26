@@ -69,6 +69,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Libs\Repositories\ClaimRepository::class
         );
 
+        $this->app->bind(
+            \App\Libs\Repositories\Contracts\PaystackPaymentRepositoryInterface::class,
+            \App\Libs\Repositories\PaystackPaymentRepository::class
+        );
+
     }
 
     /**

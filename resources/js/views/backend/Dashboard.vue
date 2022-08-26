@@ -41,8 +41,8 @@
                         <!-- End of card state -->
                         <div class="card shadow border-0 mb-7" v-if="user.role === 'superadmin' || user.role === 'hospital'">
                             <div class="card-header">
-                                <h5 class="mb-0" v-if="user.role === 'superadmin'">Enrolled Users</h5>
-                                <h5 class="mb-0" v-if="user.role === 'hospital'">Patients</h5>
+                                <h5 class="mb-0" v-if="user.role === 'superadmin'">Enrollees</h5>
+                                <h5 class="mb-0" v-if="user.role === 'hospital'">Enrollees</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover table-nowrap">
@@ -64,12 +64,12 @@
                                     >
                                         <td> {{ index + 1 }}</td>
                                         <td> {{ user.details.emp_id }}  </td>
-                                        <td> {{ user.details.surname }}  </td>
+                                        <td> {{ user.details.name }}  </td>
                                         <td> {{ user.email }}  </td>
                                         <td> {{ user.details.phone_number }}  </td>
                                         <td>  {{ formatDate(user.created_at)}} </td>
                                         <td class="text-end">
-                                            <router-link  v-bind:to="'/leave/' + user.id" class="btn btn-sm btn-info">
+                                            <router-link  v-bind:to="'/profile/' + user.id" class="btn btn-sm btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </router-link>
                                             <button  @click="deleteUser(user.id)" type="button" class="btn btn-sm btn-square btn-danger text-danger-hover">

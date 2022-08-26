@@ -51,7 +51,7 @@
                                         <td>{{ index + 1 }} </td>
                                         <td v-if="user.role === 'superadmin'"> {{ treatment.relationships.hospital.name }}</td>
                                         <td> {{ treatment.relationships.enrolle.emp_id }}</td>
-                                        <td> {{ treatment.relationships.enrolle.first_name }}</td>
+                                        <td> {{ treatment.relationships.enrolle.name}}</td>
                                         <td>  {{ treatment.verified_by }} </td>
                                         <td>  {{ treatment.cost_of_treatment }} </td>
                                         <td> {{ formatDate(treatment.date_and_time)}}</td>
@@ -158,6 +158,3 @@ export default {
 @import '../../../css/index.css';
 @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
 </style>
-
-
->

@@ -168,7 +168,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 vm = _this;
                 page_url = page_url || 'get-onboard-users';
                 _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().get("https://abshia-health.herokuapp.com/api/v1/" + page_url, {
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://127.0.0.1:8000/api/v1/" + page_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
@@ -204,7 +204,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'delete-account/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + 'delete-account/';
 
                 if (!confirm("Do you really want to delete this record?")) {
                   _context2.next = 14;
@@ -421,13 +421,13 @@ var render = function () {
                       _c("div", { staticClass: "card-header" }, [
                         _vm.user.role === "superadmin"
                           ? _c("h5", { staticClass: "mb-0" }, [
-                              _vm._v("Enrolled Users"),
+                              _vm._v("Enrollees"),
                             ])
                           : _vm._e(),
                         _vm._v(" "),
                         _vm.user.role === "hospital"
                           ? _c("h5", { staticClass: "mb-0" }, [
-                              _vm._v("Patients"),
+                              _vm._v("Enrollees"),
                             ])
                           : _vm._e(),
                       ]),
@@ -453,7 +453,7 @@ var render = function () {
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(
-                                      " " + _vm._s(user.details.surname) + "  "
+                                      " " + _vm._s(user.details.name) + "  "
                                     ),
                                   ]),
                                   _vm._v(" "),
@@ -487,7 +487,7 @@ var render = function () {
                                         "router-link",
                                         {
                                           staticClass: "btn btn-sm btn-info",
-                                          attrs: { to: "/leave/" + user.id },
+                                          attrs: { to: "/profile/" + user.id },
                                         },
                                         [_c("i", { staticClass: "bi bi-eye" })]
                                       ),

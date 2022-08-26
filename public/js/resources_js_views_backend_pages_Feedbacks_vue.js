@@ -111,12 +111,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Feedbacks",
   components: {
     Nav: function Nav() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b1").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b2").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
     }
   },
   data: function data() {
@@ -140,9 +174,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 vm = _this;
-                page_url = page_url || 'feedbacks';
+                page_url = page_url || "feedbacks";
                 _context.next = 4;
-                return axios.get("https://abshia-health.herokuapp.com/api/v1/" + page_url, {
+                return axios.get("http://127.0.0.1:8000/api/v1/" + page_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
@@ -178,7 +212,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'feedbacks/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "feedbacks/";
 
                 if (!confirm("Do you really want to delete this record?")) {
                   _context2.next = 14;
@@ -791,24 +825,17 @@ var render = function () {
                         "tbody",
                         _vm._l(_vm.feedbacks, function (feedback, index) {
                           return _c("tr", { key: feedback.id }, [
-                            _c("td", [_vm._v(_vm._s(index + 1) + " ")]),
+                            _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(" " + _vm._s(feedback.name))]),
+                            _c("td", [_vm._v(_vm._s(feedback.name))]),
                             _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "  " + _vm._s(feedback.market_reality) + " "
-                              ),
-                            ]),
+                            _c("td", [_vm._v(_vm._s(feedback.market_reality))]),
                             _vm._v(" "),
-                            _c("td", [
-                              _vm._v("  " + _vm._s(feedback.importance) + " "),
-                            ]),
+                            _c("td", [_vm._v(_vm._s(feedback.importance))]),
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
-                                " " +
-                                  _vm._s(_vm.formatDate(feedback.created_at))
+                                _vm._s(_vm.formatDate(feedback.created_at))
                               ),
                             ]),
                             _vm._v(" "),
@@ -822,14 +849,18 @@ var render = function () {
                                     "data-target": "#form",
                                   },
                                 },
-                                [_vm._v("More")]
+                                [
+                                  _vm._v(
+                                    "\n                        More\n                      "
+                                  ),
+                                ]
                               ),
                               _vm._v(" "),
                               _c(
                                 "button",
                                 {
                                   staticClass:
-                                    "btn btn-sm btn-square btn-danger text-danger-hover",
+                                    "\n                          btn btn-sm btn-square btn-danger\n                          text-danger-hover\n                        ",
                                   attrs: { type: "button" },
                                   on: {
                                     click: function ($event) {
@@ -884,9 +915,9 @@ var render = function () {
                             _vm._v(
                               "Page " +
                                 _vm._s(_vm.pagination.current_page) +
-                                " of " +
+                                " of\n                      " +
                                 _vm._s(_vm.pagination.last_page) +
-                                " "
+                                "\n                    "
                             ),
                           ]
                         ),

@@ -150,13 +150,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Nav",
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["user"])),
   methods: {
     onLogout: function onLogout() {
-      var api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'logout';
+      var api_url = "http://127.0.0.1:8000/api/v1/" + 'logout';
       axios.post(api_url, {
         token: localStorage.getItem("token")
       }, {
@@ -1029,16 +1033,36 @@ var render = function () {
                 : _vm._e(),
               _vm._v(" "),
               _c("ul", { staticClass: "navbar-nav" }, [
+                _vm.user.role != "superadmin"
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: "/profile/" + _vm.user.id },
+                          },
+                          [
+                            _c("i", { staticClass: "bi bi-person-square" }),
+                            _vm._v("  Profile\n                    "),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _c(
                   "li",
                   { staticClass: "nav-item" },
                   [
                     _c(
                       "router-link",
-                      { staticClass: "nav-link", attrs: { to: "/profile" } },
+                      { staticClass: "nav-link", attrs: { to: "/settings" } },
                       [
-                        _c("i", { staticClass: "bi bi-person-square" }),
-                        _vm._v("  Profile\n                    "),
+                        _c("i", { staticClass: "bi bi-gear-fill" }),
+                        _vm._v("  Settings\n                    "),
                       ]
                     ),
                   ],

@@ -268,25 +268,177 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Register",
   data: function data() {
     return {
       loading: false,
       user: {
-        email: '',
+        email: "",
         title: 0,
-        surname: '',
-        first_name: '',
-        middle_name: '',
-        phone_number: '',
-        address: '',
-        nok_name: '',
-        nok_address: '',
-        nok_phone_number: '',
-        nok_relationship: '',
+        surname: "",
+        first_name: "",
+        middle_name: "",
+        phone_number: "",
+        address: "",
+        nok_name: "",
+        nok_address: "",
+        nok_phone_number: "",
+        nok_relationship: "",
         blood_group: 0,
-        date_of_birth: '',
+        date_of_birth: "",
         state: 0,
         lga: 0,
         marital_status: 0,
@@ -299,11 +451,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         cancer: 0,
         genotype: 0,
         existing_medical_condition: 0,
-        password: '',
-        password_confirmation: '',
+        password: "",
+        password_confirmation: "",
         gender: 0,
-        town: '',
-        agent_code: ''
+        town: "",
+        agent_code: ""
       },
       hospitals: [],
       states: [],
@@ -324,7 +476,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'create-helpers';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "create-helpers";
                 _context.next = 3;
                 return axios.get(api_url);
 
@@ -352,7 +504,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _this2.loading = true;
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'onboard-new-users';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "onboard-new-users";
                 _context2.prev = 2;
                 _context2.next = 5;
                 return axios.post(api_url, {
@@ -423,7 +575,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'lga-helper/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "lga-helper/";
                 _context3.next = 3;
                 return axios.get(api_url + state_id);
 
@@ -460,7 +612,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-3563ad7c] {\n    font-weight: 600;\n    color: #555;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-3563ad7c] {\n  font-weight: 600;\n  color: #555;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1195,9 +1347,9 @@ var render = function () {
                   { key: index, domProps: { value: state.id } },
                   [
                     _vm._v(
-                      "\n                        " +
+                      "\n            " +
                         _vm._s(state.state_name) +
-                        "\n                    "
+                        "\n          "
                     ),
                   ]
                 )
@@ -1251,9 +1403,7 @@ var render = function () {
                   { key: index, domProps: { value: lga.id } },
                   [
                     _vm._v(
-                      "\n                        " +
-                        _vm._s(lga.lga_name) +
-                        "\n                    "
+                      "\n            " + _vm._s(lga.lga_name) + "\n          "
                     ),
                   ]
                 )
@@ -1814,9 +1964,7 @@ var render = function () {
                   { key: index, domProps: { value: category.id } },
                   [
                     _vm._v(
-                      "\n                        " +
-                        _vm._s(category.title) +
-                        "\n                    "
+                      "\n            " + _vm._s(category.title) + "\n          "
                     ),
                   ]
                 )
@@ -1870,9 +2018,7 @@ var render = function () {
                   { key: index, domProps: { value: health.id } },
                   [
                     _vm._v(
-                      "\n                        " +
-                        _vm._s(health.name) +
-                        "\n                    "
+                      "\n            " + _vm._s(health.name) + "\n          "
                     ),
                   ]
                 )
@@ -2116,7 +2262,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("Submit")]
+            [_vm._v("\n          Submit\n        ")]
           ),
         ]),
       ]),
@@ -2153,7 +2299,7 @@ var staticRenderFns = [
         attrs: { type: "checkbox", id: "chb", required: "" },
       }),
       _c("label", { staticClass: "form-check-label", attrs: { for: "chb" } }, [
-        _vm._v(" I accept all terms and conditions.\n                "),
+        _vm._v(" I accept all terms and conditions.\n        "),
       ]),
     ])
   },

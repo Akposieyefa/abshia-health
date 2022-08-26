@@ -126,28 +126,86 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "GiveFeedbacks",
   components: {
     Nav: function Nav() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b1").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b2").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
     }
   },
   data: function data() {
     return {
       loading: false,
       feedback: {
-        market_reality: '',
-        importance: '',
-        solution_platform: '',
-        key_things: '',
-        ideal_relationship: '',
-        facility_band: '',
-        patient_percentage: '',
-        second_third_investigation: '',
-        perceive_hmo: '',
-        name: ''
+        market_reality: "",
+        importance: "",
+        solution_platform: "",
+        key_things: "",
+        ideal_relationship: "",
+        facility_band: "",
+        patient_percentage: "",
+        second_third_investigation: "",
+        perceive_hmo: "",
+        name: ""
       },
       pagination: {}
     };
@@ -163,7 +221,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'feedbacks';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "feedbacks";
                 _context.prev = 1;
                 _context.next = 4;
                 return axios.post(api_url, {
@@ -1082,7 +1140,11 @@ var render = function () {
                           },
                         },
                       },
-                      [_vm._v("Submit Feedback")]
+                      [
+                        _vm._v(
+                          "\n                  Submit Feedback\n                "
+                        ),
+                      ]
                     ),
                   ]),
                 ]),

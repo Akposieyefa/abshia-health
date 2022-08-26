@@ -160,12 +160,85 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Categories",
   components: {
     Nav: function Nav() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b1").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b2").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
     }
   },
   data: function data() {
@@ -194,7 +267,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _this.edit = true;
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'categories/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "categories/";
                 _context.next = 4;
                 return axios.get(api_url + id, {
                   headers: {
@@ -223,7 +296,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'categories/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "categories/";
                 _context2.prev = 1;
                 _context2.next = 4;
                 return axios.patch(api_url + id, {
@@ -270,7 +343,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'categories';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "categories";
                 _context3.prev = 1;
                 _context3.next = 4;
                 return axios.post(api_url, {
@@ -320,9 +393,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context4.prev = _context4.next) {
               case 0:
                 vm = _this4;
-                page_url = page_url || 'categories';
+                page_url = page_url || "categories";
                 _context4.next = 4;
-                return axios.get("https://abshia-health.herokuapp.com/api/v1/" + page_url, {
+                return axios.get("http://127.0.0.1:8000/api/v1/" + page_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
@@ -358,7 +431,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'categories/';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "categories/";
 
                 if (!confirm("Do you really want to delete this record?")) {
                   _context5.next = 14;
@@ -975,18 +1048,15 @@ var render = function () {
                         "tbody",
                         _vm._l(_vm.categories, function (category, index) {
                           return _c("tr", { key: category.id }, [
-                            _c("td", [_vm._v(_vm._s(index + 1) + " ")]),
+                            _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(" " + _vm._s(category.title))]),
+                            _c("td", [_vm._v(_vm._s(category.title))]),
                             _vm._v(" "),
-                            _c("td", [
-                              _vm._v("  " + _vm._s(category.description) + " "),
-                            ]),
+                            _c("td", [_vm._v(_vm._s(category.description))]),
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
-                                " " +
-                                  _vm._s(_vm.formatDate(category.created_at))
+                                _vm._s(_vm.formatDate(category.created_at))
                               ),
                             ]),
                             _vm._v(" "),
@@ -1014,7 +1084,7 @@ var render = function () {
                                 "button",
                                 {
                                   staticClass:
-                                    "btn btn-sm btn-square btn-danger text-danger-hover",
+                                    "\n                          btn btn-sm btn-square btn-danger\n                          text-danger-hover\n                        ",
                                   attrs: {
                                     title: "Delete category",
                                     type: "button",
@@ -1072,9 +1142,9 @@ var render = function () {
                             _vm._v(
                               "Page " +
                                 _vm._s(_vm.pagination.current_page) +
-                                " of " +
+                                " of\n                      " +
                                 _vm._s(_vm.pagination.last_page) +
-                                " "
+                                "\n                    "
                             ),
                           ]
                         ),
@@ -1232,7 +1302,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Update")]
+                        [_vm._v("\n              Update\n            ")]
                       )
                     : _c(
                         "button",
@@ -1245,7 +1315,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Create")]
+                        [_vm._v("\n              Create\n            ")]
                       ),
                 ]),
               ]),
@@ -1283,7 +1353,7 @@ var staticRenderFns = [
                       attrs: { "data-toggle": "modal", "data-target": "#form" },
                     },
                     [
-                      _c("span", { staticClass: " pe-2" }, [
+                      _c("span", { staticClass: "pe-2" }, [
                         _c("i", { staticClass: "bi bi-plus" }),
                       ]),
                       _vm._v(" "),

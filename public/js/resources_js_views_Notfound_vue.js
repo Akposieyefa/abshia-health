@@ -34,8 +34,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Notfound"
 });
@@ -58,7 +56,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*======================\n    404 page\n=======================*/\n.page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif;\n}\n.page_404  img{ width:100%;}\n.four_zero_four_bg{\n\n    background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);\n    height: 400px;\n    background-position: center;\n}\n.four_zero_four_bg h1{\n    font-size:80px;\n}\n.four_zero_four_bg h3{\n    font-size:80px;\n}\n.link_404{\n    color: #fff!important;\n    padding: 10px 20px;\n    background: #39ac31;\n    margin: 20px 0;\n    display: inline-block;}\n.contant_box_404{ margin-top:-50px;}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*======================\n    404 page\n=======================*/\n.page_404 {\n  padding: 40px 0;\n  background: #fff;\n  font-family: \"Arvo\", serif;\n}\n.page_404 img {\n  width: 100%;\n}\n.four_zero_four_bg {\n  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);\n  height: 400px;\n  background-position: center;\n}\n.four_zero_four_bg h1 {\n  font-size: 80px;\n}\n.four_zero_four_bg h3 {\n  font-size: 80px;\n}\n.link_404 {\n  color: #fff !important;\n  padding: 10px 20px;\n  background: #39ac31;\n  margin: 20px 0;\n  display: inline-block;\n}\n.contant_box_404 {\n  margin-top: -50px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -549,10 +547,10 @@ var render = function () {
     _c("section", { staticClass: "page_404" }, [
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-12 " }, [
+          _c("div", { staticClass: "col-sm-12" }, [
             _c(
               "div",
-              { staticClass: "col-sm-10 col-sm-offset-1  text-center" },
+              { staticClass: "col-sm-10 col-sm-offset-1 text-center" },
               [
                 _vm._m(0),
                 _vm._v(" "),
@@ -561,9 +559,7 @@ var render = function () {
                   { staticClass: "contant_box_404" },
                   [
                     _c("h3", { staticClass: "h2" }, [
-                      _vm._v(
-                        "\n                                Look like you're lost\n                            "
-                      ),
+                      _vm._v("Look like you're lost"),
                     ]),
                     _vm._v(" "),
                     _c("p", [
@@ -592,7 +588,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "four_zero_four_bg" }, [
-      _c("h1", { staticClass: "text-center " }, [_vm._v("404")]),
+      _c("h1", { staticClass: "text-center" }, [_vm._v("404")]),
     ])
   },
 ]

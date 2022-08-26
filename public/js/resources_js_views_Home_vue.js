@@ -60,6 +60,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Home",
   data: function data() {
@@ -89,7 +105,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return");
 
               case 2:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'login';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "login";
                 _context.prev = 3;
                 _this.loading = true;
                 _context.next = 7;
@@ -149,7 +165,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-63cd6604]{\n    background-color:#f1f1f1 !important;\n}\n.form-holder[data-v-63cd6604]{\n    margin-top:20%;\n    margin-bottom:20%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-63cd6604] {\n  background-color: #f1f1f1 !important;\n}\n.form-holder[data-v-63cd6604] {\n  margin-top: 20%;\n  margin-bottom: 20%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -733,7 +749,7 @@ var render = function () {
                         },
                       },
                     },
-                    [_vm._v(" Login\n                                ")]
+                    [_vm._v("\n                  Login\n                ")]
                   ),
                 ]),
               ]),

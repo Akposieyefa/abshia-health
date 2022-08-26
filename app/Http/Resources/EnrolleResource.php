@@ -41,6 +41,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $agent
  * @property mixed $surname
  * @property mixed $emp_id
+ * @property mixed $is_subscribed
  */
 class EnrolleResource extends JsonResource
 {
@@ -56,6 +57,7 @@ class EnrolleResource extends JsonResource
             'id' => $this->id,
             'emp_id' => $helper->cleanStringHelper($this->emp_id),
             'title' => $helper->cleanStringHelper($this->title),
+            'name' => $helper->cleanStringHelper($this->surname). " ". $helper->cleanStringHelper($this->first_name). " ". $helper->cleanStringHelper($this->middle_name),
             'surname' => $helper->cleanStringHelper($this->surname),
             'first_name' => $helper->cleanStringHelper($this->first_name),
             'middle_name' => $helper->cleanStringHelper($this->middle_name),
@@ -74,10 +76,11 @@ class EnrolleResource extends JsonResource
             'marital_status' => $helper->cleanStringHelper($this->marital_status),
             'no_of_dependants' => $helper->cleanStringHelper($this->no_of_dependants),
             'existing_medical_condition' => $this->existing_medical_condition,
-            'hypertension' => $this->hypertension,
-            'sickle_cell' => $this->sickle_cell,
-            'cancer' => $this->cancer,
-            'kidney_issue' => $this->kidney_issue,
+            'hypertension' => $this->hypertension === 0 ? 'false' : 'true',
+            'sickle_cell' => $this->sickle_cell === 0 ? 'false' : 'true',
+            'cancer' => $this->cancer === 0 ? 'false' : 'true',
+            'kidney_issue' =>  $this->kidney_issue === 0 ? 'false' : 'true',
+            'is_subscribed' =>  $this->is_subscribed === 0 ? 'false' : 'true',
             'slug' => $this->slug,
             'relationships' => [
                 'state' => !is_null($this->state) ? $this->state->state_name : "",

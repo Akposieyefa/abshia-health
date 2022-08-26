@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PaystackPaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
@@ -92,6 +93,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::post('treatments',  'store');
             Route::get('treatments',  'index');
             Route::get('treatments/{id}',  'show');
+            Route::get('my-treatments/{id}',  'getEnrolleTreatment');
             Route::delete('treatments/{id}',  'destroy');
         });
 
@@ -116,7 +118,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::get('claims/{id}',  'show');
             Route::patch('claims/{id}',  'update');
             Route::delete('claims/{id}',  'destroy');
-            Route::get('approve-claims/{id}',  'approveRequest'); 
+            Route::get('approve-claims/{id}',  'approveRequest');
             Route::get('decline-claims/{id}',  'declineRequest');
         });
 
@@ -132,6 +134,11 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::get('get-hospitals',  'getHospitals');
             Route::get('get-onboard-users',  'getAllOnboardedUsers');
             Route::patch('change-password',  'changeAccountPassword');
+        });
+
+        Route::controller(PaystackPaymentController::class)->group(function () { //payment controller for all payment
+            Route::post('make-payment', 'payment');
+            Route::get('verify-payment-paystack/{id}', 'verifyPaystack');
         });
 
     });

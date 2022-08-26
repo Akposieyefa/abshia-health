@@ -168,12 +168,84 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Refers",
   components: {
     Nav: function Nav() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b1").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b2").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
     }
   },
   data: function data() {
@@ -203,7 +275,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'refers';
+                api_url = "http://127.0.0.1:8000/api/v1/" + "refers";
                 _context.prev = 1;
                 _context.next = 4;
                 return axios.post(api_url, {
@@ -253,9 +325,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context2.prev = _context2.next) {
               case 0:
                 vm = _this2;
-                page_url = page_url || 'refers';
+                page_url = page_url || "refers";
                 _context2.next = 4;
-                return axios.get("https://abshia-health.herokuapp.com/api/v1/" + page_url, {
+                return axios.get("http://127.0.0.1:8000/api/v1/" + page_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
@@ -891,7 +963,9 @@ var render = function () {
                           _vm._v(" "),
                           _vm.user.role === "superadmin"
                             ? _c("th", { attrs: { scope: "col" } }, [
-                                _vm._v("Refred From"),
+                                _vm._v(
+                                  "\n                      Refred From\n                    "
+                                ),
                               ])
                             : _vm._e(),
                           _vm._v(" "),
@@ -923,52 +997,44 @@ var render = function () {
                         "tbody",
                         _vm._l(_vm.refers, function (refer, index) {
                           return _c("tr", { key: refer.id }, [
-                            _c("td", [_vm._v(" " + _vm._s(index + 1) + " ")]),
+                            _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
                             _vm.user.role === "superadmin"
                               ? _c("td", [
                                   _vm._v(
-                                    " " +
+                                    "\n                      " +
                                       _vm._s(
                                         refer.relationships.hospital.name
                                       ) +
-                                      " "
+                                      "\n                    "
                                   ),
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
-                                " " +
-                                  _vm._s(refer.relationships.enrolle.emp_id) +
-                                  " "
+                                _vm._s(refer.relationships.enrolle.emp_id)
                               ),
                             ]),
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
-                                "  " +
+                                "\n                      " +
                                   _vm._s(
                                     refer.relationships.enrolle.surname +
                                       " " +
                                       refer.relationships.enrolle.first_name
                                   ) +
-                                  " "
+                                  "\n                    "
                               ),
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("  " + _vm._s(refer.case) + " ")]),
+                            _c("td", [_vm._v(_vm._s(refer.case))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(refer.hospital_name))]),
                             _vm._v(" "),
                             _c("td", [
-                              _vm._v("  " + _vm._s(refer.hospital_name) + " "),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                " " +
-                                  _vm._s(_vm.formatDate(refer.created_at)) +
-                                  " "
-                              ),
+                              _vm._v(_vm._s(_vm.formatDate(refer.created_at))),
                             ]),
                             _vm._v(" "),
                             _c(
@@ -1034,9 +1100,9 @@ var render = function () {
                             _vm._v(
                               "Page " +
                                 _vm._s(_vm.pagination.current_page) +
-                                " of " +
+                                " of\n                      " +
                                 _vm._s(_vm.pagination.last_page) +
-                                " "
+                                "\n                    "
                             ),
                           ]
                         ),
@@ -1235,7 +1301,7 @@ var render = function () {
                         },
                       },
                     },
-                    [_vm._v("Create")]
+                    [_vm._v("\n              Create\n            ")]
                   ),
                 ]),
               ]),
@@ -1261,7 +1327,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: " pe-2" }, [
+    return _c("span", { staticClass: "pe-2" }, [
       _c("i", { staticClass: "bi bi-plus" }),
     ])
   },

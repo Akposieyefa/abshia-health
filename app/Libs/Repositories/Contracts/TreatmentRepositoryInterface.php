@@ -8,4 +8,5 @@ interface TreatmentRepositoryInterface
     public function getAllTreatments();
     public function getSingleTreatment($id);
     public function deleteTreatment($id);
+    public function getTreatmentByEnrolleID($id);
 }

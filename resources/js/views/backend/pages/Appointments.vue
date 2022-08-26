@@ -13,7 +13,7 @@
                             <div class="row align-items-center">
                                 <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                     <!-- Title -->
-                                    <h1 class="h2 mb-0 ls-tight">Patient Appointments</h1>
+                                    <h1 class="h2 mb-0 ls-tight">Enrollees Appointments</h1>
                                 </div>
                             </div>
                             <!-- Nav -->
@@ -48,7 +48,7 @@
                                         :key="appointment.id"
                                     >
                                         <td>{{ index + 1 }} </td>
-                                        <td> {{ appointment.relationships.enrolle.surname }}</td>
+                                        <td> {{ appointment.relationships.enrolle.surname +  appointment.relationships.enrolle.first_name}}</td>
                                         <td>  {{ appointment.title }} </td>
                                         <td>  {{ appointment.appointment_reason }} </td>
                                         <td>  {{ appointment.status }} </td>

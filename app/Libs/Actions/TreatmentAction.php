@@ -114,6 +114,20 @@ class TreatmentAction
         ], 200);
     }
 
+     /**
+     * get treatement treatment
+     * @param $id
+     * @return TreatmentResource
+     */
+    public function getTreatmentByEnrolleIDAction($id): TreatmentResource
+    {
+        $treatment = $this->model->where('enrolle_id', '=', $id)->latest()->paginate(10);
+        return (new TreatmentResource($treatment))->additional( [
+            'message' => "Treatment details",
+            'success' => true
+        ], 200);
+    }
+
     /**
      * delete treatment
      * @param $id

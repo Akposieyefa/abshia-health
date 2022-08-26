@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('enrolles', function (Blueprint $table) {
-            $table->boolean('is_subscribed')->default('false')->after('kidney_issue');
+            $table->boolean('is_subscribed')->default(false)->after('kidney_issue');
         });
     }
 

@@ -118,7 +118,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + 'get-dashboard';
+                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'get-dashboard';
                 _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().get(api_url, {
                   headers: {

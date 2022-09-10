@@ -105,7 +105,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return");
 
               case 2:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "login";
+                api_url = "https://abshia-health.herokuapp.com/api/v1/" + "login";
                 _context.prev = 3;
                 _this.loading = true;
                 _context.next = 7;

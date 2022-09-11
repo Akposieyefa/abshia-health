@@ -137,6 +137,26 @@ class SystemHelper
         return $enrollee_id->id;
     }
 
+      /**
+     * convert money to kobo
+     * @param $amount
+     * @return float|int
+     */
+    public function convertToKobo($amount): float|int
+    {
+        return $amount * 100;
+    }
+
+    /**
+     * convert kobo to naira
+     * @param $amount
+     * @return float|int
+     */
+    public function convertKoboToNaira($amount): float|int
+    {
+        return $amount / 100;
+    }
+
 
 
 }

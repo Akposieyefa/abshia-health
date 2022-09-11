@@ -1,10 +1,10 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_backend_pages_Claims_vue"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_views_backend_pages_Plans_vue"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -256,92 +256,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Claims",
+  name: "plans",
   components: {
     Nav: function Nav() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b2").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
@@ -349,22 +266,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      claim: {
-        enrolle_id: "",
-        date_of_admission: "",
-        date_of_discharge: "",
-        treatment_details: "",
-        diagnosis: "",
-        investigations: "",
+      plan: {
+        title: "",
+        description: "",
+        duration: "",
         cost: ""
       },
-      claims: [],
+      plans: [],
       pagination: {},
       edit: false
     };
   },
   created: function created() {
-    this.getAllClaims();
+    this.getAllPlans();
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["user"])),
   methods: {
@@ -378,7 +292,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _this.edit = true;
-                api_url = "http://127.0.0.1:8000/api/v1/" + "claims/";
+                api_url = "http://127.0.0.1:8000/api/v1/" + "plans/";
                 _context.next = 4;
                 return axios.get(api_url + id, {
                   headers: {
@@ -388,7 +302,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 4:
                 response = _context.sent;
-                _this.claim = response.data.data;
+                _this.plan = response.data.data;
 
               case 6:
               case "end":
@@ -398,7 +312,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     },
-    approveClaim: function approveClaim(id) {
+    updatePlan: function updatePlan(id) {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -407,28 +321,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "approve-claims/";
-                _context2.next = 3;
-                return axios.get(api_url + id, {
+                api_url = "http://127.0.0.1:8000/api/v1/" + "plans/";
+                _context2.prev = 1;
+                _context2.next = 4;
+                return axios.patch(api_url + id, {
+                  title: _this2.plan.title,
+                  description: _this2.plan.description,
+                  duration: _this2.plan.duration,
+                  cost: _this2.plan.cost
+                }, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
                 });
 
-              case 3:
+              case 4:
                 response = _context2.sent;
+                _context2.next = 7;
+                return _this2.getAllPlans();
 
-                _this2.getAllClaims();
+              case 7:
+                _this2.$toasted.success(response.data.message);
 
-              case 5:
+                _this2.edit = false;
+                _context2.next = 14;
+                break;
+
+              case 11:
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](1);
+
+                _this2.$toasted.error(_context2.t0.response.data.message);
+
+              case 14:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, null, [[1, 11]]);
       }))();
     },
-    declineClaim: function declineClaim(id) {
+    createPlan: function createPlan() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
@@ -437,28 +370,51 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "decline-claims/";
-                _context3.next = 3;
-                return axios.get(api_url + id, {
+                api_url = "http://127.0.0.1:8000/api/v1/" + "plans";
+                _context3.prev = 1;
+                _context3.next = 4;
+                return axios.post(api_url, {
+                  title: _this3.plan.title,
+                  description: _this3.plan.description,
+                  duration: _this3.plan.duration,
+                  cost: _this3.plan.cost
+                }, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
                 });
 
-              case 3:
+              case 4:
                 response = _context3.sent;
 
-                _this3.getAllClaims();
+                _this3.$toasted.success(response.data.message);
 
-              case 5:
+                _this3.plan.title = "";
+                _this3.plan.description = "";
+                _this3.plan.duration = "";
+                _this3.plan.cost = "";
+                _context3.next = 12;
+                return _this3.getAllPlans();
+
+              case 12:
+                _context3.next = 17;
+                break;
+
+              case 14:
+                _context3.prev = 14;
+                _context3.t0 = _context3["catch"](1);
+
+                _this3.$toasted.error(_context3.t0.response.data.message);
+
+              case 17:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3);
+        }, _callee3, null, [[1, 14]]);
       }))();
     },
-    getAllClaims: function getAllClaims(page_url) {
+    getAllPlans: function getAllPlans(page_url) {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
@@ -468,7 +424,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context4.prev = _context4.next) {
               case 0:
                 vm = _this4;
-                page_url = page_url || "claims";
+                page_url = page_url || "plans";
                 _context4.next = 4;
                 return axios.get("http://127.0.0.1:8000/api/v1/" + page_url, {
                   headers: {
@@ -478,7 +434,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 4:
                 response = _context4.sent;
-                _this4.claims = response.data.data;
+                _this4.plans = response.data.data;
                 vm.makePagination(response.data.meta, response.data.links);
 
               case 7:
@@ -489,111 +445,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee4);
       }))();
     },
-    updateClaim: function updateClaim(id) {
-      var _this5 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-        var api_url, response;
-        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "claims/";
-                _context5.prev = 1;
-                _context5.next = 4;
-                return axios.patch(api_url + id, {
-                  date_of_admission: _this5.claim.date_of_admission,
-                  date_of_discharge: _this5.claim.date_of_discharge,
-                  treatment_details: _this5.claim.treatment_details,
-                  diagnosis: _this5.claim.diagnosis,
-                  investigations: _this5.claim.investigations,
-                  cost: _this5.claim.cost
-                }, {
-                  headers: {
-                    Authorization: "Bearer ".concat(localStorage.getItem("token"))
-                  }
-                });
-
-              case 4:
-                response = _context5.sent;
-                _context5.next = 7;
-                return _this5.getAllClaims();
-
-              case 7:
-                _this5.$toasted.success(response.data.message);
-
-                _this5.edit = false;
-                _context5.next = 14;
-                break;
-
-              case 11:
-                _context5.prev = 11;
-                _context5.t0 = _context5["catch"](1);
-
-                _this5.$toasted.error(_context5.t0.response.data.message);
-
-              case 14:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, null, [[1, 11]]);
-      }))();
-    },
-    createClaim: function createClaim() {
-      var _this6 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
-        var api_url, response;
-        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "claims";
-                _context6.prev = 1;
-                _context6.next = 4;
-                return axios.post(api_url, {
-                  emp_code: _this6.claim.enrolle_id,
-                  date_of_admission: _this6.claim.date_of_admission,
-                  date_of_discharge: _this6.claim.date_of_discharge,
-                  treatment_details: _this6.claim.treatment_details,
-                  diagnosis: _this6.claim.diagnosis,
-                  investigations: _this6.claim.investigations,
-                  cost: _this6.claim.cost
-                }, {
-                  headers: {
-                    Authorization: "Bearer ".concat(localStorage.getItem("token"))
-                  }
-                });
-
-              case 4:
-                response = _context6.sent;
-
-                _this6.$toasted.success(response.data.message);
-
-                _context6.next = 8;
-                return _this6.getAllClaims();
-
-              case 8:
-                _context6.next = 14;
-                break;
-
-              case 10:
-                _context6.prev = 10;
-                _context6.t0 = _context6["catch"](1);
-
-                _this6.$toasted.error(_context6.t0.response.data.message);
-
-                console.log(_context6.t0.response.data);
-
-              case 14:
-              case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6, null, [[1, 10]]);
-      }))();
-    },
     makePagination: function makePagination(meta, links) {
       this.pagination = {
         current_page: meta.current_page,
@@ -602,24 +453,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         prev_page_url: links.prev
       };
     },
-    deleteClaim: function deleteClaim(id) {
-      var _this7 = this;
+    deletePlan: function deletePlan(id) {
+      var _this5 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         var api_url, response;
-        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "claims/";
+                api_url = "http://127.0.0.1:8000/api/v1/" + "plans/";
 
                 if (!confirm("Do you really want to delete this record?")) {
-                  _context7.next = 14;
+                  _context5.next = 14;
                   break;
                 }
 
-                _context7.prev = 2;
-                _context7.next = 5;
+                _context5.prev = 2;
+                _context5.next = 5;
                 return axios["delete"](api_url + id, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
@@ -627,29 +478,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 });
 
               case 5:
-                response = _context7.sent;
+                response = _context5.sent;
 
-                _this7.$toasted.success(response.data.message);
+                _this5.$toasted.success(response.data.message);
 
-                _context7.next = 9;
-                return _this7.getAllClaims();
+                _context5.next = 9;
+                return _this5.getAllplans();
 
               case 9:
-                _context7.next = 14;
+                _context5.next = 14;
                 break;
 
               case 11:
-                _context7.prev = 11;
-                _context7.t0 = _context7["catch"](2);
+                _context5.prev = 11;
+                _context5.t0 = _context5["catch"](2);
 
-                _this7.$toasted.error(_context7.t0.response.data.message);
+                _this5.$toasted.error(_context5.t0.response.data.message);
 
               case 14:
               case "end":
-                return _context7.stop();
+                return _context5.stop();
             }
           }
-        }, _callee7, null, [[2, 11]]);
+        }, _callee5, null, [[2, 11]]);
       }))();
     },
     formatDate: function formatDate(dateString) {
@@ -665,10 +516,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -790,10 +641,10 @@ module.exports = function (cssWithMappingToString) {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -802,7 +653,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Claims_vue_vue_type_style_index_0_id_d192a9c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Plans_vue_vue_type_style_index_0_id_08b5be15_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css&");
 
             
 
@@ -811,11 +662,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Claims_vue_vue_type_style_index_0_id_d192a9c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Plans_vue_vue_type_style_index_0_id_08b5be15_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Claims_vue_vue_type_style_index_0_id_d192a9c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Plans_vue_vue_type_style_index_0_id_08b5be15_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -1097,19 +948,19 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ "./resources/js/views/backend/pages/Claims.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/views/backend/pages/Claims.vue ***!
-  \*****************************************************/
+/***/ "./resources/js/views/backend/pages/Plans.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/views/backend/pages/Plans.vue ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Claims_vue_vue_type_template_id_d192a9c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Claims.vue?vue&type=template&id=d192a9c8&scoped=true& */ "./resources/js/views/backend/pages/Claims.vue?vue&type=template&id=d192a9c8&scoped=true&");
-/* harmony import */ var _Claims_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Claims.vue?vue&type=script&lang=js& */ "./resources/js/views/backend/pages/Claims.vue?vue&type=script&lang=js&");
-/* harmony import */ var _Claims_vue_vue_type_style_index_0_id_d192a9c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css& */ "./resources/js/views/backend/pages/Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css&");
+/* harmony import */ var _Plans_vue_vue_type_template_id_08b5be15_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Plans.vue?vue&type=template&id=08b5be15&scoped=true& */ "./resources/js/views/backend/pages/Plans.vue?vue&type=template&id=08b5be15&scoped=true&");
+/* harmony import */ var _Plans_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Plans.vue?vue&type=script&lang=js& */ "./resources/js/views/backend/pages/Plans.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Plans_vue_vue_type_style_index_0_id_08b5be15_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css& */ "./resources/js/views/backend/pages/Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1120,70 +971,70 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _Claims_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Claims_vue_vue_type_template_id_d192a9c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Claims_vue_vue_type_template_id_d192a9c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Plans_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Plans_vue_vue_type_template_id_08b5be15_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Plans_vue_vue_type_template_id_08b5be15_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "d192a9c8",
+  "08b5be15",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/backend/pages/Claims.vue"
+component.options.__file = "resources/js/views/backend/pages/Plans.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/backend/pages/Claims.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/views/backend/pages/Claims.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
+/***/ "./resources/js/views/backend/pages/Plans.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/views/backend/pages/Plans.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Claims_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Claims.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Claims_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Plans_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Plans.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Plans_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/backend/pages/Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css&":
-/*!**************************************************************************************************************!*\
-  !*** ./resources/js/views/backend/pages/Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css& ***!
-  \**************************************************************************************************************/
+/***/ "./resources/js/views/backend/pages/Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/views/backend/pages/Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css& ***!
+  \*************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Claims_vue_vue_type_style_index_0_id_d192a9c8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=style&index=0&id=d192a9c8&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Plans_vue_vue_type_style_index_0_id_08b5be15_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=style&index=0&id=08b5be15&scoped=true&lang=css&");
 
 
 /***/ }),
 
-/***/ "./resources/js/views/backend/pages/Claims.vue?vue&type=template&id=d192a9c8&scoped=true&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/views/backend/pages/Claims.vue?vue&type=template&id=d192a9c8&scoped=true& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/views/backend/pages/Plans.vue?vue&type=template&id=08b5be15&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/views/backend/pages/Plans.vue?vue&type=template&id=08b5be15&scoped=true& ***!
+  \***********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Claims_vue_vue_type_template_id_d192a9c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Claims_vue_vue_type_template_id_d192a9c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Plans_vue_vue_type_template_id_08b5be15_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Plans_vue_vue_type_template_id_08b5be15_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Claims_vue_vue_type_template_id_d192a9c8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Claims.vue?vue&type=template&id=d192a9c8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=template&id=d192a9c8&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Plans_vue_vue_type_template_id_08b5be15_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Plans.vue?vue&type=template&id=08b5be15&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=template&id=08b5be15&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=template&id=d192a9c8&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Claims.vue?vue&type=template&id=d192a9c8&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=template&id=08b5be15&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/backend/pages/Plans.vue?vue&type=template&id=08b5be15&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1206,242 +1057,76 @@ var render = function () {
         _c("Nav"),
         _vm._v(" "),
         _c("div", { staticClass: "h-screen flex-grow-1 overflow-y-lg-auto" }, [
-          _c(
-            "header",
-            { staticClass: "bg-surface-primary border-bottom pt-6 pb-5" },
-            [
-              _c("div", { staticClass: "container-fluid" }, [
-                _c("div", { staticClass: "mb-npx" }, [
-                  _c("div", { staticClass: "row align-items-center" }, [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _vm.user.role === "hospital"
-                      ? _c(
-                          "div",
-                          { staticClass: "col-sm-6 col-12 text-sm-end" },
-                          [_vm._m(1)]
-                        )
-                      : _vm._e(),
-                  ]),
-                ]),
-              ]),
-            ]
-          ),
+          _vm._m(0),
           _vm._v(" "),
           _c("main", { staticClass: "py-6 bg-surface-secondary" }, [
             _c("div", { staticClass: "container-fluid" }, [
               _c("div", { staticClass: "card shadow border-0 mb-7" }, [
-                _vm._m(2),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "table-responsive" }, [
                   _c(
                     "table",
                     { staticClass: "table table-hover table-nowrap" },
                     [
-                      _c("thead", { staticClass: "thead-light" }, [
-                        _c("tr", [
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("No.."),
-                          ]),
-                          _vm._v(" "),
-                          _vm.user.role === "superadmin"
-                            ? _c("th", { attrs: { scope: "col" } }, [
-                                _vm._v(
-                                  "\n                      Hospital Name\n                    "
-                                ),
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("Patient ID"),
-                          ]),
-                          _vm._v(" "),
-                          _vm.user.role === "hospital"
-                            ? _c("th", { attrs: { scope: "col" } }, [
-                                _vm._v(
-                                  "\n                      Patient Name\n                    "
-                                ),
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("Diagnosis"),
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("Cost of Treatment"),
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("Payment Status"),
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("Date"),
-                          ]),
-                          _vm._v(" "),
-                          _c("th"),
-                        ]),
-                      ]),
+                      _vm._m(2),
                       _vm._v(" "),
                       _c(
                         "tbody",
-                        _vm._l(_vm.claims, function (claim, index) {
-                          return _c("tr", { key: claim.id }, [
+                        _vm._l(_vm.plans, function (plan, index) {
+                          return _c("tr", { key: plan.id }, [
                             _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
-                            _vm.user.role === "superadmin"
-                              ? _c("td", [
-                                  _vm._v(
-                                    "\n                      " +
-                                      _vm._s(
-                                        claim.relationships.hospital.name
-                                      ) +
-                                      "\n                    "
-                                  ),
-                                ])
-                              : _vm._e(),
+                            _c("td", [_vm._v(_vm._s(plan.title))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(plan.description))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(plan.duration))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(plan.cost))]),
                             _vm._v(" "),
                             _c("td", [
-                              _vm._v(
-                                _vm._s(claim.relationships.enrolle.emp_id)
-                              ),
+                              _vm._v(_vm._s(_vm.formatDate(plan.created_at))),
                             ]),
                             _vm._v(" "),
-                            _vm.user.role === "hospital"
-                              ? _c("td", [
-                                  _vm._v(
-                                    "\n                      " +
-                                      _vm._s(
-                                        claim.relationships.enrolle.first_name
-                                      ) +
-                                      "\n                    "
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(claim.diagnosis))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(claim.cost))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(claim.payment_status))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(_vm.formatDate(claim.created_at))),
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              { staticClass: "text-end" },
-                              [
-                                _vm.user.role === "hospital"
-                                  ? _c(
-                                      "button",
-                                      {
-                                        staticClass:
-                                          "btn btn-sm btn-square btn-dark text-dark-hover",
-                                        attrs: {
-                                          title: "Edit claim",
-                                          type: "button",
-                                          "data-toggle": "modal",
-                                          "data-target": "#form",
-                                        },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.editMode(claim.id)
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "bi bi-pen-fill",
-                                        }),
-                                      ]
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass:
-                                      "\n                          btn btn-sm btn-square btn-info\n                          text-danger-hover\n                        ",
-                                    attrs: {
-                                      title: "View claim details",
-                                      to: "/",
-                                      type: "button",
+                            _c("td", { staticClass: "text-end" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "btn btn-sm btn-square btn-dark text-dark-hover",
+                                  attrs: {
+                                    title: "Edit plan",
+                                    "data-toggle": "modal",
+                                    "data-target": "#form",
+                                  },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.editMode(plan.id)
                                     },
                                   },
-                                  [_c("i", { staticClass: "bi bi-eye" })]
-                                ),
-                                _vm._v(" "),
-                                _vm.user.role === "hospital"
-                                  ? _c(
-                                      "button",
-                                      {
-                                        staticClass:
-                                          "\n                          btn btn-sm btn-square btn-danger\n                          text-danger-hover\n                        ",
-                                        attrs: {
-                                          title: "Delete claim",
-                                          type: "button",
-                                        },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.deleteTreatments(
-                                              claim.id
-                                            )
-                                          },
-                                        },
-                                      },
-                                      [_c("i", { staticClass: "bi bi-trash" })]
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.user.role === "superadmin"
-                                  ? _c(
-                                      "button",
-                                      {
-                                        staticClass:
-                                          "\n                          btn btn-sm btn-square btn-danger\n                          text-danger-hover\n                        ",
-                                        attrs: {
-                                          title: "Cancle claim request",
-                                          type: "button",
-                                        },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.declineClaim(claim.id)
-                                          },
-                                        },
-                                      },
-                                      [_c("i", { staticClass: "bi bi-x" })]
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.user.role === "superadmin"
-                                  ? _c(
-                                      "button",
-                                      {
-                                        staticClass:
-                                          "\n                          btn btn-sm btn-square btn-success\n                          text-danger-hover\n                        ",
-                                        attrs: {
-                                          title: "Approve claim request",
-                                          type: "button",
-                                        },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.approveClaim(claim.id)
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "bi bi-check2-all",
-                                        }),
-                                      ]
-                                    )
-                                  : _vm._e(),
-                              ],
-                              1
-                            ),
+                                },
+                                [_c("i", { staticClass: "bi bi-pen-fill" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "\n                          btn btn-sm btn-square btn-danger\n                          text-danger-hover\n                        ",
+                                  attrs: {
+                                    title: "Delete plan",
+                                    type: "button",
+                                  },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.deletePlan(plan.id)
+                                    },
+                                  },
+                                },
+                                [_c("i", { staticClass: "bi bi-trash" })]
+                              ),
+                            ]),
                           ])
                         }),
                         0
@@ -1467,7 +1152,7 @@ var render = function () {
                               attrs: { href: "#", tabindex: "-1" },
                               on: {
                                 click: function ($event) {
-                                  return _vm.getAllClaims(
+                                  return _vm.getAllPlans(
                                     _vm.pagination.prev_page_url
                                   )
                                 },
@@ -1508,7 +1193,7 @@ var render = function () {
                               attrs: { href: "#" },
                               on: {
                                 click: function ($event) {
-                                  return _vm.getAllClaims(
+                                  return _vm.getAllPlans(
                                     _vm.pagination.next_page_url
                                   )
                                 },
@@ -1553,10 +1238,10 @@ var render = function () {
               _c("div", { staticClass: "modal-header border-bottom-0" }, [
                 _vm.edit
                   ? _c("h5", { staticClass: "modal-title" }, [
-                      _vm._v("Edit Claim"),
+                      _vm._v("Edit plan"),
                     ])
                   : _c("h5", { staticClass: "modal-title" }, [
-                      _vm._v("Request New Claim"),
+                      _vm._v("Add New"),
                     ]),
                 _vm._v(" "),
                 _vm._m(3),
@@ -1564,129 +1249,16 @@ var render = function () {
               _vm._v(" "),
               _c("div", [
                 _c("div", { staticClass: "modal-body" }, [
-                  !_vm.edit
-                    ? _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "name" } }, [
-                          _vm._v("Patient Id"),
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.claim.enrolle_id,
-                              expression: "claim.enrolle_id",
-                            },
-                          ],
-                          staticClass: "form-control form-control-lg",
-                          attrs: {
-                            type: "text",
-                            id: "name",
-                            "aria-describedby": "emailHelp",
-                            placeholder: "Enter patient id",
-                          },
-                          domProps: { value: _vm.claim.enrolle_id },
-                          on: {
-                            input: function ($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.claim,
-                                "enrolle_id",
-                                $event.target.value
-                              )
-                            },
-                          },
-                        }),
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "name" } }, [
-                      _vm._v("Admission Date"),
-                    ]),
+                    _c("label", { attrs: { for: "name" } }, [_vm._v("Title")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.claim.date_of_admission,
-                          expression: "claim.date_of_admission",
-                        },
-                      ],
-                      staticClass: "form-control form-control-lg",
-                      attrs: {
-                        type: "date",
-                        id: "name",
-                        "aria-describedby": "emailHelp",
-                      },
-                      domProps: { value: _vm.claim.date_of_admission },
-                      on: {
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.claim,
-                            "date_of_admission",
-                            $event.target.value
-                          )
-                        },
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "name" } }, [
-                      _vm._v("Discharge Date"),
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.claim.date_of_discharge,
-                          expression: "claim.date_of_discharge",
-                        },
-                      ],
-                      staticClass: "form-control form-control-lg",
-                      attrs: {
-                        type: "date",
-                        id: "name",
-                        "aria-describedby": "emailHelp",
-                      },
-                      domProps: { value: _vm.claim.date_of_discharge },
-                      on: {
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.claim,
-                            "date_of_discharge",
-                            $event.target.value
-                          )
-                        },
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "name" } }, [
-                      _vm._v("Diagnosis"),
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.claim.diagnosis,
-                          expression: "claim.diagnosis",
+                          value: _vm.plan.title,
+                          expression: "plan.title",
                         },
                       ],
                       staticClass: "form-control form-control-lg",
@@ -1694,15 +1266,15 @@ var render = function () {
                         type: "text",
                         id: "name",
                         "aria-describedby": "emailHelp",
-                        placeholder: "Enter diagnosis",
+                        placeholder: "Enter title",
                       },
-                      domProps: { value: _vm.claim.diagnosis },
+                      domProps: { value: _vm.plan.title },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.claim, "diagnosis", $event.target.value)
+                          _vm.$set(_vm.plan, "title", $event.target.value)
                         },
                       },
                     }),
@@ -1710,7 +1282,7 @@ var render = function () {
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "name" } }, [
-                      _vm._v("Investigations"),
+                      _vm._v("Duration"),
                     ]),
                     _vm._v(" "),
                     _c("input", {
@@ -1718,8 +1290,8 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.claim.investigations,
-                          expression: "claim.investigations",
+                          value: _vm.plan.duration,
+                          expression: "plan.duration",
                         },
                       ],
                       staticClass: "form-control form-control-lg",
@@ -1727,19 +1299,15 @@ var render = function () {
                         type: "text",
                         id: "name",
                         "aria-describedby": "emailHelp",
-                        placeholder: "Enter treatment investigations",
+                        placeholder: "Enter duration",
                       },
-                      domProps: { value: _vm.claim.investigations },
+                      domProps: { value: _vm.plan.duration },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(
-                            _vm.claim,
-                            "investigations",
-                            $event.target.value
-                          )
+                          _vm.$set(_vm.plan, "duration", $event.target.value)
                         },
                       },
                     }),
@@ -1753,24 +1321,24 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.claim.cost,
-                          expression: "claim.cost",
+                          value: _vm.plan.cost,
+                          expression: "plan.cost",
                         },
                       ],
                       staticClass: "form-control form-control-lg",
                       attrs: {
-                        type: "number",
+                        type: "text",
                         id: "name",
                         "aria-describedby": "emailHelp",
-                        placeholder: "Enter treatment cost",
+                        placeholder: "Enter cost",
                       },
-                      domProps: { value: _vm.claim.cost },
+                      domProps: { value: _vm.plan.cost },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.claim, "cost", $event.target.value)
+                          _vm.$set(_vm.plan, "cost", $event.target.value)
                         },
                       },
                     }),
@@ -1778,7 +1346,7 @@ var render = function () {
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "description" } }, [
-                      _vm._v("Treatment Details"),
+                      _vm._v("Description"),
                     ]),
                     _vm._v(" "),
                     _c("textarea", {
@@ -1786,28 +1354,24 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.claim.treatment_details,
-                          expression: "claim.treatment_details",
+                          value: _vm.plan.description,
+                          expression: "plan.description",
                         },
                       ],
                       staticClass: "form-control form-control-md",
                       attrs: {
                         id: "description",
-                        placeholder: "Enter treatment details",
+                        placeholder: "Enter description",
                         rows: "3",
                         "aria-label": "With textarea",
                       },
-                      domProps: { value: _vm.claim.treatment_details },
+                      domProps: { value: _vm.plan.description },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(
-                            _vm.claim,
-                            "treatment_details",
-                            $event.target.value
-                          )
+                          _vm.$set(_vm.plan, "description", $event.target.value)
                         },
                       },
                     }),
@@ -1823,7 +1387,7 @@ var render = function () {
                           attrs: { type: "submit" },
                           on: {
                             click: function ($event) {
-                              return _vm.updateClaim(_vm.category.id)
+                              return _vm.updatePlan(_vm.plan.id)
                             },
                           },
                         },
@@ -1836,7 +1400,7 @@ var render = function () {
                           attrs: { type: "submit" },
                           on: {
                             click: function ($event) {
-                              return _vm.createClaim()
+                              return _vm.createPlan()
                             },
                           },
                         },
@@ -1856,37 +1420,71 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-6 col-12 mb-4 mb-sm-0" }, [
-      _c("h1", { staticClass: "h2 mb-0 ls-tight" }, [_vm._v("Payment Claims")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mx-n1" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn d-inline-flex btn-sm btn-dark mx-1",
-          attrs: { "data-toggle": "modal", "data-target": "#form" },
-        },
-        [
-          _c("span", { staticClass: "pe-2" }, [
-            _c("i", { staticClass: "bi bi-plus" }),
+    return _c(
+      "header",
+      { staticClass: "bg-surface-primary border-bottom pt-6 pb-5" },
+      [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "mb-npx" }, [
+            _c("div", { staticClass: "row align-items-center" }, [
+              _c("div", { staticClass: "col-sm-6 col-12 mb-4 mb-sm-0" }, [
+                _c("h1", { staticClass: "h2 mb-0 ls-tight" }, [
+                  _vm._v("Plans"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-6 col-12 text-sm-end" }, [
+                _c("div", { staticClass: "mx-n1" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn d-inline-flex btn-sm btn-dark mx-1",
+                      attrs: { "data-toggle": "modal", "data-target": "#form" },
+                    },
+                    [
+                      _c("span", { staticClass: "pe-2" }, [
+                        _c("i", { staticClass: "bi bi-plus" }),
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Create")]),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
           ]),
-          _vm._v(" "),
-          _c("span", [_vm._v("Request Payment")]),
-        ]
-      ),
-    ])
+        ]),
+      ]
+    )
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "mb-0" }, [_vm._v("All Claims")]),
+      _c("h5", { staticClass: "mb-0" }, [_vm._v("All Plans")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("No..")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Title")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Description")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Duration")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cost")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
+        _vm._v(" "),
+        _c("th"),
+      ]),
     ])
   },
   function () {

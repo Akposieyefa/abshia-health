@@ -279,7 +279,7 @@
                   id="description"
                   v-model="claim.treatment_details"
                   placeholder="Enter treatment details"
-                  rows="6"
+                  rows="3"
                   class="form-control form-control-md"
                   aria-label="With textarea"
                 ></textarea>

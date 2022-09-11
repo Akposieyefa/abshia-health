@@ -50,6 +50,11 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
+                        <router-link class="nav-link" to="/plans">
+                            <i class="i bi-arrow-return-right"></i> Plans
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
                         <router-link class="nav-link" to="/agents">
                             <i class="bi bi-people"></i> Agents
                         </router-link>

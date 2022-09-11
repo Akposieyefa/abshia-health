@@ -26,12 +26,6 @@ const router = new  VueRouter({
         },
 
         {
-            path: '/payment-success',
-            name: 'PaymentSuccess',
-            component: () => import('./views/PaymentSuccess.vue')
-        },
-
-        {
             path: '/forget-password',
             name: 'ForgetPassword',
             component: () => import('./views/ForgetPassword.vue')
@@ -76,6 +70,12 @@ const router = new  VueRouter({
             path: '/appointments',
             name: 'Appointments',
             component: () => import('./views/backend/pages/Appointments.vue')
+        },
+
+        {
+            path: '/plans',
+            name: 'Plans',
+            component: () => import('./views/backend/pages/Plans.vue')
         },
 
         {

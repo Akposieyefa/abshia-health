@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @method create(array $array)
@@ -20,12 +21,12 @@ class Refer extends Model
         'enrolle_id', 'health_care_id', 'case', 'hospital_name',  'remark',  'slug'
     ];
 
-    public function enrolle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function enrolle(): BelongsTo
     {
         return $this->belongsTo(Enrolle::class, 'enrolle_id');
     }
 
-    public function hospital(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function hospital(): BelongsTo
     {
         return $this->belongsTo(HealthCare::class, 'health_care_id');
     }

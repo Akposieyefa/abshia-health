@@ -5,7 +5,6 @@ namespace App\Libs\Services;
 use App\Http\Resources\UserResource;
 use App\Models\Transaction;
 use Illuminate\Http\JsonResponse;
-use Yabacon\Paystack;
 use App\Models\Enrolle;
 
 /**
@@ -17,10 +16,6 @@ class PaystackPayment
      * @var Transaction
      */
     private Transaction $transaction_model;
-    /**
-     * @var Paystack
-     */
-    private Paystack $paystack;
     /**
      * @var Enrolle
      */
@@ -34,7 +29,6 @@ class PaystackPayment
     {
         $this->transaction_model = $transaction_model;
         $this->enrolle_model = $enrolle_model;
-        $this->paystack = new Paystack(config('abshia-config.paystack.paystack_secret'));
     }
 
     /**
@@ -46,72 +40,22 @@ class PaystackPayment
     {
         $tr = $this->createTransaction($request, 'paystack');
         try {
-            $trx = $this->paystack->transaction->initialize(
-                [
-                    'amount' => $tr->amount * 100, /* in kobo */
-                    'email' => auth()->user()->email,
-                    'reference' => $tr->trans_ref,
-                    'callback_url' => config('abshia-config.front_end_url'),
-                    'metadata' => [
-                        'user_id' => $tr->user_id,
-                        'reference' => $tr->trans_ref,
-                        'transaction_id' => $tr->id,
-                        'total' => $tr->amount,
-                    ],
-                ]
-            );
+            $this->enrolle_model->where('user_id', '=', auth()->user()->id)->update([
+                'is_subscribed' => true
+            ]);
             return response()->json([
-                'message' => 'Paystack transaction link generated successfully',
-                'url' => $trx->data->authorization_url,
+                'message' => 'Payment made successfully',
                 'success' => true
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Sorry there was an error trying to generate payment link',
+                'message' => 'Sorry unable to create payment',
                 'error' => $e->getMessage(),
                 'success' => false
             ], 400);
         }
     }
 
-    /**
-     * verify paystack unit
-     * @param $reference
-     * @return JsonResponse
-     */
-    public function verifyPaystackPayment($reference): JsonResponse
-    {
-        if (!$reference) {
-            return response()->json([
-                'message' => 'Sorry No reference token supplied',
-                'success' => false
-            ], 404);
-        }
-        try {
-            $trx = $this->paystack->transaction->verify([
-                'reference' => $reference
-            ]);
-            $trans_ref = $trx->data->metadata->reference;
-            $transType = $this->transaction_model->where('trans_ref', '=', $trans_ref)->where('user_id','=',auth()->user()->id)->first();
-            $transType->update([
-                'status' => true,
-            ]);
-            $this->enrolle_model->where('user_id', '=', auth()->user()->id)->update([
-                'is_subscribed' => true
-            ]);
-            return response()->json([
-                'message' => 'Payment successful',
-                'data' => new UserResource(auth()->user()),
-                'success' => true
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Sorry the verification process failed',
-                'error' => $e->getMessage(),
-                'success' => false
-            ], 400);
-        }
-    }
 
     /**
      * create transaction record
@@ -129,7 +73,8 @@ class PaystackPayment
             'amount' => $request->amount,
             'description' => $request->type,
             'payment_gateway' => $gateway,
-            'category_id' => $request->category_id
+            'plan_id' => $request->plan_id,
+            'status' => true,
         ]);
     }
 

@@ -216,7 +216,7 @@
                   id="description"
                   v-model="hospital.details.address"
                   placeholder="Enter address"
-                  rows="6"
+                  rows="3"
                   class="form-control form-control-md"
                   aria-label="With textarea"
                 ></textarea>

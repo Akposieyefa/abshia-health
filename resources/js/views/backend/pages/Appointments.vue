@@ -105,7 +105,7 @@
                                     id="description"
                                     v-model="appointment.approval_comment"
                                     placeholder="Enter approval comment"
-                                    rows="6"
+                                    rows="3"
                                     class="form-control form-control-md"
                                     aria-label="With textarea"
                                 ></textarea>

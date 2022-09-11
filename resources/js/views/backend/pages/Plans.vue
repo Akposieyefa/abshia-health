@@ -13,7 +13,7 @@
               <div class="row align-items-center">
                 <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                   <!-- Title -->
-                  <h1 class="h2 mb-0 ls-tight">Categories</h1>
+                  <h1 class="h2 mb-0 ls-tight">Plans</h1>
                 </div>
                 <!-- Actions -->
                 <div class="col-sm-6 col-12 text-sm-end">
@@ -42,7 +42,7 @@
             <!-- Card stats -->
             <div class="card shadow border-0 mb-7">
               <div class="card-header">
-                <h5 class="mb-0">All Categories</h5>
+                <h5 class="mb-0">All Plans</h5>
               </div>
               <div class="table-responsive">
                 <table class="table table-hover table-nowrap">
@@ -51,32 +51,33 @@
                       <th scope="col">No..</th>
                       <th scope="col">Title</th>
                       <th scope="col">Description</th>
+                      <th scope="col">Duration</th>
+                      <th scope="col">Cost</th>
                       <th scope="col">Date</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr
-                      v-for="(category, index) in categories"
-                      :key="category.id"
-                    >
+                    <tr v-for="(plan, index) in plans" :key="plan.id">
                       <td>{{ index + 1 }}</td>
-                      <td>{{ category.title }}</td>
-                      <td>{{ category.description }}</td>
-                      <td>{{ formatDate(category.created_at) }}</td>
+                      <td>{{ plan.title }}</td>
+                      <td>{{ plan.description }}</td>
+                      <td>{{ plan.duration }}</td>
+                      <td>{{ plan.cost }}</td>
+                      <td>{{ formatDate(plan.created_at) }}</td>
                       <td class="text-end">
                         <button
-                          title="Edit category"
+                          title="Edit plan"
                           class="btn btn-sm btn-square btn-dark text-dark-hover"
-                          @click="editMode(category.id)"
+                          @click="editMode(plan.id)"
                           data-toggle="modal"
                           data-target="#form"
                         >
                           <i class="bi bi-pen-fill"></i>
                         </button>
                         <button
-                          title="Delete category"
-                          @click="deleteCategory(category.id)"
+                          title="Delete plan"
+                          @click="deletePlan(plan.id)"
                           type="button"
                           class="
                             btn btn-sm btn-square btn-danger
@@ -99,7 +100,7 @@
                     >
                       <a
                         class="page-link"
-                        @click="getAllCategories(pagination.prev_page_url)"
+                        @click="getAllPlans(pagination.prev_page_url)"
                         href="#"
                         tabindex="-1"
                         >Previous</a
@@ -117,7 +118,7 @@
                     >
                       <a
                         class="page-link"
-                        @click="getAllCategories(pagination.next_page_url)"
+                        @click="getAllPlans(pagination.next_page_url)"
                         href="#"
                         >Next</a
                       >
@@ -143,7 +144,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header border-bottom-0">
-            <h5 class="modal-title" v-if="edit">Edit Category</h5>
+            <h5 class="modal-title" v-if="edit">Edit plan</h5>
             <h5 class="modal-title" v-else>Add New</h5>
             <button
               type="button"
@@ -160,7 +161,7 @@
                 <label for="name">Title</label>
                 <input
                   type="text"
-                  v-model="category.title"
+                  v-model="plan.title"
                   class="form-control form-control-lg"
                   id="name"
                   aria-describedby="emailHelp"
@@ -168,12 +169,34 @@
                 />
               </div>
               <div class="form-group">
+                <label for="name">Duration</label>
+                <input
+                  type="text"
+                  v-model="plan.duration"
+                  class="form-control form-control-lg"
+                  id="name"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter duration"
+                />
+              </div>
+              <div class="form-group">
+                <label for="name">Cost</label>
+                <input
+                  type="text"
+                  v-model="plan.cost"
+                  class="form-control form-control-lg"
+                  id="name"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter cost"
+                />
+              </div>
+              <div class="form-group">
                 <label for="description">Description</label>
                 <textarea
                   id="description"
-                  v-model="category.description"
+                  v-model="plan.description"
                   placeholder="Enter description"
-                  rows="6"
+                  rows="3"
                   class="form-control form-control-md"
                   aria-label="With textarea"
                 ></textarea>
@@ -182,7 +205,7 @@
             <div class="modal-footer border-top-0">
               <button
                 type="submit"
-                @click="updateCategory(category.id)"
+                @click="updatePlan(plan.id)"
                 class="btn btn-sm btn-dark"
                 v-if="edit"
               >
@@ -190,7 +213,7 @@
               </button>
               <button
                 type="submit"
-                @click="createCategory()"
+                @click="createPlan()"
                 class="btn btn-sm btn-dark"
                 v-else
               >
@@ -208,23 +231,25 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "Categories",
+  name: "plans",
   components: {
     Nav: () => import("../../../components/Nav.vue"),
   },
   data() {
     return {
-      category: {
+      plan: {
         title: "",
         description: "",
+        duration: "",
+        cost: "",
       },
-      categories: [],
+      plans: [],
       pagination: {},
       edit: false,
     };
   },
   created() {
-    this.getAllCategories();
+    this.getAllPlans();
   },
   computed: {
     ...mapGetters(["user"]),
@@ -232,23 +257,25 @@ export default {
   methods: {
     async editMode(id) {
       this.edit = true;
-      let api_url = process.env.MIX_API_BASE_URL + "categories/";
+      let api_url = process.env.MIX_API_BASE_URL + "plans/";
       const response = await axios.get(api_url + id, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      this.category = response.data.data;
+      this.plan = response.data.data;
     },
 
-    async updateCategory(id) {
-      let api_url = process.env.MIX_API_BASE_URL + "categories/";
+    async updatePlan(id) {
+      let api_url = process.env.MIX_API_BASE_URL + "plans/";
       try {
         const response = await axios.patch(
           api_url + id,
           {
-            title: this.category.title,
-            description: this.category.description,
+            title: this.plan.title,
+            description: this.plan.description,
+            duration: this.plan.duration,
+            cost: this.plan.cost,
           },
           {
             headers: {
@@ -256,7 +283,7 @@ export default {
             },
           }
         );
-        await this.getAllCategories();
+        await this.getAllPlans();
         this.$toasted.success(response.data.message);
         this.edit = false;
       } catch (e) {
@@ -264,14 +291,16 @@ export default {
       }
     },
 
-    async createCategory() {
-      let api_url = process.env.MIX_API_BASE_URL + "categories";
+    async createPlan() {
+      let api_url = process.env.MIX_API_BASE_URL + "plans";
       try {
         const response = await axios.post(
           api_url,
           {
-            title: this.category.title,
-            description: this.category.description,
+            title: this.plan.title,
+            description: this.plan.description,
+            duration: this.plan.duration,
+            cost: this.plan.cost,
           },
           {
             headers: {
@@ -280,23 +309,26 @@ export default {
           }
         );
         this.$toasted.success(response.data.message);
-        this.clearData();
-        await this.getAllCategories();
+        this.plan.title = "";
+        this.plan.description = "";
+        this.plan.duration = "";
+        this.plan.cost = "";
+        await this.getAllPlans();
       } catch (e) {
         this.$toasted.error(e.response.data.message);
       }
     },
 
-    async getAllCategories(page_url) {
+    async getAllPlans(page_url) {
       let vm = this;
-      page_url = page_url || "categories";
+      page_url = page_url || "plans";
       const response = await axios.get(
         process.env.MIX_API_BASE_URL + page_url,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
-      this.categories = response.data.data;
+      this.plans = response.data.data;
       vm.makePagination(response.data.meta, response.data.links);
     },
 
@@ -309,8 +341,8 @@ export default {
       };
     },
 
-    async deleteCategory(id) {
-      let api_url = process.env.MIX_API_BASE_URL + "categories/";
+    async deletePlan(id) {
+      let api_url = process.env.MIX_API_BASE_URL + "plans/";
       if (confirm("Do you really want to delete this record?")) {
         try {
           const response = await axios.delete(api_url + id, {
@@ -319,7 +351,7 @@ export default {
             },
           });
           this.$toasted.success(response.data.message);
-          await this.getAllCategories();
+          await this.getAllplans();
         } catch (e) {
           this.$toasted.error(e.response.data.message);
         }
@@ -329,11 +361,6 @@ export default {
     formatDate(dateString) {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(dateString).toLocaleDateString(undefined, options);
-    },
-
-    clearData() {
-      this.category.name = "";
-      this.category.description = "";
     },
   },
 };

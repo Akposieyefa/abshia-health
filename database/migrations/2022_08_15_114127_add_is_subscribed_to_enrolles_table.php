@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('enrolles', function (Blueprint $table) {
-            $table->boolean('is_subscribed')->default(false)->after('kidney_issue');
+            $table->foreignIdFor(\App\Models\Plan::class, 'plan_id')->nullable()->after('kidney_issue')->constrained();
+            $table->boolean('is_subscribed')->default(false)->after('plan_id');
         });
     }
 

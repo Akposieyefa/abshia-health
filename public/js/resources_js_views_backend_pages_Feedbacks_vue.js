@@ -176,7 +176,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 vm = _this;
                 page_url = page_url || "feedbacks";
                 _context.next = 4;
-                return axios.get("https://abshia-health.herokuapp.com/api/v1/" + page_url, {
+                return axios.get("http://127.0.0.1:8000/api/v1/" + page_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
@@ -212,7 +212,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + "feedbacks/";
+                api_url = "http://127.0.0.1:8000/api/v1/" + "feedbacks/";
 
                 if (!confirm("Do you really want to delete this record?")) {
                   _context2.next = 14;

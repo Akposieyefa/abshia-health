@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @method findOrFail($id)
@@ -20,12 +21,12 @@ class Treatment extends Model
         'height', 'weight', 'blood_pressure', 'pulse', 'respiration', 'temperature', 'treatment_give', 'is_referred',  'summary'
     ];
 
-    public function enrolle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function enrolle(): BelongsTo
     {
         return $this->belongsTo(Enrolle::class, 'enrolle_id');
     }
 
-    public function hospital(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function hospital(): BelongsTo
     {
         return $this->belongsTo(HealthCare::class, 'health_care_id');
     }

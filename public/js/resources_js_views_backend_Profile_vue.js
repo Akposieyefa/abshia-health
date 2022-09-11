@@ -409,7 +409,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + "account-details/";
+                api_url = "http://127.0.0.1:8000/api/v1/" + "account-details/";
                 _context.next = 3;
                 return axios.get(api_url + id, {
                   headers: {
@@ -442,7 +442,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 id = _this2.$route.params.id;
                 page_url = page_url || "my-treatments/";
                 _context2.next = 5;
-                return axios.get("https://abshia-health.herokuapp.com/api/v1/" + id + "/" + page_url, {
+                return axios.get("http://127.0.0.1:8000/api/v1/" + id + "/" + page_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }

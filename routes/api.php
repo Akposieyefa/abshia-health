@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\PaystackPaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PlanController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ClaimController;
 use App\Http\Controllers\Api\ReferController;
@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\TreatmentController;
 use App\Http\Controllers\Api\AppointmentController;
 use App\Http\Controllers\Api\ForgotPasswordController;
+use App\Http\Controllers\Api\PaystackPaymentController;
 use App\Http\Controllers\Api\EmailVerificationController;
 
 /*
@@ -136,9 +137,16 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
             Route::patch('change-password',  'changeAccountPassword');
         });
 
+        Route::controller(PlanController::class)->group(function () { // plans routes
+            Route::post('plans',  'store');
+            Route::get('plans',  'index');
+            Route::get('plans/{id}',  'show');
+            Route::patch('plans/{id}',  'update');
+            Route::delete('plans/{id}',  'destroy');
+        });
+
         Route::controller(PaystackPaymentController::class)->group(function () { //payment controller for all payment
             Route::post('make-payment', 'payment');
-            Route::get('verify-payment-paystack/{id}', 'verifyPaystack');
         });
 
     });

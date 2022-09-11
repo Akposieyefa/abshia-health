@@ -170,7 +170,7 @@
                   id="description"
                   v-model="service.description"
                   placeholder="Enter description"
-                  rows="6"
+                  rows="3"
                   class="form-control form-control-md"
                   aria-label="With textarea"
                 ></textarea>

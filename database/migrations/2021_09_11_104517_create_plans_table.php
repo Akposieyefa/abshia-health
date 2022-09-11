@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Enrolle::class, 'enrolle_id')->constrained();
-            $table->foreignIdFor(\App\Models\Plan::class, 'plan_id')->constrained();
-            $table->string('trans_ref')->unique();
-            $table->string('type');
-            $table->bigInteger('amount');
+            $table->string('title');
             $table->longText('description');
-            $table->string('payment_gateway');
-            $table->boolean('status')->default(false);
+            $table->string('duration');
+            $table->unsignedBigInteger('cost');
+            $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('plans');
     }
 };

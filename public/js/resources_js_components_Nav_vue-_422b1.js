@@ -154,13 +154,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Nav",
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["user"])),
   methods: {
     onLogout: function onLogout() {
-      var api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'logout';
+      var api_url = "http://127.0.0.1:8000/api/v1/" + 'logout';
       axios.post(api_url, {
         token: localStorage.getItem("token")
       }, {
@@ -446,6 +451,22 @@ var render = function () {
                           [
                             _c("i", { staticClass: "bi bi-eye" }),
                             _vm._v(" Categories\n                    "),
+                          ]
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          { staticClass: "nav-link", attrs: { to: "/plans" } },
+                          [
+                            _c("i", { staticClass: "i bi-arrow-return-right" }),
+                            _vm._v(" Plans\n                    "),
                           ]
                         ),
                       ],

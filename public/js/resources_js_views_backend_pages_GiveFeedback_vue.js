@@ -221,7 +221,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + "feedbacks";
+                api_url = "http://127.0.0.1:8000/api/v1/" + "feedbacks";
                 _context.prev = 1;
                 _context.next = 4;
                 return axios.post(api_url, {

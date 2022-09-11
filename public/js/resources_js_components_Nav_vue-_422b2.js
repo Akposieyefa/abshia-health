@@ -165,7 +165,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["user"])),
   methods: {
     onLogout: function onLogout() {
-      var api_url = "http://127.0.0.1:8000/api/v1/" + 'logout';
+      var api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'logout';
       axios.post(api_url, {
         token: localStorage.getItem("token")
       }, {

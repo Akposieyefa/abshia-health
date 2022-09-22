@@ -88,6 +88,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    //login user
     loginUser: function loginUser() {
       var _this = this;
 

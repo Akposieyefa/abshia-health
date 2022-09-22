@@ -65,7 +65,7 @@ class PlanAction
      */
     public function getAllPlanAction(): JsonResponse|AnonymousResourceCollection
     {
-        $plans = $this->model->latest()->paginate(20);
+        $plans = $this->model->latest()->paginate(10);
         if (count($plans) < 1) {
             return response()->json([
                 'message' => 'Sorry no plan found',

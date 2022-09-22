@@ -116,18 +116,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Treatments",
   components: {
     Nav: function Nav() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b2").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
+    },
+    PaginationComponet: function PaginationComponet() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Pagination_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Pagination.vue */ "./resources/js/components/Pagination.vue"));
     }
   },
   data: function data() {
     return {
-      treatments: [],
-      pagination: {}
+      treatments: {
+        meta: {
+          current_page: 1
+        }
+      }
     };
   },
   created: function created() {
@@ -135,30 +154,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["user"])),
   methods: {
-    getAllTreatments: function getAllTreatments(page_url) {
+    //get all treatments
+    getAllTreatments: function getAllTreatments() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var vm, response;
+        var vm, api_url;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 vm = _this;
-                page_url = page_url || 'treatments';
+                api_url = "https://abshia-health.herokuapp.com/api/v1/" + "treatments?page=".concat(vm.treatments.meta.current_page);
                 _context.next = 4;
-                return axios.get("https://abshia-health.herokuapp.com/api/v1/" + page_url, {
+                return axios.get(api_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
+                }).then(function (response) {
+                  vm.treatments = response.data;
+                })["catch"](function (error) {
+                  console.log(error);
                 });
 
               case 4:
-                response = _context.sent;
-                _this.treatments = response.data.data;
-                vm.makePagination(response.data.meta, response.data.links);
-
-              case 7:
               case "end":
                 return _context.stop();
             }
@@ -166,14 +185,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     },
-    makePagination: function makePagination(meta, links) {
-      this.pagination = {
-        current_page: meta.current_page,
-        last_page: meta.last_page,
-        next_page_url: links.next,
-        prev_page_url: links.prev
-      };
-    },
+    //delete treatments
     deleteTreatments: function deleteTreatments(id) {
       var _this2 = this;
 
@@ -183,7 +195,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + 'treatments/';
+                api_url = "https://abshia-health.herokuapp.com/api/v1/" + "treatments/";
 
                 if (!confirm("Do you really want to delete this record?")) {
                   _context2.next = 14;
@@ -224,6 +236,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee2, null, [[2, 11]]);
       }))();
     },
+    //format date
     formatDate: function formatDate(dateString) {
       var options = {
         year: "numeric",
@@ -798,7 +811,9 @@ var render = function () {
                           _vm._v(" "),
                           _vm.user.role === "superadmin"
                             ? _c("th", { attrs: { scope: "col" } }, [
-                                _vm._v("Hospital Name"),
+                                _vm._v(
+                                  "\n                      Hospital Name\n                    "
+                                ),
                               ])
                             : _vm._e(),
                           _vm._v(" "),
@@ -828,170 +843,113 @@ var render = function () {
                       _vm._v(" "),
                       _c(
                         "tbody",
-                        _vm._l(_vm.treatments, function (treatment, index) {
-                          return _c("tr", { key: treatment.id }, [
-                            _c("td", [_vm._v(_vm._s(index + 1) + " ")]),
-                            _vm._v(" "),
-                            _vm.user.role === "superadmin"
-                              ? _c("td", [
-                                  _vm._v(
-                                    " " +
-                                      _vm._s(
-                                        treatment.relationships.hospital.name
-                                      )
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                " " +
+                        _vm._l(
+                          _vm.treatments.data,
+                          function (treatment, index) {
+                            return _c("tr", { key: treatment.id }, [
+                              _c("td", [_vm._v(_vm._s(index + 1))]),
+                              _vm._v(" "),
+                              _vm.user.role === "superadmin"
+                                ? _c("td", [
+                                    _vm._v(
+                                      "\n                      " +
+                                        _vm._s(
+                                          treatment.relationships.hospital.name
+                                        ) +
+                                        "\n                    "
+                                    ),
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
                                   _vm._s(treatment.relationships.enrolle.emp_id)
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                " " +
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
                                   _vm._s(treatment.relationships.enrolle.name)
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "  " + _vm._s(treatment.verified_by) + " "
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "  " + _vm._s(treatment.cost_of_treatment) + " "
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                " " +
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(treatment.verified_by))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(treatment.cost_of_treatment)),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
                                   _vm._s(
                                     _vm.formatDate(treatment.date_and_time)
                                   )
-                              ),
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              { staticClass: "text-end" },
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass:
-                                      "btn btn-sm btn-square btn-info text-danger-hover",
-                                    attrs: { to: "/", type: "button" },
-                                  },
-                                  [_c("i", { staticClass: "bi bi-eye" })]
                                 ),
-                                _vm._v(" "),
-                                _vm.user.role === "superadmin"
-                                  ? _c(
-                                      "button",
-                                      {
-                                        staticClass:
-                                          "btn btn-sm btn-square btn-danger text-danger-hover",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.deleteTreatments(
-                                              treatment.id
-                                            )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "text-end" },
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass:
+                                        "\n                          btn btn-sm btn-square btn-info\n                          text-danger-hover\n                        ",
+                                      attrs: { to: "/", type: "button" },
+                                    },
+                                    [_c("i", { staticClass: "bi bi-eye" })]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.user.role === "superadmin"
+                                    ? _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "\n                          btn btn-sm btn-square btn-danger\n                          text-danger-hover\n                        ",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.deleteTreatments(
+                                                treatment.id
+                                              )
+                                            },
                                           },
                                         },
-                                      },
-                                      [_c("i", { staticClass: "bi bi-trash" })]
-                                    )
-                                  : _vm._e(),
-                              ],
-                              1
-                            ),
-                          ])
-                        }),
+                                        [
+                                          _c("i", {
+                                            staticClass: "bi bi-trash",
+                                          }),
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                ],
+                                1
+                              ),
+                            ])
+                          }
+                        ),
                         0
                       ),
                     ]
                   ),
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-footer border-0 py-5" }, [
-                  _c("nav", { attrs: { "aria-label": "..." } }, [
-                    _c("ul", { staticClass: "pagination" }, [
-                      _c(
-                        "li",
-                        {
-                          staticClass: "page-item",
-                          class: [{ disabled: !_vm.pagination.prev_page_url }],
+                _c(
+                  "div",
+                  { staticClass: "card-footer border-0 py-5" },
+                  [
+                    _c("PaginationComponet", {
+                      attrs: { pagination: _vm.treatments, offset: 10 },
+                      on: {
+                        paginate: function ($event) {
+                          return _vm.getAllTreatments()
                         },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              attrs: { href: "#", tabindex: "-1" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.getAllTreatments(
-                                    _vm.pagination.prev_page_url
-                                  )
-                                },
-                              },
-                            },
-                            [_vm._v("Previous")]
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "page-item disabled" }, [
-                        _c(
-                          "a",
-                          { staticClass: "page-link", attrs: { href: "#" } },
-                          [
-                            _vm._v(
-                              "Page " +
-                                _vm._s(_vm.pagination.current_page) +
-                                " of " +
-                                _vm._s(_vm.pagination.last_page) +
-                                " "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass: "page-item",
-                          class: [{ disabled: !_vm.pagination.next_page_url }],
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.getAllTreatments(
-                                    _vm.pagination.next_page_url
-                                  )
-                                },
-                              },
-                            },
-                            [_vm._v("Next")]
-                          ),
-                        ]
-                      ),
-                    ]),
-                  ]),
-                ]),
+                      },
+                    }),
+                  ],
+                  1
+                ),
               ]),
             ]),
           ]),

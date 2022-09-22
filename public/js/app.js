@@ -2340,12 +2340,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_views_Verify_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/Verify.vue */ "./resources/js/views/Verify.vue"));
     }
   }, {
-    path: '/verify-payment',
-    name: 'VerifyPayment',
-    component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_views_VerifyPayment_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/VerifyPayment.vue */ "./resources/js/views/VerifyPayment.vue"));
-    }
-  }, {
     path: '/forget-password',
     name: 'ForgetPassword',
     component: function component() {
@@ -36733,7 +36727,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_Home_vue":1,"resources_js_views_Verify_vue":1,"resources_js_views_VerifyPayment_vue":1,"resources_js_views_ForgetPassword_vue":1,"resources_js_views_backend_Profile_vue":1,"resources_js_views_Register_vue":1,"resources_js_views_backend_pages_Categories_vue":1,"resources_js_views_backend_pages_Services_vue":1,"resources_js_views_backend_pages_Agents_vue":1,"resources_js_views_backend_pages_Hospitals_vue":1,"resources_js_views_backend_pages_Appointments_vue":1,"resources_js_views_backend_pages_Plans_vue":1,"resources_js_views_backend_pages_Feedbacks_vue":1,"resources_js_views_backend_pages_GiveFeedback_vue":1,"resources_js_views_backend_pages_AdministerTreatment_vue":1,"resources_js_views_backend_pages_Treatments_vue":1,"resources_js_views_backend_pages_Refers_vue":1,"resources_js_views_backend_pages_Claims_vue":1,"resources_js_views_backend_Dashboard_vue":1,"resources_js_views_backend_Settings_vue":1,"resources_js_views_Notfound_vue":1,"resources_js_components_Nav_vue-_422b1":1,"resources_js_components_Nav_vue-_422b2":1,"resources_js_components_DashboardComponent_vue":1,"resources_js_components_DashboardComponentHospital_vue":1,"resources_js_components_Nav_vue-_422b0":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_Home_vue":1,"resources_js_views_Verify_vue":1,"resources_js_views_ForgetPassword_vue":1,"resources_js_views_backend_Profile_vue":1,"resources_js_views_Register_vue":1,"resources_js_views_backend_pages_Categories_vue":1,"resources_js_views_backend_pages_Services_vue":1,"resources_js_views_backend_pages_Agents_vue":1,"resources_js_views_backend_pages_Hospitals_vue":1,"resources_js_views_backend_pages_Appointments_vue":1,"resources_js_views_backend_pages_Plans_vue":1,"resources_js_views_backend_pages_Feedbacks_vue":1,"resources_js_views_backend_pages_GiveFeedback_vue":1,"resources_js_views_backend_pages_AdministerTreatment_vue":1,"resources_js_views_backend_pages_Treatments_vue":1,"resources_js_views_backend_pages_Refers_vue":1,"resources_js_views_backend_pages_Claims_vue":1,"resources_js_views_backend_Dashboard_vue":1,"resources_js_views_backend_Settings_vue":1,"resources_js_views_Notfound_vue":1,"resources_js_components_Nav_vue-_422b1":1,"resources_js_components_Pagination_vue":1,"resources_js_components_Nav_vue-_422b2":1,"resources_js_components_DashboardComponent_vue":1,"resources_js_components_DashboardComponentHospital_vue":1,"resources_js_components_Nav_vue-_422b0":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

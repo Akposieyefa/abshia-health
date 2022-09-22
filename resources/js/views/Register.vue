@@ -447,6 +447,7 @@ export default {
     this.getHelpers();
   },
   methods: {
+    //get helpers endpoints
     async getHelpers() {
       let api_url = process.env.MIX_API_BASE_URL + "create-helpers";
       const response = await axios.get(api_url);
@@ -455,6 +456,7 @@ export default {
       this.hospitals = response.data.data.hospitals;
     },
 
+    //create users
     async createUser() {
       this.loading = true;
       let api_url = process.env.MIX_API_BASE_URL + "onboard-new-users";
@@ -504,6 +506,7 @@ export default {
       }
     },
 
+    //get all state by id
     async getStateLga(state_id) {
       let api_url = process.env.MIX_API_BASE_URL + "lga-helper/";
       const response = await axios.get(api_url + state_id);

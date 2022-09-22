@@ -66,7 +66,7 @@ class FeedbackAction
      */
     public function getAllFeedbacksAction(): JsonResponse|AnonymousResourceCollection
     {
-        $categories = $this->model->latest()->paginate(20);
+        $categories = $this->model->latest()->paginate(10);
         if (count($categories) < 1) {
             return response()->json([
                 'message' => 'Sorry no feedback found',

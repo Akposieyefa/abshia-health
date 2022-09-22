@@ -311,40 +311,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Claims",
   components: {
     Nav: function Nav() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b2").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
+    },
+    PaginationComponet: function PaginationComponet() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Pagination_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../../../components/Pagination.vue */ "./resources/js/components/Pagination.vue"));
     }
   },
   data: function data() {
@@ -358,8 +333,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         investigations: "",
         cost: ""
       },
-      claims: [],
-      pagination: {},
+      claims: {
+        meta: {
+          current_page: 1
+        }
+      },
       edit: false
     };
   },
@@ -368,6 +346,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["user"])),
   methods: {
+    //set edit mode
     editMode: function editMode(id) {
       var _this = this;
 
@@ -398,6 +377,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     },
+    //approve claims
     approveClaim: function approveClaim(id) {
       var _this2 = this;
 
@@ -428,6 +408,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee2);
       }))();
     },
+    //decline claims
     declineClaim: function declineClaim(id) {
       var _this3 = this;
 
@@ -458,30 +439,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee3);
       }))();
     },
-    getAllClaims: function getAllClaims(page_url) {
+    //get all claims
+    getAllClaims: function getAllClaims() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-        var vm, response;
+        var vm, api_url;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 vm = _this4;
-                page_url = page_url || "claims";
+                api_url = "https://abshia-health.herokuapp.com/api/v1/" + "claims?page=".concat(vm.claims.meta.current_page);
                 _context4.next = 4;
-                return axios.get("https://abshia-health.herokuapp.com/api/v1/" + page_url, {
+                return axios.get(api_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
+                }).then(function (response) {
+                  vm.claims = response.data;
+                })["catch"](function (error) {
+                  console.log(error);
                 });
 
               case 4:
-                response = _context4.sent;
-                _this4.claims = response.data.data;
-                vm.makePagination(response.data.meta, response.data.links);
-
-              case 7:
               case "end":
                 return _context4.stop();
             }
@@ -489,6 +470,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee4);
       }))();
     },
+    //udpate claims
     updateClaim: function updateClaim(id) {
       var _this5 = this;
 
@@ -540,6 +522,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee5, null, [[1, 11]]);
       }))();
     },
+    //create claims
     createClaim: function createClaim() {
       var _this6 = this;
 
@@ -594,14 +577,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee6, null, [[1, 10]]);
       }))();
     },
-    makePagination: function makePagination(meta, links) {
-      this.pagination = {
-        current_page: meta.current_page,
-        last_page: meta.last_page,
-        next_page_url: links.next,
-        prev_page_url: links.prev
-      };
-    },
+    //delete claims
     deleteClaim: function deleteClaim(id) {
       var _this7 = this;
 
@@ -652,6 +628,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee7, null, [[2, 11]]);
       }))();
     },
+    //format date
     formatDate: function formatDate(dateString) {
       var options = {
         year: "numeric",
@@ -1450,77 +1427,21 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-footer border-0 py-5" }, [
-                  _c("nav", { attrs: { "aria-label": "..." } }, [
-                    _c("ul", { staticClass: "pagination" }, [
-                      _c(
-                        "li",
-                        {
-                          staticClass: "page-item",
-                          class: [{ disabled: !_vm.pagination.prev_page_url }],
+                _c(
+                  "div",
+                  { staticClass: "card-footer border-0 py-5" },
+                  [
+                    _c("PaginationComponet", {
+                      attrs: { pagination: _vm.claims, offset: 10 },
+                      on: {
+                        paginate: function ($event) {
+                          return _vm.getAllClaims()
                         },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              attrs: { href: "#", tabindex: "-1" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.getAllClaims(
-                                    _vm.pagination.prev_page_url
-                                  )
-                                },
-                              },
-                            },
-                            [_vm._v("Previous")]
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "page-item disabled" }, [
-                        _c(
-                          "a",
-                          { staticClass: "page-link", attrs: { href: "#" } },
-                          [
-                            _vm._v(
-                              "Page " +
-                                _vm._s(_vm.pagination.current_page) +
-                                " of\n                      " +
-                                _vm._s(_vm.pagination.last_page) +
-                                "\n                    "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass: "page-item",
-                          class: [{ disabled: !_vm.pagination.next_page_url }],
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "page-link",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.getAllClaims(
-                                    _vm.pagination.next_page_url
-                                  )
-                                },
-                              },
-                            },
-                            [_vm._v("Next")]
-                          ),
-                        ]
-                      ),
-                    ]),
-                  ]),
-                ]),
+                      },
+                    }),
+                  ],
+                  1
+                ),
               ]),
             ]),
           ]),

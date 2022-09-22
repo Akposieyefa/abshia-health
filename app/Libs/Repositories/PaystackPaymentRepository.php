@@ -36,7 +36,8 @@ class PaystackPaymentRepository implements PaystackPaymentRepositoryInterface
             'type' => 'required',
             'amount' => 'required',
             'category_id' => 'sometimes',
-            'description' => 'sometimes'
+            'description' => 'sometimes',
+            'emp_code' => 'sometimes'
         ]);
         if ($validator->fails()) {
             return response()->json([

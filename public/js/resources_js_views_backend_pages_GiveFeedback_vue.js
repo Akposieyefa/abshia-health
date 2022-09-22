@@ -212,6 +212,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["user"])),
   methods: {
+    //submit feedback
     submitFeedBack: function submitFeedBack() {
       var _this = this;
 

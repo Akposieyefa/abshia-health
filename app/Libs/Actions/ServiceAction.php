@@ -71,7 +71,7 @@ class ServiceAction
      */
     public function getAllServiceAction(): JsonResponse|AnonymousResourceCollection
     {
-        $services = $this->model->latest()->paginate(20);
+        $services = $this->model->latest()->paginate(10);
         if (count($services) < 1) {
             return response()->json([
                 'message' => 'Sorry no service found',

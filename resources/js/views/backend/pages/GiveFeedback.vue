@@ -185,6 +185,7 @@ export default {
     ...mapGetters(["user"]),
   },
   methods: {
+    //submit feedback
     async submitFeedBack() {
       let api_url = process.env.MIX_API_BASE_URL + "feedbacks";
       try {

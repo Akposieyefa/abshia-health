@@ -61,7 +61,7 @@
                   class="form-control form-control-lg"
                   required
                 />
-                <br/> 
+                <br />
                 <div class="col-sm-12 form-group mb-0">
                   <button
                     class="btn btn-dark float-right"
@@ -96,27 +96,28 @@ export default {
     };
   },
   methods: {
+    //submit change password
     async submitChangePassword() {
-         let api_url = process.env.MIX_API_BASE_URL + 'change-password'
-            try {
-                const response = await axios.patch(
-                    api_url,
-                    {
-                        old_password: this.password.old_password,
-                        password : this.password.new_password,
-                        password_confirmation : this.password.confirm_new_password
-                    },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        },
-                    }
-                );
-                this.$toasted.success(response.data.message)
-            } catch (e) {
-                this.$toasted.error(e.response.data.message)
-            }
-    }
+      let api_url = process.env.MIX_API_BASE_URL + "change-password";
+      try {
+        const response = await axios.patch(
+          api_url,
+          {
+            old_password: this.password.old_password,
+            password: this.password.new_password,
+            password_confirmation: this.password.confirm_new_password,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        this.$toasted.success(response.data.message);
+      } catch (e) {
+        this.$toasted.error(e.response.data.message);
+      }
+    },
   },
   computed: {
     ...mapGetters(["user"]),

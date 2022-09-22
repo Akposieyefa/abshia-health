@@ -343,55 +343,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Profile",
   components: {
     Nav: function Nav() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Nav_vue-_422b1").then(__webpack_require__.bind(__webpack_require__, /*! ../../components/Nav.vue */ "./resources/js/components/Nav.vue"));
+    },
+    PaginationComponet: function PaginationComponet() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Pagination_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../../components/Pagination.vue */ "./resources/js/components/Pagination.vue"));
     }
   },
   data: function data() {
     return {
       userDetails: {},
-      treatments: [],
-      pagination: {}
+      treatments: {
+        meta: {
+          current_page: 1
+        }
+      }
     };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["user"])),
@@ -400,6 +370,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getAllAppointments();
   },
   methods: {
+    //get my profile
     getMyProfile: function getMyProfile(id) {
       var _this = this;
 
@@ -429,31 +400,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     },
-    getAllTreatmentes: function getAllTreatmentes(page_url) {
+    //get all treatments
+    getAllTreatmentes: function getAllTreatmentes() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var vm, response;
+        var vm, api_url;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 vm = _this2;
-                id = _this2.$route.params.id;
-                page_url = page_url || "my-treatments/";
-                _context2.next = 5;
-                return axios.get("https://abshia-health.herokuapp.com/api/v1/" + id + "/" + page_url, {
+                api_url = "https://abshia-health.herokuapp.com/api/v1/" + "my-treatments?page=".concat(vm.treatments.meta.current_page);
+                _context2.next = 4;
+                return axios.get(api_url, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem("token"))
                   }
+                }).then(function (response) {
+                  vm.treatments = response.data;
+                })["catch"](function (error) {
+                  console.log(error);
                 });
 
-              case 5:
-                response = _context2.sent;
-                _this2.treatments = response.data.data;
-                vm.makePagination(response.data.meta, response.data.links);
-
-              case 8:
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -461,14 +431,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee2);
       }))();
     },
-    makePagination: function makePagination(meta, links) {
-      this.pagination = {
-        current_page: meta.current_page,
-        last_page: meta.last_page,
-        next_page_url: links.next,
-        prev_page_url: links.prev
-      };
-    },
+    //format date
     formatDate: function formatDate(dateString) {
       var options = {
         year: "numeric",
@@ -498,7 +461,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Profile container */\n.profile[data-v-74b67d5f] {\n  margin: 20px 0;\n}\n\n/* Profile sidebar */\n.profile-sidebar[data-v-74b67d5f] {\n  padding: 20px 0 10px 0;\n  background: #fff;\n}\n.profile-userpic img[data-v-74b67d5f] {\n  float: none;\n  margin: 0 auto;\n  width: 50%;\n  height: 50%;\n  border-radius: 50% !important;\n}\n.profile-usertitle[data-v-74b67d5f] {\n  text-align: center;\n  margin-top: 20px;\n}\n.profile-usertitle-name[data-v-74b67d5f] {\n  color: #5a7391;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 7px;\n}\n.profile-usertitle-job[data-v-74b67d5f] {\n  text-transform: uppercase;\n  color: #5b9bd1;\n  font-size: 12px;\n  font-weight: 600;\n  margin-bottom: 15px;\n}\n.profile-userbuttons[data-v-74b67d5f] {\n  text-align: center;\n  margin-top: 10px;\n}\n.profile-userbuttons .btn[data-v-74b67d5f] {\n  text-transform: uppercase;\n  font-size: 11px;\n  font-weight: 600;\n  padding: 6px 15px;\n  margin-right: 5px;\n}\n.profile-userbuttons .btn[data-v-74b67d5f]:last-child {\n  margin-right: 0px;\n}\n.profile-usermenu[data-v-74b67d5f] {\n  margin-top: 30px;\n}\n.profile-usermenu ul li[data-v-74b67d5f] {\n  border-bottom: 1px solid #f0f4f7;\n}\n.profile-usermenu ul li[data-v-74b67d5f]:last-child {\n  border-bottom: none;\n}\n.profile-usermenu ul li a[data-v-74b67d5f] {\n  color: #93a3b5;\n  font-size: 14px;\n  font-weight: 400;\n}\n.profile-usermenu ul li a i[data-v-74b67d5f] {\n  margin-right: 8px;\n  font-size: 14px;\n}\n.profile-usermenu ul li a[data-v-74b67d5f]:hover {\n  background-color: #fafcfd;\n  color: #5b9bd1;\n}\n.profile-usermenu ul li.active[data-v-74b67d5f] {\n  border-bottom: none;\n}\n.profile-usermenu ul li.active a[data-v-74b67d5f] {\n  color: #5b9bd1;\n  background-color: #f6f9fb;\n  border-left: 2px solid #5b9bd1;\n  margin-left: -2px;\n}\n\n/* Profile Content */\n.profile-content[data-v-74b67d5f] {\n  padding: 20px;\n  background: #fff;\n  min-height: 460px;\n}\na[data-v-74b67d5f],\nbutton[data-v-74b67d5f],\ncode[data-v-74b67d5f],\ndiv[data-v-74b67d5f],\nimg[data-v-74b67d5f],\ninput[data-v-74b67d5f],\nlabel[data-v-74b67d5f],\nli[data-v-74b67d5f],\np[data-v-74b67d5f],\npre[data-v-74b67d5f],\nselect[data-v-74b67d5f],\nspan[data-v-74b67d5f],\nsvg[data-v-74b67d5f],\ntable[data-v-74b67d5f],\ntd[data-v-74b67d5f],\ntextarea[data-v-74b67d5f],\nth[data-v-74b67d5f],\nul[data-v-74b67d5f] {\n  border-radius: 0 !important;\n}\n.dashboard-stat[data-v-74b67d5f],\n.portlet[data-v-74b67d5f] {\n  -webkit-border-radius: 4px;\n  -moz-border-radius: 4px;\n  -ms-border-radius: 4px;\n  -o-border-radius: 4px;\n}\n.portlet[data-v-74b67d5f] {\n  margin-top: 0;\n  margin-bottom: 25px;\n  padding: 0;\n  border-radius: 4px;\n}\n.portlet.bordered[data-v-74b67d5f] {\n  border-left: 2px solid #e6e9ec !important;\n}\n.portlet.light[data-v-74b67d5f] {\n  padding: 12px 20px 15px;\n  background-color: #fff;\n}\n.portlet.light.bordered[data-v-74b67d5f] {\n  border: 1px solid #e7ecf1 !important;\n}\n.list-separated[data-v-74b67d5f] {\n  margin-top: 10px;\n  margin-bottom: 15px;\n}\n.profile-stat[data-v-74b67d5f] {\n  padding-bottom: 20px;\n  border-bottom: 1px solid #f0f4f7;\n}\n.profile-stat-title[data-v-74b67d5f] {\n  color: #7f90a4;\n  font-size: 25px;\n  text-align: center;\n}\n.uppercase[data-v-74b67d5f] {\n  text-transform: uppercase !important;\n}\n.profile-stat-text[data-v-74b67d5f] {\n  color: #5b9bd1;\n  font-size: 10px;\n  font-weight: 600;\n  text-align: center;\n}\n.profile-desc-title[data-v-74b67d5f] {\n  color: #7f90a4;\n  font-size: 17px;\n  font-weight: 600;\n}\n.profile-desc-text[data-v-74b67d5f] {\n  color: #7e8c9e;\n  font-size: 14px;\n}\n.margin-top-20[data-v-74b67d5f] {\n  margin-top: 20px !important;\n}\n[class*=\" fa-\"][data-v-74b67d5f]:not(.fa-stack),\n[class*=\" glyphicon-\"][data-v-74b67d5f],\n[class*=\" icon-\"][data-v-74b67d5f],\n[class^=\"fa-\"][data-v-74b67d5f]:not(.fa-stack),\n[class^=\"glyphicon-\"][data-v-74b67d5f],\n[class^=\"icon-\"][data-v-74b67d5f] {\n  display: inline-block;\n  line-height: 14px;\n  -webkit-font-smoothing: antialiased;\n}\n.profile-desc-link i[data-v-74b67d5f] {\n  width: 22px;\n  font-size: 19px;\n  color: #abb6c4;\n  margin-right: 5px;\n}\n.center[data-v-74b67d5f] {\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n  width: 50%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Profile container */\n.profile[data-v-74b67d5f] {\n  margin: 20px 0;\n}\n\n/* Profile sidebar */\n.profile-sidebar[data-v-74b67d5f] {\n  padding: 20px 0 10px 0;\n  background: #fff;\n}\n.profile-userpic img[data-v-74b67d5f] {\n  float: none;\n  margin: 0 auto;\n  width: 50%;\n  height: 50%;\n  border-radius: 50% !important;\n}\n.profile-usertitle[data-v-74b67d5f] {\n  text-align: center;\n  margin-top: 20px;\n}\n.profile-usertitle-name[data-v-74b67d5f] {\n  color: #5a7391;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 7px;\n}\n.profile-usertitle-job[data-v-74b67d5f] {\n  text-transform: uppercase;\n  color: #5b9bd1;\n  font-size: 12px;\n  font-weight: 600;\n  margin-bottom: 15px;\n}\n.profile-userbuttons[data-v-74b67d5f] {\n  text-align: center;\n  margin-top: 10px;\n}\n.profile-userbuttons .btn[data-v-74b67d5f] {\n  text-transform: uppercase;\n  font-size: 11px;\n  font-weight: 600;\n  padding: 6px 15px;\n  margin-right: 5px;\n}\n.profile-userbuttons .btn[data-v-74b67d5f]:last-child {\n  margin-right: 0px;\n}\n.profile-usermenu[data-v-74b67d5f] {\n  margin-top: 30px;\n}\n.profile-usermenu ul li[data-v-74b67d5f] {\n  border-bottom: 1px solid #f0f4f7;\n}\n.profile-usermenu ul li[data-v-74b67d5f]:last-child {\n  border-bottom: none;\n}\n.profile-usermenu ul li a[data-v-74b67d5f] {\n  color: #93a3b5;\n  font-size: 14px;\n  font-weight: 400;\n}\n.profile-usermenu ul li a i[data-v-74b67d5f] {\n  margin-right: 8px;\n  font-size: 14px;\n}\n.profile-usermenu ul li a[data-v-74b67d5f]:hover {\n  background-color: #fafcfd;\n  color: #5b9bd1;\n}\n.profile-usermenu ul li.active[data-v-74b67d5f] {\n  border-bottom: none;\n}\n.profile-usermenu ul li.active a[data-v-74b67d5f] {\n  color: #5b9bd1;\n  background-color: #f6f9fb;\n  border-left: 2px solid #5b9bd1;\n  margin-left: -2px;\n}\n\n/* Profile Content */\n.profile-content[data-v-74b67d5f] {\n  padding: 20px;\n  background: #fff;\n  min-height: 460px;\n}\na[data-v-74b67d5f],\nbutton[data-v-74b67d5f],\ncode[data-v-74b67d5f],\ndiv[data-v-74b67d5f],\nimg[data-v-74b67d5f],\ninput[data-v-74b67d5f],\nlabel[data-v-74b67d5f],\nli[data-v-74b67d5f],\np[data-v-74b67d5f],\npre[data-v-74b67d5f],\nselect[data-v-74b67d5f],\nspan[data-v-74b67d5f],\nsvg[data-v-74b67d5f],\ntable[data-v-74b67d5f],\ntd[data-v-74b67d5f],\ntextarea[data-v-74b67d5f],\nth[data-v-74b67d5f],\nul[data-v-74b67d5f] {\n  border-radius: 0 !important;\n}\n.dashboard-stat[data-v-74b67d5f],\n.portlet[data-v-74b67d5f] {\n  -webkit-border-radius: 4px;\n  -moz-border-radius: 4px;\n  -ms-border-radius: 4px;\n  -o-border-radius: 4px;\n}\n.portlet[data-v-74b67d5f] {\n  margin-top: 0;\n  margin-bottom: 25px;\n  padding: 0;\n  border-radius: 4px;\n}\n.portlet.bordered[data-v-74b67d5f] {\n  border-left: 2px solid #e6e9ec !important;\n}\n.portlet.light[data-v-74b67d5f] {\n  padding: 12px 20px 15px;\n  background-color: #fff;\n}\n.portlet.light.bordered[data-v-74b67d5f] {\n  border: 1px solid #e7ecf1 !important;\n}\n.list-separated[data-v-74b67d5f] {\n  margin-top: 10px;\n  margin-bottom: 15px;\n}\n.profile-stat[data-v-74b67d5f] {\n  padding-bottom: 20px;\n  border-bottom: 1px solid #f0f4f7;\n}\n.profile-stat-title[data-v-74b67d5f] {\n  color: #7f90a4;\n  font-size: 25px;\n  text-align: center;\n}\n.uppercase[data-v-74b67d5f] {\n  text-transform: uppercase !important;\n}\n.profile-stat-text[data-v-74b67d5f] {\n  color: #5b9bd1;\n  font-size: 10px;\n  font-weight: 600;\n  text-align: center;\n}\n.profile-desc-title[data-v-74b67d5f] {\n  color: #7f90a4;\n  font-size: 17px;\n  font-weight: 600;\n}\n.profile-desc-text[data-v-74b67d5f] {\n  color: #7e8c9e;\n  font-size: 14px;\n}\n.margin-top-20[data-v-74b67d5f] {\n  margin-top: 20px !important;\n}\n[class*=\" fa-\"][data-v-74b67d5f]:not(.fa-stack),\n[class*=\" glyphicon-\"][data-v-74b67d5f],\n[class*=\" icon-\"][data-v-74b67d5f],\n[class^=\"fa-\"][data-v-74b67d5f]:not(.fa-stack),\n[class^=\"glyphicon-\"][data-v-74b67d5f],\n[class^=\"icon-\"][data-v-74b67d5f] {\n  display: inline-block;\n  line-height: 14px;\n  -webkit-font-smoothing: antialiased;\n}\n.profile-desc-link i[data-v-74b67d5f] {\n  width: 22px;\n  font-size: 19px;\n  color: #abb6c4;\n  margin-right: 5px;\n}\n.center[data-v-74b67d5f] {\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n  width: 50%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1749,7 +1712,7 @@ var render = function () {
                                     _c(
                                       "tbody",
                                       _vm._l(
-                                        _vm.treatments,
+                                        _vm.treatments.data,
                                         function (treatment, index) {
                                           return _c(
                                             "tr",
@@ -1885,107 +1848,19 @@ var render = function () {
                                 "div",
                                 { staticClass: "card-footer border-0 py-5" },
                                 [
-                                  _c(
-                                    "nav",
-                                    { attrs: { "aria-label": "..." } },
-                                    [
-                                      _c("ul", { staticClass: "pagination" }, [
-                                        _c(
-                                          "li",
-                                          {
-                                            staticClass: "page-item",
-                                            class: [
-                                              {
-                                                disabled:
-                                                  !_vm.pagination.prev_page_url,
-                                              },
-                                            ],
-                                          },
-                                          [
-                                            _c(
-                                              "a",
-                                              {
-                                                staticClass: "page-link",
-                                                attrs: {
-                                                  href: "#",
-                                                  tabindex: "-1",
-                                                },
-                                                on: {
-                                                  click: function ($event) {
-                                                    return _vm.getAllTreatmentes(
-                                                      _vm.pagination
-                                                        .prev_page_url
-                                                    )
-                                                  },
-                                                },
-                                              },
-                                              [_vm._v("Previous")]
-                                            ),
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "li",
-                                          { staticClass: "page-item disabled" },
-                                          [
-                                            _c(
-                                              "a",
-                                              {
-                                                staticClass: "page-link",
-                                                attrs: { href: "#" },
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "Page " +
-                                                    _vm._s(
-                                                      _vm.pagination
-                                                        .current_page
-                                                    ) +
-                                                    " of\n                              " +
-                                                    _vm._s(
-                                                      _vm.pagination.last_page
-                                                    ) +
-                                                    "\n                            "
-                                                ),
-                                              ]
-                                            ),
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "li",
-                                          {
-                                            staticClass: "page-item",
-                                            class: [
-                                              {
-                                                disabled:
-                                                  !_vm.pagination.next_page_url,
-                                              },
-                                            ],
-                                          },
-                                          [
-                                            _c(
-                                              "a",
-                                              {
-                                                staticClass: "page-link",
-                                                attrs: { href: "#" },
-                                                on: {
-                                                  click: function ($event) {
-                                                    return _vm.getAllTreatmentes(
-                                                      _vm.pagination
-                                                        .next_page_url
-                                                    )
-                                                  },
-                                                },
-                                              },
-                                              [_vm._v("Next")]
-                                            ),
-                                          ]
-                                        ),
-                                      ]),
-                                    ]
-                                  ),
-                                ]
+                                  _c("PaginationComponet", {
+                                    attrs: {
+                                      pagination: _vm.treatments,
+                                      offset: 10,
+                                    },
+                                    on: {
+                                      paginate: function ($event) {
+                                        return _vm.getAllAppointments()
+                                      },
+                                    },
+                                  }),
+                                ],
+                                1
                               ),
                             ]
                           ),

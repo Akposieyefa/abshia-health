@@ -253,7 +253,7 @@
                           </thead>
                           <tbody>
                             <tr
-                              v-for="(treatment, index) in treatments"
+                              v-for="(treatment, index) in treatments.data"
                               :key="treatment.id"
                             >
                               <td>{{ index + 1 }}</td>
@@ -297,47 +297,11 @@
                         </table>
                       </div>
                       <div class="card-footer border-0 py-5">
-                        <nav aria-label="...">
-                          <ul class="pagination">
-                            <li
-                              v-bind:class="[
-                                { disabled: !pagination.prev_page_url },
-                              ]"
-                              class="page-item"
-                            >
-                              <a
-                                class="page-link"
-                                @click="
-                                  getAllTreatmentes(pagination.prev_page_url)
-                                "
-                                href="#"
-                                tabindex="-1"
-                                >Previous</a
-                              >
-                            </li>
-                            <li class="page-item disabled">
-                              <a class="page-link" href="#"
-                                >Page {{ pagination.current_page }} of
-                                {{ pagination.last_page }}
-                              </a>
-                            </li>
-                            <li
-                              v-bind:class="[
-                                { disabled: !pagination.next_page_url },
-                              ]"
-                              class="page-item"
-                            >
-                              <a
-                                class="page-link"
-                                @click="
-                                  getAllTreatmentes(pagination.next_page_url)
-                                "
-                                href="#"
-                                >Next</a
-                              >
-                            </li>
-                          </ul>
-                        </nav>
+                        <PaginationComponet
+                          :pagination="treatments"
+                          @paginate="getAllAppointments()"
+                          :offset="10"
+                        ></PaginationComponet>
                       </div>
                     </div>
                   </div>
@@ -357,12 +321,16 @@ export default {
   name: "Profile",
   components: {
     Nav: () => import("../../components/Nav.vue"),
+    PaginationComponet: () => import("../../components/Pagination.vue"),
   },
   data() {
     return {
       userDetails: {},
-      treatments: [],
-      pagination: {},
+      treatments: {
+        meta: {
+          current_page: 1,
+        },
+      },
     };
   },
   computed: {
@@ -373,6 +341,7 @@ export default {
     this.getAllAppointments();
   },
   methods: {
+    //get my profile
     async getMyProfile(id) {
       let api_url = process.env.MIX_API_BASE_URL + "account-details/";
       const response = await axios.get(api_url + id, {
@@ -383,29 +352,25 @@ export default {
       this.userDetails = response.data.data;
     },
 
-    async getAllTreatmentes(page_url) {
+    //get all treatments
+    async getAllTreatmentes() {
       let vm = this;
-      id = this.$route.params.id;
-      page_url = page_url || "my-treatments/";
-      const response = await axios.get(
-        process.env.MIX_API_BASE_URL + id + "/" + page_url,
-        {
+      let api_url =
+        process.env.MIX_API_BASE_URL +
+        `my-treatments?page=${vm.treatments.meta.current_page}`;
+      await axios
+        .get(api_url, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
-      this.treatments = response.data.data;
-      vm.makePagination(response.data.meta, response.data.links);
+        })
+        .then((response) => {
+          vm.treatments = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
-    makePagination(meta, links) {
-      this.pagination = {
-        current_page: meta.current_page,
-        last_page: meta.last_page,
-        next_page_url: links.next,
-        prev_page_url: links.prev,
-      };
-    },
-
+    //format date
     formatDate(dateString) {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(dateString).toLocaleDateString(undefined, options);

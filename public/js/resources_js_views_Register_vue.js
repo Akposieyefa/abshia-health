@@ -467,6 +467,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getHelpers();
   },
   methods: {
+    //get helpers endpoints
     getHelpers: function getHelpers() {
       var _this = this;
 
@@ -494,6 +495,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
+    //create users
     createUser: function createUser() {
       var _this2 = this;
 
@@ -566,6 +568,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2, null, [[2, 9]]);
       }))();
     },
+    //get all state by id
     getStateLga: function getStateLga(state_id) {
       var _this3 = this;
 

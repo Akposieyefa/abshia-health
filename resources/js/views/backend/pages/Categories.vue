@@ -57,7 +57,7 @@
                   </thead>
                   <tbody>
                     <tr
-                      v-for="(category, index) in categories"
+                      v-for="(category, index) in categories.data"
                       :key="category.id"
                     >
                       <td>{{ index + 1 }}</td>
@@ -91,39 +91,11 @@
                 </table>
               </div>
               <div class="card-footer border-0 py-5">
-                <nav aria-label="...">
-                  <ul class="pagination">
-                    <li
-                      v-bind:class="[{ disabled: !pagination.prev_page_url }]"
-                      class="page-item"
-                    >
-                      <a
-                        class="page-link"
-                        @click="getAllCategories(pagination.prev_page_url)"
-                        href="#"
-                        tabindex="-1"
-                        >Previous</a
-                      >
-                    </li>
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#"
-                        >Page {{ pagination.current_page }} of
-                        {{ pagination.last_page }}
-                      </a>
-                    </li>
-                    <li
-                      v-bind:class="[{ disabled: !pagination.next_page_url }]"
-                      class="page-item"
-                    >
-                      <a
-                        class="page-link"
-                        @click="getAllCategories(pagination.next_page_url)"
-                        href="#"
-                        >Next</a
-                      >
-                    </li>
-                  </ul>
-                </nav>
+                <PaginationComponet
+                  :pagination="categories"
+                  @paginate="getAllCategories()"
+                  :offset="10"
+                ></PaginationComponet>
               </div>
             </div>
           </div>
@@ -211,6 +183,7 @@ export default {
   name: "Categories",
   components: {
     Nav: () => import("../../../components/Nav.vue"),
+    PaginationComponet: () => import("../../../components/Pagination.vue"),
   },
   data() {
     return {
@@ -218,8 +191,11 @@ export default {
         title: "",
         description: "",
       },
-      categories: [],
-      pagination: {},
+      categories: {
+        meta: {
+          current_page: 1,
+        },
+      },
       edit: false,
     };
   },
@@ -230,6 +206,7 @@ export default {
     ...mapGetters(["user"]),
   },
   methods: {
+    //set edit mode
     async editMode(id) {
       this.edit = true;
       let api_url = process.env.MIX_API_BASE_URL + "categories/";
@@ -241,6 +218,7 @@ export default {
       this.category = response.data.data;
     },
 
+    //udpate category
     async updateCategory(id) {
       let api_url = process.env.MIX_API_BASE_URL + "categories/";
       try {
@@ -264,6 +242,7 @@ export default {
       }
     },
 
+    //create category
     async createCategory() {
       let api_url = process.env.MIX_API_BASE_URL + "categories";
       try {
@@ -280,35 +259,33 @@ export default {
           }
         );
         this.$toasted.success(response.data.message);
-        this.clearData();
+        this.category.title = "";
+        this.category.description = "";
         await this.getAllCategories();
       } catch (e) {
         this.$toasted.error(e.response.data.message);
       }
     },
 
-    async getAllCategories(page_url) {
+    //get all category
+    async getAllCategories() {
       let vm = this;
-      page_url = page_url || "categories";
-      const response = await axios.get(
-        process.env.MIX_API_BASE_URL + page_url,
-        {
+      let api_url =
+        process.env.MIX_API_BASE_URL +
+        `categories?page=${vm.categories.meta.current_page}`;
+      await axios
+        .get(api_url, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
-      this.categories = response.data.data;
-      vm.makePagination(response.data.meta, response.data.links);
+        })
+        .then((response) => {
+          vm.categories = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
-    makePagination(meta, links) {
-      this.pagination = {
-        current_page: meta.current_page,
-        last_page: meta.last_page,
-        next_page_url: links.next,
-        prev_page_url: links.prev,
-      };
-    },
-
+    //delete category
     async deleteCategory(id) {
       let api_url = process.env.MIX_API_BASE_URL + "categories/";
       if (confirm("Do you really want to delete this record?")) {
@@ -326,14 +303,10 @@ export default {
       }
     },
 
+    //format date
     formatDate(dateString) {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(dateString).toLocaleDateString(undefined, options);
-    },
-
-    clearData() {
-      this.category.name = "";
-      this.category.description = "";
     },
   },
 };

@@ -59,7 +59,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(agent, index) in agents" :key="agent.id">
+                    <tr v-for="(agent, index) in agents.data" :key="agent.id">
                       <td>{{ index + 1 }}</td>
                       <td>{{ agent.details.code }}</td>
                       <td>{{ agent.details.name }}</td>
@@ -96,39 +96,7 @@
                 </table>
               </div>
               <div class="card-footer border-0 py-5">
-                <nav aria-label="...">
-                  <ul class="pagination">
-                    <li
-                      v-bind:class="[{ disabled: !pagination.prev_page_url }]"
-                      class="page-item"
-                    >
-                      <a
-                        class="page-link"
-                        @click="getAllAgents(pagination.prev_page_url)"
-                        href="#"
-                        tabindex="-1"
-                        >Previous</a
-                      >
-                    </li>
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#"
-                        >Page {{ pagination.current_page }} of
-                        {{ pagination.last_page }}
-                      </a>
-                    </li>
-                    <li
-                      v-bind:class="[{ disabled: !pagination.next_page_url }]"
-                      class="page-item"
-                    >
-                      <a
-                        class="page-link"
-                        @click="getAllAgents(pagination.next_page_url)"
-                        href="#"
-                        >Next</a
-                      >
-                    </li>
-                  </ul>
-                </nav>
+                 <PaginationComponet :pagination="agents" @paginate="getAllAgents()" :offset="10"></PaginationComponet>
               </div>
             </div>
           </div>
@@ -255,6 +223,7 @@ export default {
   name: "Agents",
   components: {
     Nav: () => import("../../../components/Nav.vue"),
+    PaginationComponet: () => import("../../../components/Pagination.vue"),
   },
   data() {
     return {
@@ -268,8 +237,11 @@ export default {
         },
       },
       lgas: [],
-      agents: [],
-      pagination: {},
+      agents: {
+        meta: {
+          current_page : 1
+        }
+      },
       edit: false,
     };
   },
@@ -281,6 +253,7 @@ export default {
     ...mapGetters(["user"]),
   },
   methods: {
+    //set edit mood
     async editMode(id) {
       this.edit = true;
       let api_url = process.env.MIX_API_BASE_URL + "account-details/";
@@ -292,6 +265,7 @@ export default {
       this.agent = response.data.data;
     },
 
+    //udate agent
     async updateAgent(id) {
       let api_url = process.env.MIX_API_BASE_URL + "account-update-agent/";
       try {
@@ -317,6 +291,7 @@ export default {
       }
     },
 
+    //create agent
     async createAgent() {
       let api_url = process.env.MIX_API_BASE_URL + "create-agents";
       try {
@@ -342,26 +317,21 @@ export default {
       }
     },
 
-    async getAllAgents(page_url) {
+  //get all agent
+    async getAllAgents() {
       let vm = this;
-      page_url = page_url || "get-agents";
-      const response = await axios.get(
-        process.env.MIX_API_BASE_URL + page_url,
+      let api_url = process.env.MIX_API_BASE_URL + `get-agents?page=${vm.agents.meta.current_page}`
+      await axios.get(
+        api_url,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
-      );
-      this.agents = response.data.data;
-      vm.makePagination(response.data.meta, response.data.links);
-    },
-
-    makePagination(meta, links) {
-      this.pagination = {
-        current_page: meta.current_page,
-        last_page: meta.last_page,
-        next_page_url: links.next,
-        prev_page_url: links.prev,
-      };
+      ).then((response) => {
+         vm.agents = response.data;
+      })
+      .catch((error) => {
+          console.log(error);
+      });
     },
 
     //get all local government areas
@@ -375,6 +345,7 @@ export default {
       this.lgas = response.data.data.lgas;
     },
 
+    //delete agent
     async deleteAgent(id) {
       let api_url = process.env.MIX_API_BASE_URL + "delete-account/";
       if (confirm("Do you really want to delete this record?")) {
@@ -392,6 +363,7 @@ export default {
       }
     },
 
+    //date time format
     formatDate(dateString) {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(dateString).toLocaleDateString(undefined, options);

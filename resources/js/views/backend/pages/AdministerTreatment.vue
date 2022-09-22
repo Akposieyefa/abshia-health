@@ -289,6 +289,7 @@ export default {
     ...mapGetters(["user"]),
   },
   methods: {
+    //submit treatment form
     async submitTreatment() {
       this.loading = true;
       let api_url = process.env.MIX_API_BASE_URL + "treatments";

@@ -2,10 +2,11 @@
 
 namespace App\Libs\Services;
 
-use App\Http\Resources\UserResource;
+use App\Models\Enrolle;
 use App\Models\Transaction;
 use Illuminate\Http\JsonResponse;
-use App\Models\Enrolle;
+use App\Libs\Helpers\SystemHelper;
+use App\Http\Resources\UserResource;
 
 /**
  * Paystack payment service
@@ -20,15 +21,21 @@ class PaystackPayment
      * @var Enrolle
      */
     private  Enrolle $enrolle_model;
+    /**
+     * @var SystemHelper
+     */
+    private SystemHelper $helper;
 
     /**
      * @param Transaction $transaction_model
      * @param Enrolle $enrolle_model
+     * @param SystemHelper $helper
      */
-    public function __construct(Transaction $transaction_model, Enrolle $enrolle_model)
+    public function __construct(Transaction $transaction_model, Enrolle $enrolle_model,SystemHelper $helper)
     {
         $this->transaction_model = $transaction_model;
         $this->enrolle_model = $enrolle_model;
+        $this->helper = $helper;
     }
 
     /**
@@ -68,7 +75,7 @@ class PaystackPayment
         $paymentReference = "VS" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
         return $this->transaction_model->create([
             'type' => $request->type,
-            'enrolle_id' => auth()->user()->enrollee->id,
+            'enrolle_id' => auth() ? auth()->user()->enrollee->id : $this->helper->getEnrolleeId($request->emp_code) ,
             'trans_ref' => $paymentReference,
             'amount' => $request->amount,
             'description' => $request->type,

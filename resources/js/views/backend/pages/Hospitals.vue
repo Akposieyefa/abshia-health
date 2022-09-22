@@ -59,7 +59,7 @@
                   </thead>
                   <tbody>
                     <tr
-                      v-for="(hospital, index) in hospitals"
+                      v-for="(hospital, index) in hospitals.data"
                       :key="hospital.id"
                     >
                       <td>{{ index + 1 }}</td>
@@ -95,39 +95,11 @@
                 </table>
               </div>
               <div class="card-footer border-0 py-5">
-                <nav aria-label="...">
-                  <ul class="pagination">
-                    <li
-                      v-bind:class="[{ disabled: !pagination.prev_page_url }]"
-                      class="page-item"
-                    >
-                      <a
-                        class="page-link"
-                        @click="getAllHospitals(pagination.prev_page_url)"
-                        href="#"
-                        tabindex="-1"
-                        >Previous</a
-                      >
-                    </li>
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#"
-                        >Page {{ pagination.current_page }} of
-                        {{ pagination.last_page }}
-                      </a>
-                    </li>
-                    <li
-                      v-bind:class="[{ disabled: !pagination.next_page_url }]"
-                      class="page-item"
-                    >
-                      <a
-                        class="page-link"
-                        @click="getAllHospitals(pagination.next_page_url)"
-                        href="#"
-                        >Next</a
-                      >
-                    </li>
-                  </ul>
-                </nav>
+                <PaginationComponet
+                  :pagination="hospitals"
+                  @paginate="getAllHospitals()"
+                  :offset="10"
+                ></PaginationComponet>
               </div>
             </div>
           </div>
@@ -254,6 +226,7 @@ export default {
   name: "Hospitals",
   components: {
     Nav: () => import("../../../components/Nav.vue"),
+    PaginationComponet: () => import("../../../components/Pagination.vue"),
   },
   data() {
     return {
@@ -267,8 +240,11 @@ export default {
         },
       },
       lgas: [],
-      hospitals: [],
-      pagination: {},
+      hospitals: {
+        meta: {
+          current_page: 1,
+        },
+      },
       edit: false,
     };
   },
@@ -280,6 +256,7 @@ export default {
     ...mapGetters(["user"]),
   },
   methods: {
+    //set edit mode
     async editMode(id) {
       this.edit = true;
       let api_url = process.env.MIX_API_BASE_URL + "account-details/";
@@ -291,6 +268,7 @@ export default {
       this.agent = response.data.data;
     },
 
+    //update hospital
     async updateHospital(id) {
       let api_url = process.env.MIX_API_BASE_URL + "account-update-hospital/";
       try {
@@ -316,6 +294,7 @@ export default {
       }
     },
 
+    //create hospital
     async createHospital() {
       let api_url = process.env.MIX_API_BASE_URL + "create-hospitals";
       try {
@@ -341,26 +320,22 @@ export default {
       }
     },
 
-    async getAllHospitals(page_url) {
+    //get all hosptals
+    async getAllHospitals() {
       let vm = this;
-      page_url = page_url || "get-hospitals";
-      const response = await axios.get(
-        process.env.MIX_API_BASE_URL + page_url,
-        {
+      let api_url =
+        process.env.MIX_API_BASE_URL +
+        `get-hospitals?page=${vm.hospitals.meta.current_page}`;
+      await axios
+        .get(api_url, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
-      this.hospitals = response.data.data;
-      vm.makePagination(response.data.meta, response.data.links);
-    },
-
-    makePagination(meta, links) {
-      this.pagination = {
-        current_page: meta.current_page,
-        last_page: meta.last_page,
-        next_page_url: links.next,
-        prev_page_url: links.prev,
-      };
+        })
+        .then((response) => {
+          vm.hospitals = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     //get all local government areas
@@ -374,6 +349,7 @@ export default {
       this.lgas = response.data.data.lgas;
     },
 
+    //delete hospital
     async deleteHospital(id) {
       let api_url = process.env.MIX_API_BASE_URL + "delete-account/";
       if (confirm("Do you really want to delete this record?")) {
@@ -391,6 +367,7 @@ export default {
       }
     },
 
+    //format date
     formatDate(dateString) {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(dateString).toLocaleDateString(undefined, options);

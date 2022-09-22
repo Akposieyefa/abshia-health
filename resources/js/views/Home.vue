@@ -68,6 +68,7 @@ export default {
     };
   },
   methods: {
+    //login user
     async loginUser() {
       if (this.loading) {
         return;

@@ -76,7 +76,7 @@
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" to="/get-refers">
-                            <i class="bi bi-arrow-right-circle"></i> Refers
+                            <i class="bi bi-arrow-right-circle"></i> Referral
                         </router-link>
                     </li>
                     <li class="nav-item">
@@ -109,7 +109,7 @@
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" to="/get-refers">
-                            <i class="bi bi-people"></i> Refers
+                            <i class="bi bi-people"></i> Referral
                         </router-link>
                     </li>
                     <li class="nav-item">

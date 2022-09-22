@@ -537,7 +537,7 @@ var render = function () {
                             _c("i", {
                               staticClass: "bi bi-arrow-right-circle",
                             }),
-                            _vm._v(" Refers\n                    "),
+                            _vm._v(" Referral\n                    "),
                           ]
                         ),
                       ],
@@ -652,7 +652,7 @@ var render = function () {
                           },
                           [
                             _c("i", { staticClass: "bi bi-people" }),
-                            _vm._v(" Refers\n                    "),
+                            _vm._v(" Referral\n                    "),
                           ]
                         ),
                       ],

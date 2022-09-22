@@ -143,7 +143,7 @@ class UserAction
         }
         DB::commit();
         return response()->json([
-            'message' => 'Account created successfully',
+            'message' => 'Account created successfully'. $user->enrollee()->emp_id,
             'data' => new UserResource($this->model->find($user->id)),
             'success' => true
         ], 201);

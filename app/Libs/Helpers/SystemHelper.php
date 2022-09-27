@@ -137,6 +137,17 @@ class SystemHelper
         return $enrollee_id->id;
     }
 
+    /**
+     * get enroll id
+     * @param $id
+     * @return mixed
+     */
+    public function getEnrolleeIdByUserID($id): mixed
+    {
+        $enrollee_id = DB::table('enrolles')->where('user_id', '=', $id)->first();
+        return $enrollee_id->id;
+    }
+
       /**
      * convert money to kobo
      * @param $amount

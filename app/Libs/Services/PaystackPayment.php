@@ -75,7 +75,7 @@ class PaystackPayment
         $paymentReference = "VS" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
         return $this->transaction_model->create([
             'type' => $request->type,
-            'enrolle_id' => auth() ? auth()->user()->enrollee->id : $this->helper->getEnrolleeId($request->emp_code) ,
+            'enrolle_id' => auth() ? auth()->user()->enrollee->id : $this->helper->getEnrolleeIdByUserID($request->emp_code),
             'trans_ref' => $paymentReference,
             'amount' => $request->amount,
             'description' => $request->type,

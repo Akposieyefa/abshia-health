@@ -31,7 +31,7 @@ class PaystackPayment
      * @param Enrolle $enrolle_model
      * @param SystemHelper $helper
      */
-    public function __construct(Transaction $transaction_model, Enrolle $enrolle_model,SystemHelper $helper)
+    public function __construct(Transaction $transaction_model, Enrolle $enrolle_model, SystemHelper $helper)
     {
         $this->transaction_model = $transaction_model;
         $this->enrolle_model = $enrolle_model;
@@ -63,7 +63,6 @@ class PaystackPayment
         }
     }
 
-
     /**
      * create transaction record
      * @param $request
@@ -75,7 +74,7 @@ class PaystackPayment
         $paymentReference = "VS" . sprintf("%0.9s", str_shuffle(rand(12, 30000) * time()));
         return $this->transaction_model->create([
             'type' => $request->type,
-            'enrolle_id' => auth() ? auth()->user()->enrollee->id : $this->helper->getEnrolleeIdByUserID($request->emp_code),
+            'enrolle_id' => auth()->user()->enrolle ? auth()->user()->enrollee->id : $this->helper->getEnrolleeIdByUserID($request->emp_id),
             'trans_ref' => $paymentReference,
             'amount' => $request->amount,
             'description' => $request->type,

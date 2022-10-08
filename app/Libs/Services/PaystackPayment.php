@@ -48,7 +48,8 @@ class PaystackPayment
         $tr = $this->createTransaction($request, 'paystack');
         try {
             $this->enrolle_model->where('user_id', '=', auth()->user()->id)->update([
-                'is_subscribed' => true
+                'is_subscribed' => true,
+                'plan_id' => $request->plan_id
             ]);
             return response()->json([
                 'message' => 'Payment made successfully',

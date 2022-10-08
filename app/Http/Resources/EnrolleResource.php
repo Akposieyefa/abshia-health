@@ -42,6 +42,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $surname
  * @property mixed $emp_id
  * @property mixed $is_subscribed
+ * @property mixed $plan
  */
 class EnrolleResource extends JsonResource
 {
@@ -86,7 +87,8 @@ class EnrolleResource extends JsonResource
                 'state' => !is_null($this->state) ? $this->state->state_name : "",
                 'lga' => !is_null($this->lga) ?  $this->lga->lga_name : "",
                 'primary_healthcare' => !is_null($this->primaryHealthCare) ?  $this->primaryHealthCare->name : "",
-                'agents' => is_null($this->agent) ? ""  :  $this->agent->name
+                'agents' => is_null($this->agent) ? ""  :  $this->agent->name,
+                'plan' => new PlanResource($this->plan)
             ],
             'deleted_at' => $this->deleted_at,
             'created_at' => $this->created_at,

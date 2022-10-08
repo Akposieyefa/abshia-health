@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Hospitals </span>
+                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Health Care Provider </span>
                             <span class="h3 font-bold mb-0">{{ hospitals }}</span>
                         </div>
                         <div class="col-auto">

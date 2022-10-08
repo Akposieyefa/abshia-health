@@ -292,7 +292,7 @@ var render = function () {
                   staticClass:
                     "h6 font-semibold text-muted text-sm d-block mb-2",
                 },
-                [_vm._v("Hospitals ")]
+                [_vm._v("Health Care Provider ")]
               ),
               _vm._v(" "),
               _c("span", { staticClass: "h3 font-bold mb-0" }, [

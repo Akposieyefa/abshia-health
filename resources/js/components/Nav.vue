@@ -61,7 +61,7 @@
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" to="/hospitals">
-                            <i class="bi bi-file-medical-fill"></i> Hospitals
+                            <i class="bi bi-file-medical-fill"></i> Health Care Provider
                         </router-link>
                     </li>
                     <li class="nav-item">

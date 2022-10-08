@@ -1215,7 +1215,7 @@ var render = function () {
               _c("div", { staticClass: "modal-header border-bottom-0" }, [
                 _vm.edit
                   ? _c("h5", { staticClass: "modal-title" }, [
-                      _vm._v("Edit Hospital"),
+                      _vm._v("Edit Health Care Provider"),
                     ])
                   : _c("h5", { staticClass: "modal-title" }, [
                       _vm._v("Add New"),
@@ -1477,7 +1477,7 @@ var staticRenderFns = [
             _c("div", { staticClass: "row align-items-center" }, [
               _c("div", { staticClass: "col-sm-6 col-12 mb-4 mb-sm-0" }, [
                 _c("h1", { staticClass: "h2 mb-0 ls-tight" }, [
-                  _vm._v("Hospitals"),
+                  _vm._v("Health Care Provider"),
                 ]),
               ]),
               _vm._v(" "),
@@ -1510,7 +1510,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "mb-0" }, [_vm._v("All Hospitals")]),
+      _c("h5", { staticClass: "mb-0" }, [_vm._v("All Health Care Provider")]),
     ])
   },
   function () {

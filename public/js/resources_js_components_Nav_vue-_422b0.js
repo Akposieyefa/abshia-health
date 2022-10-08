@@ -854,7 +854,9 @@ var render = function () {
                           },
                           [
                             _c("i", { staticClass: "bi bi-file-medical-fill" }),
-                            _vm._v(" Hospitals\n                    "),
+                            _vm._v(
+                              " Health Care Provider\n                    "
+                            ),
                           ]
                         ),
                       ],

@@ -48,6 +48,8 @@ class PaystackPayment
         $tr = $this->createTransaction($request, 'paystack');
         try {
             $this->enrolle_model->where('user_id', '=', auth()->user()->id)->update([
+                'from_date' => now(),
+                'to_date' =>  $this->helper->subscriptionDurationHelper($request->plan_id),
                 'is_subscribed' => true,
                 'plan_id' => $request->plan_id
             ]);

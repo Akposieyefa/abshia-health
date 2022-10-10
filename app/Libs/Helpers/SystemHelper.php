@@ -2,6 +2,8 @@
 
 namespace App\Libs\Helpers;
 
+use App\Models\Plan;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -166,6 +168,28 @@ class SystemHelper
     public function convertKoboToNaira($amount): float|int
     {
         return $amount / 100;
+    }
+
+    /**
+     * subscription duration
+     * @param $id
+     * @return Carbon
+     */
+    public function subscriptionDurationHelper($id): Carbon
+    {
+        $end_date = null;
+        $plan = Plan::find($id);
+        $du = $plan->duration;
+        if ($du == 'Three Month') {
+            $end_date = Carbon::now()->addMonths(3);
+        }elseif ($du == 'Six Month') {
+            $end_date = Carbon::now()->addMonths(6);
+        }elseif ($du == 'One Year') {
+            $end_date = Carbon::now()->addMonths(12);
+        }else {
+            $end_date = Carbon::now()->addMonths(1);
+        }
+        return $end_date;
     }
 
 

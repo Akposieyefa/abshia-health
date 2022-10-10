@@ -20,7 +20,7 @@ class Enrolle extends Model
         'user_id', 'agent_id', 'title', 'surname', 'first_name', 'middle_name', 'gender', 'phone_number',  'dob',  'address',
         'blood_group', 'state_id', 'lga_id',  'town', 'nok_name', 'nok_address', 'nok_phone', 'nok_relationship',
         'category_id', 'genotype', 'marital_status', 'no_of_dependants',  'health_care_id', 'is_subscribed',
-        'existing_medical_condition',  'hypertension', 'plan_id', 'sickle_cell', 'cancer',  'kidney_issue',  'slug', 'emp_id'
+        'existing_medical_condition',  'hypertension', 'plan_id', 'sickle_cell', 'cancer',  'kidney_issue',  'slug', 'emp_id', 'from_date', 'to_date',
     ];
 
     public function user(): BelongsTo

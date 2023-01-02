@@ -8,6 +8,7 @@ const router = new  VueRouter({
     routes: [
 
         { path: '/', name: 'Home',  component: () => import('./views/Home.vue') },
+        { path: '/login', name: 'Login',  component: () => import('./views/Login.vue') },
         { path: '/verify-email',  name: 'Verify',  component: () => import('./views/Verify.vue') },
         { path: '/forget-password', name: 'ForgetPassword', component: () => import('./views/ForgetPassword.vue')  },
         { path: '/profile/:id',  name: 'Profile', component: () => import('./views/backend/Profile.vue') },

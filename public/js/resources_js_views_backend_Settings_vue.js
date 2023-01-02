@@ -135,7 +135,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                api_url = "https://abshia-health.herokuapp.com/api/v1/" + "change-password";
+                api_url = "http://127.0.0.1:8000/api/v1/" + "change-password";
                 _context.prev = 1;
                 _context.next = 4;
                 return axios.patch(api_url, {

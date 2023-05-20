@@ -1263,8 +1263,8 @@ var render = function () {
                       _vm._v(" "),
                       _c(
                         "tbody",
-                        _vm._l(_vm.claims, function (claim, index) {
-                          return _c("tr", { key: claim.id }, [
+                        _vm._l(_vm.claims.data, function (claimData, index) {
+                          return _c("tr", { key: claimData.id }, [
                             _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
                             _vm.user.role === "superadmin"
@@ -1272,7 +1272,7 @@ var render = function () {
                                   _vm._v(
                                     "\n                      " +
                                       _vm._s(
-                                        claim.relationships.hospital.name
+                                        claimData.relationships.hospital.name
                                       ) +
                                       "\n                    "
                                   ),
@@ -1281,7 +1281,7 @@ var render = function () {
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
-                                _vm._s(claim.relationships.enrolle.emp_id)
+                                _vm._s(claimData.relationships.enrolle.emp_id)
                               ),
                             ]),
                             _vm._v(" "),
@@ -1290,21 +1290,26 @@ var render = function () {
                                   _vm._v(
                                     "\n                      " +
                                       _vm._s(
-                                        claim.relationships.enrolle.first_name
+                                        claimData.relationships.enrolle
+                                          .first_name
                                       ) +
                                       "\n                    "
                                   ),
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(claim.diagnosis))]),
+                            _c("td", [_vm._v(_vm._s(claimData.diagnosis))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(claim.cost))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(claim.payment_status))]),
+                            _c("td", [_vm._v(_vm._s(claimData.cost))]),
                             _vm._v(" "),
                             _c("td", [
-                              _vm._v(_vm._s(_vm.formatDate(claim.created_at))),
+                              _vm._v(_vm._s(claimData.payment_status)),
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(_vm.formatDate(claimData.created_at))
+                              ),
                             ]),
                             _vm._v(" "),
                             _c(
@@ -1325,7 +1330,7 @@ var render = function () {
                                         },
                                         on: {
                                           click: function ($event) {
-                                            return _vm.editMode(claim.id)
+                                            return _vm.editMode(claimData.id)
                                           },
                                         },
                                       },
@@ -1364,7 +1369,7 @@ var render = function () {
                                         on: {
                                           click: function ($event) {
                                             return _vm.deleteTreatments(
-                                              claim.id
+                                              claimData.id
                                             )
                                           },
                                         },
@@ -1385,7 +1390,9 @@ var render = function () {
                                         },
                                         on: {
                                           click: function ($event) {
-                                            return _vm.declineClaim(claim.id)
+                                            return _vm.declineClaim(
+                                              claimData.id
+                                            )
                                           },
                                         },
                                       },
@@ -1405,7 +1412,9 @@ var render = function () {
                                         },
                                         on: {
                                           click: function ($event) {
-                                            return _vm.approveClaim(claim.id)
+                                            return _vm.approveClaim(
+                                              claimData.id
+                                            )
                                           },
                                         },
                                       },

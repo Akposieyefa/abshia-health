@@ -261,6 +261,7 @@ export default {
             },
           }
         );
+        $('.modal').modal('hide');
         await this.getAllPlans();
         this.$toasted.success(response.data.message);
         this.edit = false;
@@ -287,6 +288,7 @@ export default {
             },
           }
         );
+        $('.modal').modal('hide');
         this.$toasted.success(response.data.message);
         this.plan.title = "";
         this.plan.description = "";

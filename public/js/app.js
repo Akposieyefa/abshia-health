@@ -2456,7 +2456,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }]
 });
 router.beforeEach(function (to, from, next) {
-  var publicPages = ['/', '/verify-email', '/forget-password', '/register'];
+  var publicPages = ['/', '/verify-email', '/login', '/forget-password', '/register'];
   var authRequired = !publicPages.includes(to.path);
   var loggedIn = localStorage.getItem('token');
 

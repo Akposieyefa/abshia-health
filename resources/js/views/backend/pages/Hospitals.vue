@@ -286,6 +286,7 @@ export default {
             },
           }
         );
+        $('.modal').modal('hide');
         await this.getAllHospitals();
         this.$toasted.success(response.data.message);
         this.edit = false;
@@ -314,6 +315,7 @@ export default {
           }
         );
         this.$toasted.success(response.data.message);
+        $('.modal').modal('hide');
         await this.getAllHospitals();
       } catch (e) {
         this.$toasted.error(e.response.data.message);

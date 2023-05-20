@@ -233,6 +233,7 @@ export default {
             },
           }
         );
+        $('.modal').modal('hide');
         this.$toasted.success(response.data.message);
         await this.getAllRefers();
       } catch (e) {

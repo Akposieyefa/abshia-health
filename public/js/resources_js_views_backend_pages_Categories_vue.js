@@ -343,25 +343,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this3.category.title = "";
                 _this3.category.description = "";
-                _context3.next = 10;
+                $('.modal').modal('hide');
+                _context3.next = 11;
                 return _this3.getAllCategories();
 
-              case 10:
-                _context3.next = 15;
+              case 11:
+                _context3.next = 16;
                 break;
 
-              case 12:
-                _context3.prev = 12;
+              case 13:
+                _context3.prev = 13;
                 _context3.t0 = _context3["catch"](1);
 
                 _this3.$toasted.error(_context3.t0.response.data.message);
 
-              case 15:
+              case 16:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[1, 12]]);
+        }, _callee3, null, [[1, 13]]);
       }))();
     },
     //get all category

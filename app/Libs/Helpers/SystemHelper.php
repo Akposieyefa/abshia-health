@@ -47,10 +47,10 @@ class SystemHelper
     {
         return response()->json([
             "data" => [
-                'agents' =>  DB::table('users')->where('role', '=', 'agent')->count(),
-                'hospitals' =>  DB::table('users')->where('role', '=', 'hospital')->count(),
-                'services' => DB::table('services')->count(),
-                'enrolled_users' => DB::table('users')->where('role', '=', 'user')->count()
+                'agents' =>  DB::table('users')->whereNull('deleted_at')->where('role', '=', 'agent')->count(),
+                'hospitals' =>  DB::table('users')->whereNull('deleted_at')->where('role', '=', 'hospital')->count(),
+                'services' => DB::table('services')->whereNull('deleted_at')->count(),
+                'enrolled_users' => DB::table('users')->whereNull('deleted_at')->where('role', '=', 'user')->count()
             ]
         ], 200);
     }

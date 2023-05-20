@@ -261,6 +261,7 @@ export default {
         this.$toasted.success(response.data.message);
         this.category.title = "";
         this.category.description = "";
+        $('.modal').modal('hide');
         await this.getAllCategories();
       } catch (e) {
         this.$toasted.error(e.response.data.message);

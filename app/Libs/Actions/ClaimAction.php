@@ -128,17 +128,10 @@ class ClaimAction
     public function getAllClaimAction(): JsonResponse|AnonymousResourceCollection
     {
         $claims = $this->model->with(['enrolle', 'hospital'])->latest()->paginate(10);
-        if (count($claims) < 1) {
-            return response()->json([
-                'message' => 'Sorry no claim found',
-                'success' => false
-            ], 404);
-        }else {
-            return ClaimResource::collection($claims)->additional([
-                'message' => "All claims",
-                'success' => true
-            ], 200);
-        }
+        return ClaimResource::collection($claims)->additional([
+            'message' => "All claims",
+            'success' => true
+        ], 200);
     }
 
     /**

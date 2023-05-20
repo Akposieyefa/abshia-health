@@ -270,28 +270,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 4:
                 response = _context.sent;
+                $('.modal').modal('hide');
 
                 _this.$toasted.success(response.data.message);
 
-                _context.next = 8;
+                _context.next = 9;
                 return _this.getAllRefers();
 
-              case 8:
-                _context.next = 13;
+              case 9:
+                _context.next = 14;
                 break;
 
-              case 10:
-                _context.prev = 10;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](1);
 
                 _this.$toasted.error(_context.t0.response.data.message);
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 10]]);
+        }, _callee, null, [[1, 11]]);
       }))();
     },
     //get all refers

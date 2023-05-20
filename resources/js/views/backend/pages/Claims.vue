@@ -66,24 +66,24 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(claim, index) in claims" :key="claim.id">
+                    <tr v-for="(claimData, index) in claims.data" :key="claimData.id">
                       <td>{{ index + 1 }}</td>
                       <td v-if="user.role === 'superadmin'">
-                        {{ claim.relationships.hospital.name }}
+                        {{ claimData.relationships.hospital.name }}
                       </td>
-                      <td>{{ claim.relationships.enrolle.emp_id }}</td>
+                      <td>{{ claimData.relationships.enrolle.emp_id }}</td>
                       <td v-if="user.role === 'hospital'">
-                        {{ claim.relationships.enrolle.first_name }}
+                        {{ claimData.relationships.enrolle.first_name }}
                       </td>
-                      <td>{{ claim.diagnosis }}</td>
-                      <td>{{ claim.cost }}</td>
-                      <td>{{ claim.payment_status }}</td>
-                      <td>{{ formatDate(claim.created_at) }}</td>
+                      <td>{{ claimData.diagnosis }}</td>
+                      <td>{{ claimData.cost }}</td>
+                      <td>{{ claimData.payment_status }}</td>
+                      <td>{{ formatDate(claimData.created_at) }}</td>
                       <td class="text-end">
                         <button
                           title="Edit claim"
                           v-if="user.role === 'hospital'"
-                          @click="editMode(claim.id)"
+                          @click="editMode(claimData.id)"
                           type="button"
                           class="btn btn-sm btn-square btn-dark text-dark-hover"
                           data-toggle="modal"
@@ -105,7 +105,7 @@
                         <button
                           title="Delete claim"
                           v-if="user.role === 'hospital'"
-                          @click="deleteTreatments(claim.id)"
+                          @click="deleteTreatments(claimData.id)"
                           type="button"
                           class="
                             btn btn-sm btn-square btn-danger
@@ -117,7 +117,7 @@
                         <button
                           title="Cancle claim request"
                           v-if="user.role === 'superadmin'"
-                          @click="declineClaim(claim.id)"
+                          @click="declineClaim(claimData.id)"
                           type="button"
                           class="
                             btn btn-sm btn-square btn-danger
@@ -129,7 +129,7 @@
                         <button
                           title="Approve claim request"
                           v-if="user.role === 'superadmin'"
-                          @click="approveClaim(claim.id)"
+                          @click="approveClaim(claimData.id)"
                           type="button"
                           class="
                             btn btn-sm btn-square btn-success
@@ -140,7 +140,7 @@
                         </button>
                       </td>
                     </tr>
-                  </tbody>
+                  </tbody> 
                 </table>
               </div>
               <div class="card-footer border-0 py-5">

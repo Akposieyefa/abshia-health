@@ -4,7 +4,10 @@
             <div class="col-md-4 offset-md-4">
                 <div class="card form-holder">
                     <div class="card-body">
-                        <h1 class="text-center">Login</h1>
+                        <router-link to="/" href="#">
+                            <img :src="asset('logo.jpg')" id="logo" class="img-responsive center-block d-block mx-auto" alt="Website Logo" />
+                        </router-link>
+                        <h3 class="text-center">Login</h3>
                         <br />
                         <div class="d-flex justify-content-center" v-if="loading">
                             <div class="spinner-border" role="status">
@@ -41,7 +44,7 @@
                                         type="submit"
                                         :disabled="loading"
                                         @click="loginUser()"
-                                        class="btn btn-primary"
+                                        class="btn btn-dark"
                                     >
                                         Login
                                     </button>
@@ -99,6 +102,12 @@ body {
 .form-holder {
     margin-top: 20%;
     margin-bottom: 20%;
+}
+
+#logo {
+  display: block;
+  max-width: 30%;
+  height: auto;
 }
 </style>
 

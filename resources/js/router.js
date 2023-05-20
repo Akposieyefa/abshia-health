@@ -32,7 +32,7 @@ const router = new  VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/','/verify-email', '/forget-password', '/register'];
+    const publicPages = ['/','/verify-email', '/login', '/forget-password', '/register'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('token');
 

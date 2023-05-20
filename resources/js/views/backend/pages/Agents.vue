@@ -283,6 +283,7 @@ export default {
             },
           }
         );
+        $('.modal').modal('hide');
         await this.getAllAgents();
         this.$toasted.success(response.data.message);
         this.edit = false;
@@ -310,6 +311,7 @@ export default {
             },
           }
         );
+        $('.modal').modal('hide');
         this.$toasted.success(response.data.message);
         await this.getAllAgents();
       } catch (e) {

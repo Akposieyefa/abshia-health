@@ -317,28 +317,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 4:
                 response = _context2.sent;
-                _context2.next = 7;
+                $('.modal').modal('hide');
+                _context2.next = 8;
                 return _this2.getAllPlans();
 
-              case 7:
+              case 8:
                 _this2.$toasted.success(response.data.message);
 
                 _this2.edit = false;
-                _context2.next = 14;
+                _context2.next = 15;
                 break;
 
-              case 11:
-                _context2.prev = 11;
+              case 12:
+                _context2.prev = 12;
                 _context2.t0 = _context2["catch"](1);
 
                 _this2.$toasted.error(_context2.t0.response.data.message);
 
-              case 14:
+              case 15:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 11]]);
+        }, _callee2, null, [[1, 12]]);
       }))();
     },
     //create plan
@@ -367,6 +368,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 4:
                 response = _context3.sent;
+                $('.modal').modal('hide');
 
                 _this3.$toasted.success(response.data.message);
 
@@ -374,25 +376,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _this3.plan.description = "";
                 _this3.plan.duration = "";
                 _this3.plan.cost = "";
-                _context3.next = 12;
+                _context3.next = 13;
                 return _this3.getAllPlans();
 
-              case 12:
-                _context3.next = 17;
+              case 13:
+                _context3.next = 18;
                 break;
 
-              case 14:
-                _context3.prev = 14;
+              case 15:
+                _context3.prev = 15;
                 _context3.t0 = _context3["catch"](1);
 
                 _this3.$toasted.error(_context3.t0.response.data.message);
 
-              case 17:
+              case 18:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[1, 14]]);
+        }, _callee3, null, [[1, 15]]);
       }))();
     },
     //get all plans

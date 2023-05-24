@@ -380,7 +380,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "account-details/";
+                api_url = "https://extralive.herokuapp.com/api/v1/" + "account-details/";
                 _context.next = 3;
                 return axios.get(api_url + id, {
                   headers: {
@@ -411,7 +411,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context2.prev = _context2.next) {
               case 0:
                 vm = _this2;
-                api_url = "http://127.0.0.1:8000/api/v1/" + "my-treatments?page=".concat(vm.treatments.meta.current_page);
+                api_url = "https://extralive.herokuapp.com/api/v1/" + "my-treatments?page=".concat(vm.treatments.meta.current_page);
                 _context2.next = 4;
                 return axios.get(api_url, {
                   headers: {

@@ -246,7 +246,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 _this.edit = true;
-                api_url = "http://127.0.0.1:8000/api/v1/" + "categories/";
+                api_url = "https://extralive.herokuapp.com/api/v1/" + "categories/";
                 _context.next = 4;
                 return axios.get(api_url + id, {
                   headers: {
@@ -276,7 +276,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "categories/";
+                api_url = "https://extralive.herokuapp.com/api/v1/" + "categories/";
                 _context2.prev = 1;
                 _context2.next = 4;
                 return axios.patch(api_url + id, {
@@ -324,7 +324,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "categories";
+                api_url = "https://extralive.herokuapp.com/api/v1/" + "categories";
                 _context3.prev = 1;
                 _context3.next = 4;
                 return axios.post(api_url, {
@@ -376,7 +376,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context4.prev = _context4.next) {
               case 0:
                 vm = _this4;
-                api_url = "http://127.0.0.1:8000/api/v1/" + "categories?page=".concat(vm.categories.meta.current_page);
+                api_url = "https://extralive.herokuapp.com/api/v1/" + "categories?page=".concat(vm.categories.meta.current_page);
                 _context4.next = 4;
                 return axios.get(api_url, {
                   headers: {
@@ -406,7 +406,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "categories/";
+                api_url = "https://extralive.herokuapp.com/api/v1/" + "categories/";
 
                 if (!confirm("Do you really want to delete this record?")) {
                   _context5.next = 14;

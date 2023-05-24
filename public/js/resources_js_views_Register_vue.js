@@ -477,7 +477,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "create-helpers";
+                api_url = "https://extralive.herokuapp.com/api/v1/" + "create-helpers";
                 _context.next = 3;
                 return axios.get(api_url);
 
@@ -506,7 +506,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _this2.loading = true;
-                api_url = "http://127.0.0.1:8000/api/v1/" + "onboard-new-users";
+                api_url = "https://extralive.herokuapp.com/api/v1/" + "onboard-new-users";
                 _context2.prev = 2;
                 _context2.next = 5;
                 return axios.post(api_url, {
@@ -578,7 +578,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                api_url = "http://127.0.0.1:8000/api/v1/" + "lga-helper/";
+                api_url = "https://extralive.herokuapp.com/api/v1/" + "lga-helper/";
                 _context3.next = 3;
                 return axios.get(api_url + state_id);
 

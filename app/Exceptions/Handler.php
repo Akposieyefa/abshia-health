@@ -110,6 +110,7 @@ class Handler extends ExceptionHandler
 
         return  response()->json([
             'message' => 'Sorry there was an  error contact the backend team',
+            'error' => $e->getMessage(),
             'success' => false
         ], 401);
     }

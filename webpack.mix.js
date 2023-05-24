@@ -10,7 +10,7 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-//online  https://extralive.herokuapp.com/api/v1/
+//online  https://abshia-health.herokuapp.com/
 //local http://127.0.0.1:8000/
 //https://abshia.net/
 mix.browserSync('https://extralive.herokuapp.com/');
